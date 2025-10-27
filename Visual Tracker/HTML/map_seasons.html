@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
+        <style>
+            body                { margin: 0; background: black; position: relative;}
+        </style>
+    </head>
+
+    <body>
+        <div id=search>
+            <input>
+            <ul></ul>
+        </div>
+
+        <div id=map-holodrum-ctnr class=map-ctnr style="top:0px; left:0px">
+            <img src="../Images/holodrum.png">
+            <div class=map-shroud></div>
+            <div class=map-searchOverlay></div>
+        </div>
+		<div id=map-subrosia-ctnr class=map-ctnr style="top:512px; left:2560px">
+            <img src="../Images/subrosia.png">
+            <div class=map-shroud></div>
+            <div class=map-searchOverlay></div>
+        </div>
+    </body>
+
+    <script src="../JS/a1_prototype_location.js"></script>
+    <script src="../JS/a2_data_locations_seasons.js"></script>
+    <script src="../JS/b_func_shared.js"></script>
+    <script src="../JS/c_ctrl_seasons.js"></script>
+    <script src="../JS/e_eventListeners_shared.js"></script>
+</html>
