@@ -4,10 +4,10 @@ $gridElement-width: 160px;
 $gridElement-height: 128px;
 
 $zIndex-overlay: 0;
-$zIndex-gridElement: 0;
-$zIndex-marker-ping: 0;
-$zIndex-marker-hl: 1;
-$zIndex-search: 10;
+$zIndex-gridElement: 5;
+$zIndex-marker-ping: 10;
+$zIndex-marker-hl: 11;
+$zIndex-search: 20;
 
 @mixin dimensions-holodrum {
     width: $gridElement-width * 16;
@@ -125,11 +125,11 @@ $zIndex-search: 10;
 
 //Hold display when marker is selected
     .marker-hl:hover, .marker-hold-display {
-        >.marker-ping {
-            display: none;
-        }
         border: solid white 2px;
         background-color: rgba(255,255,255,0.75);
+		>.marker-ping {
+            display: none;
+        }
     }
 
 

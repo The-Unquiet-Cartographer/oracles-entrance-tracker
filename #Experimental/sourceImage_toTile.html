@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SourceImage_toTile</title>
+    <style>
+        .hidden {display:none;}
+    </style>
+</head>
+<body>
+    <image id=map class=hidden src="../Key Location Tracker/IMG/sources/seasons/holodrum_winter.png">
+</body>
+
+<script>
+    const tileW = 160;
+    const tileH = 128;
+    const map = document.getElementById("map");
+    map.onload = ()=>{
+        const mapW = map.naturalWidth;
+        const mapH = map.naturalHeight;
+        const tilesX = mapW/tileW;
+        const tilesY = mapH/tileH;
+        for (let y = 0; y < tilesY; y++) {
+            for (let x = 0; x < tilesX; x++) {
+            //Draw canvas containing tile (crop main image)
+                const canvas = document.body.appendChild(document.createElement("canvas"));
+                canvas.width = tileW;
+                canvas.height = tileH;
+                let context = canvas.getContext("2d");
+                context.drawImage(map, x*tileW, y*tileH, tileW, tileH, 0, 0, tileW, tileH);
+            }
+        }
+    }
+</script>
+</html>

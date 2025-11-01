@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seasons Visual Tracker</title>
+        <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
+        <style>
+            body                { margin: 0; background: black; position: relative;}
+        </style>
+    </head>
+
+	<body>
+		<div id=search>
+			<input>
+			<ul></ul>
+		</div>
+
+		<div id=map-ancientRuins-ctnr class=map-ctnr style="top:0px; left:0px">
+			<img src="../Images/Seasons/Areas/ancientRuins_spring.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-northernPeak-ctnr class=map-ctnr style="top:0px; left:480px">
+			<img src="../Images/Seasons/Areas/northernPeak_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-templeRemains-ctnr class=map-ctnr style="top:0px; left:640px">
+			<img src="../Images/Seasons/Areas/templeRemains_winter.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-goronMountain-ctnr class=map-ctnr style="top:0px; left:1280px">
+			<img src="../Images/Seasons/Areas/goronMountain_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-mtCucco-ctnr class=map-ctnr style="top:0px; left:1760px">
+			<img src="../Images/Seasons/Areas/mtCucco_summer.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+
+
+		<div id=map-tarmRuins-ctnr class=map-ctnr style="top:256px; left:0px">
+			<img src="../Images/Seasons/Areas/tarmRuins_fall.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-northernPeakFoothills-ctnr class=map-ctnr style="top:384px; left:480px">
+			<img src="../Images/Seasons/Areas/northernPeak_foothills_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-holodrumPlain-ctnr class=map-ctnr style="top:512px; left:480px">
+			<img src="../Images/Seasons/Areas/holodrumPlain_spring.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-natzuRegion-ctnr class=map-ctnr style="top:512px; left:960px">
+			<img src="../Images/Seasons/Areas/natzuPraire.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-greatMoblinsKeep-ctnr class=map-ctnr style="top:640px; left:1760px">
+			<img src="../Images/Seasons/Areas/greatMoblinsKeep_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-moblinsKeepRoof-ctnr class=map-ctnr style="top:512px; left:1760px">
+		<!--
+			Need to change this. If the src is empty causes an issue, but we want it to be empty by default.
+			<img src="">
+			<img src="../Images/Seasons/Areas/natzuPraire_ruinedKeep.png">
+		-->
+			<img src="../Images/Seasons/Areas/natzuPraire_ruinedKeep.png">
+
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-sunkenCity-ctnr class=map-ctnr style="top:384px; left:2080px">
+			<img src="../Images/Seasons/Areas/sunkenCity_summer.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+
+
+		<div id=map-spoolSwamp-ctnr class=map-ctnr style="top:768px; left:0px">
+			<img src="../Images/Seasons/Areas/spoolSwamp_fall.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-northHoron-ctnr class=map-ctnr style="top:1024px; left:960px">
+			<img src="../Images/Seasons/Areas/northHoron_winter.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-easternSuburbs-ctnr class=map-ctnr style="top:896px; left:1600px">
+			<img src="../Images/Seasons/Areas/easternSuburbs_fall.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-woodsOfWinter-ctnr class=map-ctnr style="top:896px; left:2080px">
+			<img src="../Images/Seasons/Areas/woodsOfWinter_summer.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+
+
+		<div id=map-graveyard-ctnr class=map-ctnr style="top:1664px; left:0px">
+			<img src="../Images/Seasons/Areas/graveyard_winter.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-westernCoast-ctnr class=map-ctnr style="top:1536px; left:0px">
+			<img src="../Images/Seasons/Areas/westernCoast_winter.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-horonVillage-ctnr class=map-ctnr style="top:1536px; left:800px">
+			<img src="../Images/Seasons/Areas/horonVillage_summer.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-makuTree-ctnr class=map-ctnr style="top:1536px; left:1440px">
+			<img src="../Images/Seasons/Areas/makuTree_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-easternCoast-ctnr class=map-ctnr style="top:1920px; left:1600px">
+			<img src="../Images/Seasons/Areas/easternCoast_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+		<div id=map-samasaDesert-ctnr class=map-ctnr style="top:1408px; left:1920px">
+			<img src="../Images/Seasons/Areas/samasaDesert_default.png">
+			<div class=map-shroud></div>
+			<div class=map-searchOverlay></div>
+		</div>
+
+    </body>
+
+	<script src="../JS/scriptLoadManager.js"></script>
+    <script src="../JS/a1_prototype_location.js"></script>
+    <script src="../JS/a2_data_locations_seasons.js"></script>
+    <script src="../JS/b_func_shared.js"></script>
+	<script src="../JS/EX/b2_func_shared_EX.js"></script>
+<!--
+    <script src="../JS/EX/c_ctrl_seasons_EX.js"></script>
+    <script src="../JS/e_eventListeners_shared.js"></script>
+-->
+
+<!--Delay running scripts as they require image elements to be fully loaded-->
+	<script>
+		console.log("Working...");
+
+		const scriptSrcs = [
+		/*
+			"../JS/a1_prototype_location.js",
+			"../JS/a2_data_locations_seasons.js",
+			"../JS/b_func_shared.js",
+			"../JS/EX/b_func_shared_EX.js",
+		*/
+			"../JS/EX/c_ctrl_seasons_EX.js",
+			"../JS/e_eventListeners_shared.js"
+		];
+		WaitForImages(() => {
+			LoadScriptsInOrder(scriptSrcs);
+		});
+	</script>
+
+</html>

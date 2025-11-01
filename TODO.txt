@@ -1,0 +1,18 @@
+TODO:
+
+Moblins fort - I want the default image to have a blank source, but that causes an issue. Check up on that.
+
+Locations_ConcatGroups - Just merge the EX version into the regular version?
+
+Event listeners - Oracle of seasons - change season per region.
+
+Create EX page for Oracle of Ages
+Event Listeners - Oracle of Ages - change Nuul region for animal companion.
+
+Overhaul location list, add clear button. Potentially base it off of the key location tracker.
+
+Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
+
+Exempt locations from EX seasons (and I suppose ages) location lists. Look in c_ctrl_[ages/seasons]_EX.js
+
+Shroud doesn't work on EX version. Figure out why.

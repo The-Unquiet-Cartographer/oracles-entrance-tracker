@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Ages Visual Tracker</title>
         <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
         <style>
             body                { margin: 0; background: black; position: relative;}
@@ -17,35 +17,53 @@
         </div>
 
         <div id=map-labrynna-past-ctnr class=map-ctnr style="top:0px; left:0px">
-            <img src="../Images/labrynna_past.png">
+            <img src="../Images/Ages/labrynna_past.png">
             <div class=map-shroud></div>
             <div class=map-searchOverlay></div>
         </div>
 		<div id=map-labrynna-present-ctnr class=map-ctnr style="top:0px; left:2240px">
-            <img src="../Images/labrynna_present.png">
+            <img src="../Images/Ages/labrynna_present.png">
             <div class=map-shroud></div>
             <div class=map-searchOverlay></div>
         </div>
 		<div id=map-zoraseas-past1-ctnr class=map-ctnr style="top:1792px; left:1280px">
-            <img src="../Images/zoraseas_past_cropped1.png">
+            <img src="../Images/Ages/zoraseas_past_cropped1.png">
             <div class=map-shroud></div>
             <div class=map-searchOverlay></div>
         </div>
 		<div id=map-zoraseas-past2-ctnr class=map-ctnr style="top:1920px; left:0px">
-            <img src="../Images/zoraseas_past_cropped2.png">
+            <img src="../Images/Ages/zoraseas_past_cropped2.png">
             <div class=map-shroud></div>
             <div class=map-searchOverlay></div>
         </div>
 		<div id=map-zoraseas-present-ctnr class=map-ctnr style="top:1920px; left:2240px">
-            <img src="../Images/zoraseas_present.png">
+            <img src="../Images/Ages/zoraseas_present.png">
             <div class=map-shroud></div>
             <div class=map-searchOverlay></div>
         </div>
     </body>
 
+	<script src="../JS/scriptLoadManager.js"></script>
     <script src="../JS/a1_prototype_location.js"></script>
     <script src="../JS/a2_data_locations_ages.js"></script>
     <script src="../JS/b_func_shared.js"></script>
-    <script src="../JS/c_ctrl_ages.js"></script>
+<!--
+	<script src="../JS/c_ctrl_ages.js"></script>
     <script src="../JS/e_eventListeners_shared.js"></script>
+-->
+
+<!--Delay running scripts as they require image elements to be fully loaded-->
+	<script>
+		const scriptSrcs = [
+		//	"../JS/a1_prototype_location.js",
+		//	"../JS/a2_data_locations_ages.js",
+		//	"../JS/b_func_shared.js",
+			"../JS/c_ctrl_ages.js",
+			"../JS/e_eventListeners_shared.js"
+		];
+		WaitForImages(() => {
+			LoadScriptsInOrder(scriptSrcs);
+		});
+	</script>
+
 </html>

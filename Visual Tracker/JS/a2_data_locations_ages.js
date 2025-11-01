@@ -9,6 +9,10 @@ const locs_ambisPalace = [
 	new Location("Ambi's Palace", "Ambi's Palace",		"West", 7,0, 6,1, "B"),
 ];
 
+const locs_blackTower_past = [
+	new Location("Black Tower (Past)", "Black Tower (Past)",	Location.Type.Single, 6,7, 4.5,4, "B")
+];
+
 const locs_coastOfNoReturn = [
 	new Location("Coast of No Return", "Old Zora's Cave",	Location.Type.Single, 10,5, 1,3, "B")
 ];
@@ -125,6 +129,9 @@ const locs_southShore_past = [
 	new Location("South Shore", "Rafton's House",		Location.Type.Con_Right, 7,10, 6,2, "B"),
 ];
 
+//const locs_southShore_underwater_past = [
+//];
+
 const locs_symmetryVillage = [
 	new Location("Symmetry Village", "North-East House",	Location.Type.Generic, 4,0, 7,2, "B"),
 	new Location("Symmetry Village", "North-West House",	Location.Type.Single, 2,0, 2,2, "B"),	//Tuni Nut holder
@@ -167,6 +174,10 @@ const locs_zoraVillage_underwater_past = [
 //////////////////////////////////
 //  LABRYNNA PRESENT LOCATIONS	// 
 //////////////////////////////////
+
+const locs_blackTower_present = [
+	new Location("Black Tower (Present)", "Black Tower (Present)",	Location.Type.Single, 6,7, 4.5,4, "B")
+];
 
 const locs_crescentIsland_present = [
 	new Location("Crescent Island (Present)", "Cuccos' Coop",				Location.Type.Single, 13,12, 2,5, "B"),
@@ -291,6 +302,9 @@ const locs_seaOfStorms_underwater_present = [
 ];
 
 //const locs_southShore_present = [
+//];
+
+//const locs_southShore_underwater_present = [
 //];
 
 const locs_symmetryCity = [

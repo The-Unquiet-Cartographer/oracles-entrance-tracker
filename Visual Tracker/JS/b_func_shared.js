@@ -14,11 +14,6 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 */
 	function Locations_ConcatGroups (...locationGroups) {
 		return locationGroups.flat();
-		//const concatenatedLocations = [];
-		//for (const l of locationGroups) {
-		//	concatenatedLocations = concatenatedLocations.concat(l);
-		//}
-		//return concatenatedLocations;
 	}
 
 /*
@@ -73,23 +68,52 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 //	ADD MARKERS AND GRID ELEMENTS TO MAP ELEMENT
 //
 	let idCount = 0;
-	function MapElement_AddLocationMarkers (
-		mapElement,
-		gridElements_x,
-		gridElements_y,
-		_locations,
-	) {
+	function MapElement_AddLocationMarkers (mapElement, _locations) {
+		if (mapElement == null) {
+			console.log("MapElement is null, so the querySelector has probably been mis-spelled...");
+			return [];
+		}
+		const imgElement = mapElement.querySelector('img');
+		if (imgElement == null) {
+			console.log(`DOM element ${mapElement} does not contain a valid image.`);
+			return;
+		}
+		else {
+			console.log(imgElement);
+		}
+				
+		const gridElements_x = Math.floor(imgElement.naturalWidth / gridElement_width_pixels);
+		const gridElements_y = Math.floor(imgElement.naturalHeight / gridElement_height_pixels);
 		const gridElements = new Array(gridElements_x * gridElements_y).fill();
 
 	//(OPTIONAL) ADD GRID ELEMENTS
 	/*
 	*	While not all grid references have entrances in them, giving each a grid element will serve as a visual aid while scrolling over the map.
+	*	The EX version of this function checks for whether the part of the image is transparent, as the map will be made up of various regions which will necessarily contain transparent parts so as to overlap.
 	*/
+
+	//Prepare Canvas
+		const canvas = document.createElement('canvas');
+		canvas.width = imgElement.naturalWidth;
+		canvas.height = imgElement.naturalHeight;
+		const context = canvas.getContext('2d', { willReadFrequently: true });
+		context.drawImage(imgElement, 0, 0);
+
+	//Create a gridElement for each filled-in grid reference of the map element
 		for (let i = 0; i < gridElements.length; i++) {
 			const x = Math.floor(i % gridElements_x);
 			const y = Math.floor(i / gridElements_x);
-			gridElements[i] = CreateElement_Grid(x, y);
-			mapElement.appendChild(gridElements[i]);
+			const alpha = context.getImageData(x * gridElement_width_pixels, y * gridElement_height_pixels, 1, 1).data[3];
+			const logAlpha = `Inspecting pixel @ (${x * gridElement_width_pixels}, ${y * gridElement_height_pixels}); alpha = ${alpha}`;
+			if (alpha === 0) {
+				gridElements[i] = null;
+				console.log(`${logAlpha}; %cSkipping (${x}, ${y})`, "color: red;");
+			}
+			else {
+				gridElements[i] = CreateElement_Grid(x, y);
+				mapElement.appendChild(gridElements[i]);
+				console.log(`${logAlpha}; %cCreating grid element @ (${x}, ${y})`, "color: green;");
+			}
 		}
 
 	//ITERATE LOCATIONS
@@ -106,9 +130,13 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		//	}
 
 		//Instead, catch elements whose position is out-of-bounds
-			if (gridIndex >= gridElements.length) {
-				console.log(loc.address+" is out-of-bounds - check grid reference.");
-				return;
+			if (gridIndex >= gridElements.length || gridIndex < 0) {
+				console.log(`%c${loc.address}%c is out-of-bounds - check grid reference.`, "color: yellow;", "color:red");
+				continue;
+			}
+			else if (gridElements[gridIndex] === null) {
+				console.log(`%c${loc.address} is located on a grid that has been intentionally skipped - grid reference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: red;");
+				continue;
 			}
 
 		//Add a marker element corresponding to the location
@@ -125,8 +153,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		//Add a label element that will display when the location is assigned
 			CreateElement_Label(gridElements[gridIndex], loc, markerPos_x, markerPos_y);
 		//Log
-			console.log(`#${markerElement.id} ${loc.address} @ gridReference (${loc.tilePos_x}, ${loc.tilePos_y})`);
-			//console.log(`${loc.gridReference}:\t${loc.label}`);
+			console.log(`%c#${markerElement.id} ${loc.address} @ gridReference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: yellow;");
 		}
 	}
 

@@ -1,8 +1,14 @@
 //Holodrum locations
 
+const locs_ancientRuins = [
+    new Location("Tarm Ruins", "Dungeon 6 (Ancient Ruins)",			Location.Type.Single, 0,0, 4,3, "BR"),
+    new Location("Tarm Ruins", "Old Man (Give)",					Location.Type.Generic, 2,0, 8,1, "B"),
+    new Location("Tarm Ruins", "Wooden Basement",					Location.Type.Single, 0,1, 1,6, "BRR"),
+];
+
 const locs_easternSuburbs = [
     new Location("Eastern Suburbs", "Magnetic Glove Cave",		Location.Type.Single, 12,12, 1,1, "RRR"),
-    new Location("Eastern Suburbs", "Eastern Suburbs Portal",	Location.Type.Portal, 10,9, 3,3, "LLL"),		//to Subrosia N
+	new Location("Woods of Winter", "Old Man (Take)",				Location.Type.Generic, 15,8, 2,3, "RRR"),
     new Location("Eastern Suburbs", "Windmill Cave",			Location.Type.Con_Lower, 10,14, 5,1, "BL"),
     new Location("Eastern Suburbs", "Windmill Cave",			Location.Type.Con_Middle, 10,14, 7,0, "RRR"),
     new Location("Eastern Suburbs", "Windmill Cave",			Location.Type.Con_Upper, 10,13, 5,6, "T"),
@@ -12,6 +18,7 @@ const locs_eyeglassLake = [
     new Location("Eyeglass Lake", "Booby Trapped Cave",			Location.Type.Single, 10,10, 7,3, "B"),
     new Location("Eyeglass Lake", "Dungeon 5 (Unicorn's Cave)",	Location.Type.Single, 10,8, 5,2, "B"),
     new Location("Eyeglass Lake", "Lakebed Bomb Cave",			Location.Type.Single, 7,10, 8,3, "B"),
+	new Location("Eastern Suburbs", "Eastern Suburbs Portal",	Location.Type.Portal, 10,9, 3,3, "LLL"),		//to Subrosia N
     new Location("Eyeglass Lake", "Eyeglass Lake Portal",		Location.Type.Portal, 9,11, 2,2, "B"),			//to Great Furnace
 ];
 
@@ -20,11 +27,11 @@ const locs_goronMountain = [
     new Location("Goron Mountain", "First Ascent",				Location.Type.Con_Upper, 9,1, 7,5, "RRR"),    //Lava cave
     new Location("Goron Mountain", "Second Ascent",				Location.Type.Con_Lower, 9,1, 8,0, "TRR"),    //Double cave right-hand side
     new Location("Goron Mountain", "Second Ascent",				Location.Type.Con_Upper, 9,0, 6,2, "RRR"),    //Double cave right-hand side
-    new Location("Goron Mountain", "Gorons' Cave",				Location.Type.Con_Lower, 9,3, 1,1, "B"),
-    new Location("Goron Mountain", "Gorons' Cave",				Location.Type.Con_Middle, 8,2, 3,1, "B"),
-    new Location("Goron Mountain", "Gorons' Cave",				Location.Type.Con_Upper, 8,1, 7,1, "LLL"),
+    new Location("Goron Mountain", "Goron City",				Location.Type.Con_Lower, 9,3, 1,1, "B"),
+    new Location("Goron Mountain", "Goron City",				Location.Type.Con_Middle, 8,2, 3,1, "B"),
+    new Location("Goron Mountain", "Goron City",				Location.Type.Con_Upper, 8,1, 7,1, "LLL"),
     new Location("Goron Mountain", "Lone Goron's Cave",			Location.Type.Single, 9,1, 2,2, "BL"),
-    new Location("Goron Mountain", "Old Man",					Location.Type.Generic, 8,2, 2,5, "B"),
+    new Location("Goron Mountain", "Old Man (Give)",			Location.Type.Generic, 8,2, 2,5, "B"),
     new Location("Goron Mountain", "Small Pot Cave",			Location.Type.Single, 9,1, 6,0, "TLL"),
 ];
 
@@ -34,11 +41,19 @@ const locs_graveyard = [
     new Location("Graveyard", "Graveyard Passage",				Location.Type.Con_Upper, 1,14, 7,3, "B"),
 ];
 
+const locs_greatMoblinsKeep = [
+	new Location("Natzu Region", "Great Moblin's Keep",			Location.Type.Con_Left, 11,5, 3,3, "BL"),
+	new Location("Natzu Region", "Great Moblin's Keep",			Location.Type.Con_Right, 11,5, 5,3, "BR"),
+];
+
 const locs_holodrumPlain = [
-    new Location("Holodrum Plain", "Flooded Cave",				Location.Type.Single, 3,11, 2,0, "B"),
+	new Location("North Horon", "Blaino's Gym",					Location.Type.Single, 8,7, 6,3, "B"),
+    new Location("North Horon", "Large Flooded Cave",			Location.Type.Single, 7,8, 1,3, "B"),
     new Location("Holodrum Plain", "Mrs Ruul's House",			Location.Type.Single, 3,10, 2,4, "LLL"),
-    new Location("Holodrum Plain", "Old Man",					Location.Type.Generic, 4,10, 6,5, "B"),
-    new Location("Holodrum Plain", "Round Jewel Guardian",		Location.Type.Single, 5,11, 8,1, "BLL"),
+	new Location("North Horon", "Old Man (Give)",				Location.Type.Generic, 6,6, 5,5, "B"),
+    new Location("Holodrum Plain", "Old Man (Take)",			Location.Type.Generic, 4,10, 6,5, "B"),
+	new Location("Holodrum Plain", "Small Flooded Cave",		Location.Type.Single, 3,11, 2,0, "B"),
+	new Location("Holodrum Plain", "Round Jewel Guardian",		Location.Type.Single, 5,11, 8,1, "BLL"),
 ];
 
 const locs_horonVillage = [
@@ -48,14 +63,17 @@ const locs_horonVillage = [
     new Location("Horon Village", "Clock Shop",					Location.Type.Single, 7,13, 3,4, "RRR"), 
     new Location("Horon Village", "Clock Shop Basement",		Location.Type.Secret, 7,13, 4,1, "RRR"),
     new Location("Horon Village", "Know-It-All Birds' Hut",		Location.Type.Single, 5,12, 4,1, "BRR"),
-    new Location("Horon Village", "Maku Tree",					Location.Type.Single, 9,12, 6,2.5, "B"),
     new Location("Horon Village", "Mayor Ruul's House",			Location.Type.Single, 8,12, 4,4, "LLL"),
     new Location("Horon Village", "Mr. Left's House",			Location.Type.Con_Left, 9,15, 3,3, "LLL"),		//Main
     new Location("Horon Village", "Mr. Left's House",			Location.Type.Con_Right, 9,15, 5,2, "RRR"),		//Shed
-    new Location("Horon Village", "Old Man",					Location.Type.Generic, 9,15, 2,6, "RRR"),
+    new Location("Horon Village", "Old Man (Give)",				Location.Type.Generic, 9,15, 2,6, "RRR"),
     new Location("Horon Village", "Shop",						Location.Type.Single, 6,14, 5,4, "TLLL"),
     new Location("Horon Village", "Vasu Jewelers",				Location.Type.Single, 8,14, 5,4, "B"),
 	new Location("Horon Village", "Horon Village Portal",		Location.Type.Portal, 7,15, 3,3, "B"),		//Indoor, to House of Pirates
+];
+
+const locs_makuTree = [
+    new Location("Horon Village", "Maku Tree",					Location.Type.Single, 9,12, 6,2.5, "B"),	
 ];
 
 const locs_mtCucco = [
@@ -70,6 +88,8 @@ const locs_mtCucco = [
     new Location("Mt. Cucco", "East Ascent",						Location.Type.Con_Lower, 15,0, 5,5, "RRR"),		//Big pit, tiny platforms
     new Location("Mt. Cucco", "East Ascent",						Location.Type.Con_Upper, 15,0, 5,1, "LLL"),		//Big pit, tiny platforms
 	new Location("Mt. Cucco", "Sunken-Cucco Passage",				Location.Type.Con_Upper, 13,3, 6,6, "RRR"),		//Generic{Underwater Connector}
+	new Location("Sunken Falls", "Master Diver's Test",				Location.Type.Single, 14,2, 1.5,5, "B"),
+    new Location("Sunken Falls", "Master Diver's Cave",				Location.Type.Single, 14,2, 5,6, "B")
 ];
 
 const locs_natzuRegion = [
@@ -77,21 +97,16 @@ const locs_natzuRegion = [
     new Location("Natzu Region", "Small Platform Cave",			Location.Type.Single, 9,4, 7,1, "B"),
     new Location("Natzu Region", "Great Fairy",					Location.Type.Generic, 7,5, 2,3, "B"),
     new Location("Natzu Region", "Seed-Loving Scrub",			Location.Type.Single, 9,7, 8,4, "B"),
-    new Location("Natzu Region", "Great Moblin's Fortress",		Location.Type.Con_Left, 11,5, 3,3, "BL"),
-    new Location("Natzu Region", "Great Moblin's Fortress",		Location.Type.Con_Right, 11,5, 5,3, "BR"),
-]
+];
 
 const locs_northernPeak = [
     new Location("Northern Peak", "Onox's Castle",			Location.Type.Single, 3,0, 4.5,3, "B"),
 ];
 
 const locs_northHoron = [
-    new Location("North Horon", "Blaino's Gym",				Location.Type.Single, 8,7, 6,3, "B"),
     new Location("North Horon", "Dungeon 1 (Gnarled Root)",	Location.Type.Single, 6,9, 4,4, "B"),
-    new Location("North Horon", "Flooded Cave",				Location.Type.Single, 7,8, 1,3, "B"),
     new Location("North Horon", "Impa's Refuge",			Location.Type.Single, 6,11, 1,1, "BRR"),
     new Location("North Horon", "Malon's House",			Location.Type.Single, 8,8, 3,1, "B"),
-    new Location("North Horon", "Old Man",					Location.Type.Generic, 6,6, 5,5, "B"),
     new Location("North Horon", "Old Man (Give)",			Location.Type.Generic, 7,9, 3,2, "B"),
     new Location("North Horon", "Red Ring Guardian",		Location.Type.Single, 6,10, 7,2, "B"),
 ];
@@ -123,17 +138,12 @@ const locs_sunkenCity = [
     new Location("Sunken City", "Woman's House",					Location.Type.Single, 15,3, 7,5, "BR"),
     new Location("Sunken City", "Sunken-Cucco Passage",				Location.Type.Generic, 13,4, 5,1, "BR"),		//Generic{Underwater Connector}
     new Location("Sunken City", "Sunken-Woods Passage",				Location.Type.Con_Upper, 14,6, 6,6, "TL"), 
-    new Location("Sunken Falls", "Master Diver's Test",				Location.Type.Single, 14,2, 1.5,5, "B"),
-    new Location("Sunken Falls", "Master Diver's Cave",				Location.Type.Single, 14,2, 5,6, "B")
 ];
 
 const locs_tarmRuins = [
-    new Location("Tarm Ruins", "Dungeon 6 (Ancient Ruins)",			Location.Type.Single, 0,0, 4,3, "BR"),
     new Location("Tarm Ruins", "Great Fairy",						Location.Type.Generic, 1,3, 4,1, "B"),
     new Location("Tarm Ruins", "Helpful Scrub's Cave",				Location.Type.Single, 3,4, 8,1, "B"),
     new Location("Tarm Ruins", "Music-Loving Scrub's Cave",			Location.Type.Single, 1,5, 6,5, "T"),
-    new Location("Tarm Ruins", "Old Man (Give)",					Location.Type.Generic, 2,0, 8,1, "B"),
-    new Location("Tarm Ruins", "Wooden Basement",					Location.Type.Single, 0,1, 1,6, "BRR")
 ];
 
 const locs_templeRemains = [
@@ -153,7 +163,7 @@ const locs_westernCoast = [
     new Location("Western Coast", "Coast House",					Location.Type.Con_Left, 2,13, 4,2, "BB"),			//Entrance
     new Location("Western Coast", "Coast House",					Location.Type.Con_Right, 2,13, 6,1, "B"),			//Shed
     new Location("Western Coast", "Pirate Ship (Docked)",			Location.Type.Single, 2,14, 6,6, "B"),
-    new Location("Western Coast", "Old Man",						Location.Type.Generic, 2,13, 2,1, "B"),
+    new Location("Western Coast", "Old Man (Give)",					Location.Type.Generic, 2,13, 2,1, "B"),
 	new Location("Western Coast", "Graveyard Passage",				Location.Type.Con_Lower, 1,15, 6,0, "B")
 ];
 
@@ -165,7 +175,6 @@ const locs_woodsOfWinter = [
     new Location("Woods of Winter", "Holly's House",				"Chimney", 15,7, 7,2, "RRR"),
 	new Location("Woods of Winter", "Holly's House",				Location.Type.Entrance, 15,7, 7,4, "BRR"),
     new Location("Woods of Winter", "Magnetic Glove Cave",			Location.Type.Single, 14,8, 8,4, "BR"),
-    new Location("Woods of Winter", "Old Man (Take)",				Location.Type.Generic, 15,8, 2,3, "RRR"),
     new Location("Woods of Winter", "Small Fairy Cave",				Location.Type.Single, 14,8, 3,4, "BL"),
 	new Location("Woods of Winter", "Sunken-Woods Passage",			Location.Type.Con_Lower, 14,7, 1,1, "RRR"),
 ];

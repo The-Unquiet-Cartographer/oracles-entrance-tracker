@@ -52,7 +52,7 @@
   position: absolute;
   width: 160px;
   height: 128px;
-  z-index: 0;
+  z-index: 5;
 }
 .gridElement-ctnr:hover > .marker-hl, .gridElement-ctnr:hover .gridElement-border {
   display: block;
@@ -72,7 +72,7 @@
 
 .marker-hl {
   display: none;
-  z-index: 1;
+  z-index: 11;
   position: absolute;
   border-radius: 50%;
   width: 48px;
@@ -97,7 +97,7 @@
 }
 
 .marker-ping {
-  z-index: 0;
+  z-index: 10;
   position: absolute;
   background: radial-gradient(closest-side, transparent, rgba(255, 255, 255, 0.66));
   border: solid rgb(255, 255, 255) 2px;
@@ -160,7 +160,7 @@
   display: none;
   position: absolute;
   white-space: nowrap;
-  z-index: 10;
+  z-index: 20;
   background-color: grey;
   color: white;
 }

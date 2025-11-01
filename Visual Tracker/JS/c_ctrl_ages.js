@@ -1,6 +1,7 @@
 //LABRYNNA PAST LOCATIONS
 	const locations_labrynna_past = Locations_ConcatGroups(
 		locs_ambisPalace,
+		locs_blackTower_past,
 		locs_coastOfNoReturn,
 		locs_crescentIsland_past,
 		locs_dekuForest,
@@ -19,6 +20,7 @@
 
 //LABRYNNA PRESENT LOCATIONS
 	const locations_labrynna_present = Locations_ConcatGroups(
+		locs_blackTower_present,
 		locs_crescentIsland_present,
 		locs_eyeglassIsland_present,
 		locs_fairiesWoods,
@@ -70,40 +72,11 @@
 		elem_map_underwater_past2 = document.getElementById('map-zoraseas-past2-ctnr'),
     	elem_map_underwater_present = document.getElementById('map-zoraseas-present-ctnr')
 	;
-	const
-		gridElements_labrynna_x = 14, gridElements_labrynna_y = 14,
-		gridElements_underwater_x = 14, gridElements_underwater_y = 5
-	;
-	MapElement_AddLocationMarkers(
-		elem_map_labrynna_past,
-		gridElements_labrynna_x,
-		gridElements_labrynna_y,
-		locations_labrynna_past
-	);
-	MapElement_AddLocationMarkers(
-		elem_map_labrynna_present,
-		gridElements_labrynna_x,
-		gridElements_labrynna_y,
-		locations_labrynna_present
-	);
-	MapElement_AddLocationMarkers(
-		elem_map_underwater_past1,
-		6,
-		1,
-		locations_underwater_past1
-	);
-	MapElement_AddLocationMarkers(
-		elem_map_underwater_past2,
-		gridElements_underwater_x,
-		gridElements_underwater_y,
-		locations_underwater_past2
-	);
-	MapElement_AddLocationMarkers(
-		elem_map_underwater_present,
-		gridElements_underwater_x,
-		gridElements_underwater_y,
-		locations_underwater_present
-	);
+	MapElement_AddLocationMarkers(elem_map_labrynna_past, locations_labrynna_past);
+	MapElement_AddLocationMarkers(elem_map_labrynna_present, locations_labrynna_present);
+	MapElement_AddLocationMarkers(elem_map_underwater_past1, locations_underwater_past1);
+	MapElement_AddLocationMarkers(elem_map_underwater_past2, locations_underwater_past2);
+	MapElement_AddLocationMarkers(elem_map_underwater_present, locations_underwater_present);
 
 //SEARCH TERMS
 	AddSearchTerms(locs_generic);

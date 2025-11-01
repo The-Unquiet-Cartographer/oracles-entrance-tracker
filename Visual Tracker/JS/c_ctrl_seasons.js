@@ -1,9 +1,11 @@
 //HOLODRUM LOCATIONS
 	const locations_holodrum = Locations_ConcatGroups(
+		locs_ancientRuins,
 		locs_easternSuburbs,
 		locs_eyeglassLake,
 		locs_goronMountain,
 		locs_graveyard,
+		locs_greatMoblinsKeep,
 		locs_holodrumPlain,
 		locs_horonVillage,
 		locs_mtCucco,
@@ -35,22 +37,8 @@
 		elem_map_holodrum = document.getElementById('map-holodrum-ctnr'),
 		elem_map_subrosia = document.getElementById('map-subrosia-ctnr')
 	;
-	const
-		gridElements_holodrum_x = 16, gridElements_holodrum_y = 16,
-		gridElements_subrosia_x = 11, gridElements_subrosia_y = 8
-	;
-	MapElement_AddLocationMarkers(
-		elem_map_holodrum,
-		gridElements_holodrum_x,
-		gridElements_holodrum_y,
-		locations_holodrum,
-	);
-	MapElement_AddLocationMarkers(
-		elem_map_subrosia,
-		gridElements_subrosia_x,
-		gridElements_subrosia_y,
-		locations_subrosia,
-	);
+	MapElement_AddLocationMarkers(elem_map_holodrum, locations_holodrum);
+	MapElement_AddLocationMarkers(elem_map_subrosia, locations_subrosia);
 
 //SEARCH TERMS
 	AddSearchTerms(locs_generic);
