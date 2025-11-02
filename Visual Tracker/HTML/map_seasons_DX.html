@@ -12,7 +12,7 @@
 
 	<body>
 		<div id=search>
-			<input>
+			<input title="Search" placeholder="Search">
 			<ul></ul>
 		</div>
 
@@ -79,13 +79,7 @@
 		</div>
 
 		<div id=map-moblinsKeepRoof-ctnr class=map-ctnr style="top:512px; left:1760px">
-		<!--
-			Need to change this. If the src is empty causes an issue, but we want it to be empty by default.
-			<img src="">
-			<img src="../Images/Seasons/Areas/natzuPraire_ruinedKeep.png">
-		-->
-			<img src="../Images/Seasons/Areas/natzuPraire_ruinedKeep.png">
-
+			<img src="../Images/dummyGrid.png">
 			<div class=map-shroud></div>
 			<div class=map-searchOverlay></div>
 		</div>
@@ -166,10 +160,10 @@
     <script src="../JS/a1_prototype_location.js"></script>
     <script src="../JS/a2_data_locations_seasons.js"></script>
     <script src="../JS/b_func_shared.js"></script>
-	<script src="../JS/EX/b2_func_shared_EX.js"></script>
 <!--
-    <script src="../JS/EX/c_ctrl_seasons_EX.js"></script>
+    <script src="../JS/DX/c_ctrl_seasons_DX.js"></script>
     <script src="../JS/e_eventListeners_shared.js"></script>
+	<script src="../JS/DX/e_eventListeners_seasonsDX.js"></script>
 -->
 
 <!--Delay running scripts as they require image elements to be fully loaded-->
@@ -181,10 +175,10 @@
 			"../JS/a1_prototype_location.js",
 			"../JS/a2_data_locations_seasons.js",
 			"../JS/b_func_shared.js",
-			"../JS/EX/b_func_shared_EX.js",
 		*/
-			"../JS/EX/c_ctrl_seasons_EX.js",
-			"../JS/e_eventListeners_shared.js"
+			"../JS/DX/c_ctrl_seasons_DX.js",
+			"../JS/e_eventListeners_shared.js",
+			"../JS/DX/e_eventListeners_seasonsDX"
 		];
 		WaitForImages(() => {
 			LoadScriptsInOrder(scriptSrcs);

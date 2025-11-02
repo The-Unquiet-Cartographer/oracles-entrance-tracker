@@ -115,6 +115,7 @@ $zIndex-search: 20;
         transform:translate(-50%, -50%);
         border: solid rgba(255,255,255,0.8) 2px;
         background-color: rgba(255,255,255,0.5);
+		pointer-events: auto;
         &:hover {
             cursor: pointer;
         }

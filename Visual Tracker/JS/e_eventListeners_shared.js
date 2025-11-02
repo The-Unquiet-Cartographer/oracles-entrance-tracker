@@ -165,13 +165,15 @@
 //	Click Marker: Select marker and display search overlay
 //
 	document.querySelectorAll('.marker-hl').forEach(_markerElem => {
-		_markerElem.addEventListener('click', ()=> {
+		_markerElem.addEventListener('click', e => {
 			Annotation.Deselect();
 		//Since the marker offset is relative, add the grid element position to get the true position
 			let x = StringToInt(_markerElem.style.left) + StringToInt(_markerElem.parentElement.style.left);
 			let y = StringToInt(_markerElem.style.top) + StringToInt(_markerElem.parentElement.style.top);
 			Annotation.Select(_markerElem);
 			DisplaySearchOverlay(x,y);
+			e.stopPropagation();
+			console.log(e.target);
 		});
 	});
 
@@ -185,12 +187,14 @@
 			HideSearchOverlay();
 		});
 	});
+/*
 	document.querySelectorAll('.gridElement-border').forEach(_gridElem => {
 		_gridElem.addEventListener('click', ()=>{
 			Annotation.Deselect();
 			HideSearchOverlay();
 		});
 	});
+*/
 
 
 //

@@ -2,22 +2,24 @@ function WaitForImages(callback) {
 	const images = Array.from(document.images);
 	const pending = [];
 
-	images.forEach(img => {
-	// Skip broken images (naturalWidth === 0)
-		if (!img.complete || img.naturalWidth === 0) {		//At least one of our containers IS created without an image source, so it'll always hang...
-		// Wait for load or error
+	for (const img of images) {
+	//Skip images with no source
+		if (img.src == "") continue;
+	//If image is not loaded or is broken
+		if (!img.complete || img.naturalWidth === 0) {
 			pending.push(new Promise(resolve => {
 				img.addEventListener('load', resolve, { once: true });
 				img.addEventListener('error', resolve, { once: true });
 			}));
+	//Image is loaded, decode it
+		} else {
+			pending.push(img.decode().catch(() => {}));
 		}
-		else {
-		// Already loaded, but may not be decoded
-			pending.push(img.decode().catch(() => {})); // decode() returns a Promise
-		}
-	});
+	}
 
-// Wait for all load + decode promises to settle
+	console.log("All images done");
+
+//Wait for all load + decode promises to settle
 	Promise.all(pending).then(() => {
 		callback();
 	});

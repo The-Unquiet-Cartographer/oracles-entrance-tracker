@@ -30,82 +30,82 @@
 	;
 
 //HOLODRUM LOCATIONS
-	const locations_ancientRuins = Locations_ConcatGroups(
+	const locations_ancientRuins = Locations_ConcatGroups_DX(
 		elem_map_ancientRuins,
 		locs_ancientRuins
 	);
-	const locations_northernPeak = Locations_ConcatGroups(
+	const locations_northernPeak = Locations_ConcatGroups_DX(
 		elem_map_northernPeak,
 		locs_northernPeak
 	);
-	const locations_templeRemains = Locations_ConcatGroups(
+	const locations_templeRemains = Locations_ConcatGroups_DX(
 		elem_map_templeRemains,
 		locs_templeRemains
 	);
-	const locations_goronMountain = Locations_ConcatGroups(
+	const locations_goronMountain = Locations_ConcatGroups_DX(
 		elem_map_goronMountain,
 		locs_goronMountain
 	);
-	const locations_mtCucco = Locations_ConcatGroups(
+	const locations_mtCucco = Locations_ConcatGroups_DX(
 		elem_map_mtCucco,
 		locs_mtCucco
 	);
 
-	const locations_tarmRuins = Locations_ConcatGroups(
+	const locations_tarmRuins = Locations_ConcatGroups_DX(
 		elem_map_tarmRuins,
 		locs_tarmRuins
 	);
-	const locations_holodrumPlain = Locations_ConcatGroups(
+	const locations_holodrumPlain = Locations_ConcatGroups_DX(
 		elem_map_holodrumPlain,
 		locs_holodrumPlain
 	);
-		const locations_natzuRegion = Locations_ConcatGroups(
+		const locations_natzuRegion = Locations_ConcatGroups_DX(
 		elem_map_natzuRegion,
 		locs_natzuRegion
 	);
-		const locations_greatMoblinsKeep = Locations_ConcatGroups(
+		const locations_greatMoblinsKeep = Locations_ConcatGroups_DX(
 		elem_map_greatMoblinsKeep,
 		locs_greatMoblinsKeep
 	);
-	const locations_sunkenCity = Locations_ConcatGroups(
+	const locations_sunkenCity = Locations_ConcatGroups_DX(
 		elem_map_sunkenCity,
 		locs_sunkenCity
 	);
 
-	const locations_spoolSwamp = Locations_ConcatGroups(
+	const locations_spoolSwamp = Locations_ConcatGroups_DX(
 		elem_map_spoolSwamp,
 		locs_spoolSwamp
 	);
-	const locations_northHoron = Locations_ConcatGroups(
+	const locations_northHoron = Locations_ConcatGroups_DX(
 		elem_map_northHoron,
 		locs_northHoron
 	);
-	const locations_easternSuburbs = Locations_ConcatGroups(
+	const locations_easternSuburbs = Locations_ConcatGroups_DX(
 		elem_map_easternSuburbs,
 		locs_easternSuburbs
 	);
-	const locations_woodsOfWinter = Locations_ConcatGroups(
+	const locations_woodsOfWinter = Locations_ConcatGroups_DX(
 		elem_map_woodsOfWinter,
 		locs_woodsOfWinter
 	);
 
-	const locations_graveyard = Locations_ConcatGroups(
+	const locations_graveyard = Locations_ConcatGroups_DX(
 		elem_map_graveyard,
 		locs_graveyard
 	);
-	const locations_westernCoast = Locations_ConcatGroups(
+	const locations_westernCoast = Locations_ConcatGroups_DX(
 		elem_map_westernCoast,
 		locs_westernCoast
 	);
-	const locations_horonVillage = Locations_ConcatGroups(
+	const locations_horonVillage = Locations_ConcatGroups_DX(
 		elem_map_horonVillage,
 		locs_horonVillage
 	);
-	const locations_makuTree = Locations_ConcatGroups(
+	const locations_makuTree = Locations_ConcatGroups_DX(
 		elem_map_makuTree,
 		locs_makuTree
 	);
-	const locations_samasaDesert = Locations_ConcatGroups(
+	const locations_samasaDesert = Locations_ConcatGroups_DX(
 		elem_map_samasaDesert,
 		locs_samasaDesert
 	);
