@@ -3,55 +3,24 @@ $marker-radius: 24px;
 $gridElement-width: 160px;
 $gridElement-height: 128px;
 
-$zIndex-overlay: 0;
 $zIndex-gridElement: 5;
 $zIndex-marker-ping: 10;
 $zIndex-marker-hl: 11;
+$zIndex-marker-label: 15;
+$zIndex-line: 0;				//<== Should be 13 but due to stacking context gubbins that doesn't work. Values of 0-4 work.
 $zIndex-search: 20;
 
-@mixin dimensions-holodrum {
-    width: $gridElement-width * 16;
-    height: $gridElement-height * 16;
-}
-@mixin dimensions-subrosia {
-    width: $gridElement-width * 11;
-    height: $gridElement-height * 8;
-}
-@mixin dimensions-labrynna {
-    width: $gridElement-width * 14;
-    height: $gridElement-height * 14;
-}
+	*{
+		box-sizing: border-box;
+	}
 
-*{
-    box-sizing: border-box;
-}
-
-.map-ctnr {
-    position: absolute;
-}
-
-#map-holodrum-ctnr {
-    z-index: 1;
-    @include dimensions-holodrum;
-    >.map-searchOverlay, >.map-shroud {
-        @include dimensions-holodrum;
-    }
-}
-#map-subrosia-ctnr {
-    @include dimensions-subrosia;
-    >.map-searchOverlay, >.map-shroud {
-        @include dimensions-subrosia;
-    }
-}
-#map-labrynna-ctnr {
-    @include dimensions-labrynna;
-    >.map-searchOverlay, >.map-shroud {
-        @include dimensions-labrynna;
-    }
-}
-
-
-
+	.map-ctnr {
+		position: absolute;
+		> img {
+			filter: brightness(75%);
+		}
+		//DON'T add a z-index! It's very tenuous right now with all the overlapping map elements...
+	}
 
 //Optional: Mute overly-bright colours on the map element.
 	.map-shroud {
@@ -59,16 +28,6 @@ $zIndex-search: 20;
 		top: 0;
 		background-color: rgba(0,0,0,0.25);
 	}
-
-//Displays when a marker is selected.
-	.map-searchOverlay {
-		display: none;
-		position: absolute;
-		top: 0;
-		z-index: $zIndex-overlay;
-		background-color: rgba(0,0,0,0.5);
-	}
-
 
 
 //////////////////////////
@@ -184,6 +143,7 @@ $zIndex-search: 20;
         background-color: brown;
         color: white;
         display: none;
+		z-index: $zIndex-marker-label;
     }
     .label-shown {
         display: block;
@@ -197,33 +157,5 @@ $zIndex-search: 20;
         border-radius: 2px;
         background-color: cyan;
         box-shadow: 0,0,6px,6px,white;
-        z-index: 20;
+        z-index: $zIndex-line;
     }
-
-    
-
-////////////////////////////
-//  SEARCH LIST & INPUT   //
-////////////////////////////
-
-#search {
-    display: none;
-    position: absolute;
-	white-space: nowrap;
-    z-index: $zIndex-search;
-    background-color: grey;
-    color: white;
-    ul {
-        list-style: none;
-    }
-}
-
-li {
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-.li-grey {
-    color: black;
-}

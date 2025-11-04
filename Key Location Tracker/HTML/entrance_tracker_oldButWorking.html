@@ -69,7 +69,7 @@
 			overflow: scroll;
 		*/
 		}
-		#btn-clear, .list-options {
+		#btn-clear, .entrance-list {
 			margin-top: 0;
 			width: 200px;
 			margin-bottom: 10px;
@@ -639,7 +639,7 @@ RemoveExemptions(exemptions_subrosia);
 		;
 	//Create new element for area containing entrance list
 		if (!Entrances_Holodrum.querySelector(`#${areaID}`)) {
-			Entrances_Holodrum.appendChild(NewElem('div', areaID, ['list-options'], (_elmt)=>{
+			Entrances_Holodrum.appendChild(NewElem('div', areaID, ['entrance-list'], (_elmt)=>{
 				_elmt.appendChild(NewElem('h3', '', [], (_subElmt)=>{
 					_subElmt.textContent = _loc[0];
 				}));

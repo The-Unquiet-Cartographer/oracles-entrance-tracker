@@ -2,7 +2,7 @@ class Location {
 	constructor(
 		area,				// "Area"
 		name,				// "Name of Location".
-		type,				// See Types below, or use your own, e.g."Chimney", "Secret Entrance", etc.
+		type_,				// See Types below, or use your own, e.g."Chimney", "Secret Entrance", etc.
 		gridRef_x,			// Zero-based index starting from the left-hand side of the map.
 		gridRef_y,			// Zero based index starting from the top of the map.
 		tilePos_x,			// Zero-based index starting from the left-hand tile of the grid cell.
@@ -15,7 +15,7 @@ class Location {
 		this.gridRef_y = gridRef_y;
 		this.tilePos_x = tilePos_x;
 		this.tilePos_y = tilePos_y;
-		this.type = type;
+		this.type_ = type_;
 		this.labelPos = labelPos;
 	}
 	static Type = class {
@@ -63,38 +63,79 @@ Object.defineProperties(Location.prototype, {
 			return `${alpha[this.gridRef_x]}${str_y}`;
 		}
 	},
+	hasPreDefinedType: {
+		get: function() {
+			if (this.type_ instanceof Location.Type || typeof this.type_ === "symbol") {
+				if (this.type_ === undefined) {
+					throw new Error(`Unrecognised type - check that ${this.address} has been given a valid type.`);
+				}
+				return true;
+			}
+		}
+	},
 	address: {
 		get: function() {
 			return this.area+" - "+this.name;
 		}
 	},
+	type: {
+		get: function() {
+			if (this.hasPreDefinedType) {
+				return this.type_.description;
+			}
+			return this.type_;
+		}
+	},
 	fullAddress: {
 		get: function() {
 		//If is a defined type...
-			if (this.type instanceof Location.Type || typeof this.type === "symbol") {
+			if (this.hasPreDefinedType) {
 				if (
-					this.type != Location.Type.Single
-				&&	this.type != Location.Type.Generic
-				&&	this.type != Location.Type.Portal
+					this.type_ != Location.Type.Single
+				&&	this.type_ != Location.Type.Generic
+				&&	this.type_ != Location.Type.Portal
+				&&	this.type_ != Location.Type.Secret
 				) {
-					return this.area+" - "+this.name+" - "+this.type.description;
+					return this.address+" - "+this.type_.description;
 				}
-				return this.area+" - "+this.name;
+				return this.address;
 			}
 		//Else assume a string:
-			return this.area+" - "+this.name+" - "+this.type;
+			return this.area+" - "+this.name+" - "+this.type_;
 		}
 	},
+	displayName: {
+		get: function() {
+			if (this.hasPreDefinedType) {
+				if (
+					this.type_ != Location.Type.Single
+				&&	this.type_ != Location.Type.Generic
+				&&	this.type_ != Location.Type.Portal
+				&&	this.type_ != Location.Type.Secret
+				) {
+					return this.name+" - "+this.type_.description;
+				}
+			}
+			return this.name;
+		} 
+	},
+/*
+//The trouble is you can't tell if it's a connector or not if the type is a string.
 	isConnector: {
 		get: function() {
-			switch (this.type) {
-				default:				return true;
-				case Type.Single:		return false;
-				case Type.Generic:		return false;
-				case Type.Portal:		return false;		
+			if (this.type_ instanceof Location.Type || typeof this.type_ === "symbol") {
+				switch (this.type_) {
+					default:				return true;
+					case Type.Single:		return false;
+					case Type.Generic:		return false;
+					case Type.Portal:		return false;
+					case Type.Secret:		return false;
+				}
 			}
+			return true;
 		}
 	},
+*/
 	isPortal: {
 		get: function() {
 			return this.type == Type.Portal ? true : false;

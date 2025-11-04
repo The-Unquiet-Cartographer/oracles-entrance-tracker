@@ -5,33 +5,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Seasons Visual Tracker</title>
         <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
+		<link rel="stylesheet" href="../CSS & SASS/search.css">
         <style>
 			body	{ margin: 0; background: black; position: relative;}
         </style>
     </head>
 
     <body>
+<!--
         <div id=search>
-            <input>
+			<input title="Search" placeholder="Search">
             <ul></ul>
         </div>
+-->
+
+		<div id=search-ctnr-outer>
+			<div id=search-ctnr-inner>
+				<div id=search-ctnr-scrollArea>
+					<div id=location-menu>
+						<p id=btn-clear>Clear</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <div id=map-holodrum-ctnr class=map-ctnr style="top:0px; left:0px">
-			<div class=map-shroud></div>
             <img src="../Images/Seasons/Sources/holodrum_default.png">
-            <div class=map-searchOverlay></div>
         </div>
 		<div id=map-subrosia-ctnr class=map-ctnr style="top:512px; left:2560px">
             <img src="../Images/Seasons/Sources/subrosia.png">
-            <div class=map-shroud></div>
-            <div class=map-searchOverlay></div>
         </div>
     </body>
 
 	<script src="../JS/scriptLoadManager.js"></script>
     <script src="../JS/a1_prototype_location.js"></script>
     <script src="../JS/a2_data_locations_seasons.js"></script>
-    <script src="../JS/b_func_shared.js"></script>
+    <script src="../JS/b1_appLogging.js"></script>
+    <script src="../JS/b2_sharedFunctions.js"></script>
 <!--
 	<script src="../JS/c_ctrl_seasons.js"></script>
     <script src="../JS/e_eventListeners_shared.js"></script>
@@ -40,9 +50,12 @@
 <!--Delay running scripts as they require image elements to be fully loaded-->
 	<script>
 		const scriptSrcs = [
-		//	"../JS/a1_prototype_location.js",
-		//	"../JS/a2_data_locations_seasons.js",
-		//	"../JS/b_func_shared.js",
+		/*
+			"../JS/a1_prototype_location.js",
+			"../JS/a2_data_locations_seasons.js",
+			"../JS/b1_appLogging.js"
+			"../JS/b2_sharedFunctions.js",
+		*/
 			"../JS/c_ctrl_seasons.js",
 			"../JS/e_eventListeners_shared.js"
 		];

@@ -125,8 +125,8 @@
 	Locations_RemoveExemptions(locations_subrosia, exemptions_subrosia);
 */
 
-//MAP ELEMENTS
-	MapElement_AddLocationMarkers(elem_map_ancientRuins, locations_ancientRuins);
+//LOCATION MARKERS
+ 	MapElement_AddLocationMarkers(elem_map_ancientRuins, locations_ancientRuins);
 	MapElement_AddLocationMarkers(elem_map_northernPeak, locations_northernPeak);
 	MapElement_AddLocationMarkers(elem_map_templeRemains, locations_templeRemains);
 	MapElement_AddLocationMarkers(elem_map_goronMountain, locations_goronMountain);

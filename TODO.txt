@@ -1,23 +1,17 @@
 TODO:
 
-Event listeners - Oracle of seasons - change season per region.
-
-	Need to change map shroud and search overlay elements.
-	Instead of having them as children of the map containers, make them stand alone.
-	Since search overlay already has an event listener (to close the search thingy), we need to give the css class pointer-events: auto; to stop event bubbling.
-	We can probably remove the event listener for the grid elements that also closes the search thingy. 
+Add generics to search terms.
+Add search input field.
+Add functionality to Clear button.
 
 
+Solve teh mystery of why locations aren't being listed in the search menu properly.
 
 
 Create EX page for Oracle of Ages
 
 Event Listeners - Oracle of Ages - change Nuul region for animal companion.
 
-Overhaul location list, add clear button. Potentially base it off of the key location tracker.
-
 Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
 
-Exempt locations from EX seasons (and I suppose ages) location lists. Look in c_ctrl_[ages/seasons]_EX.js
-
-Shroud doesn't work on EX version. Figure out why.
+Exempt locations from EX seasons (and I suppose EX ages) location lists. Look in c_ctrl_[ages/seasons]_EX.js

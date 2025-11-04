@@ -27,7 +27,7 @@ const locs_goronMountain = [
     new Location("Goron Mountain", "First Ascent",				Location.Type.Con_Upper, 9,1, 7,5, "RRR"),    //Lava cave
     new Location("Goron Mountain", "Second Ascent",				Location.Type.Con_Lower, 9,1, 8,0, "TRR"),    //Double cave right-hand side
     new Location("Goron Mountain", "Second Ascent",				Location.Type.Con_Upper, 9,0, 6,2, "RRR"),    //Double cave right-hand side
-    new Location("Goron Mountain", "Goron City",				Location.Type.Con_Lower, 9,3, 1,1, "B"),
+    new Location("Goron Mountain", "Goron City",				Location.Type.Con_Lower, 9,3, 1,1, "LLL"),
     new Location("Goron Mountain", "Goron City",				Location.Type.Con_Middle, 8,2, 3,1, "B"),
     new Location("Goron Mountain", "Goron City",				Location.Type.Con_Upper, 8,1, 7,1, "LLL"),
     new Location("Goron Mountain", "Lone Goron's Cave",			Location.Type.Single, 9,1, 2,2, "BL"),
@@ -173,7 +173,7 @@ const locs_woodsOfWinter = [
     new Location("Woods of Winter", "Dungeon 2 (Snake's Remains)",	Location.Type.Con_Upper, 13,8, 8,1, "TLL"),			//Middle
     new Location("Woods of Winter", "Dungeon 2b",					Location.Type.Single, 14,8, 2,1, "TRR"),
     new Location("Woods of Winter", "Holly's House",				"Chimney", 15,7, 7,2, "RRR"),
-	new Location("Woods of Winter", "Holly's House",				Location.Type.Entrance, 15,7, 7,4, "BRR"),
+	new Location("Woods of Winter", "Holly's House",				Location.Type.Con_Entrance, 15,7, 7,4, "BRR"),
     new Location("Woods of Winter", "Magnetic Glove Cave",			Location.Type.Single, 14,8, 8,4, "BR"),
     new Location("Woods of Winter", "Small Fairy Cave",				Location.Type.Single, 14,8, 3,4, "BL"),
 	new Location("Woods of Winter", "Sunken-Woods Passage",			Location.Type.Con_Lower, 14,7, 1,1, "RRR"),

@@ -21,10 +21,10 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 
 	function Locations_ConcatGroups_DX (mapElement, ...locationGroups) {
 		if (mapElement == null) {
-			console.log("MapElement is null, so the querySelector has probably been mis-spelled...");
+			AppLog("MapElement is null, so the querySelector has probably been mis-spelled...");
 			return [];
 		}
-		else console.log("Concatenating location groups for map element:", mapElement);
+		else AppLog("Concatenating location groups for map element:", mapElement);
 		const concatenatedLocations = [];
 		const mapElement_gridOffset_x = Math.floor(parseInt(mapElement.style.left) / gridElement_width_pixels);
 		const mapElement_gridOffset_y = Math.floor(parseInt(mapElement.style.top) / gridElement_height_pixels);
@@ -96,16 +96,16 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 	let idCount = 0;
 	function MapElement_AddLocationMarkers (mapElement, _locations) {
 		if (mapElement == null) {
-			console.log("MapElement is null, so the querySelector has probably been mis-spelled...");
+			AppLog("MapElement is null, so the querySelector has probably been mis-spelled...");
 			return [];
 		}
 		const imgElement = mapElement.querySelector('img');
 		if (imgElement == null) {
-			console.log(`DOM element ${mapElement} does not contain a valid image.`);
+			AppLog(`DOM element ${mapElement} does not contain a valid image.`);
 			return;
 		}
 		else {
-			console.log(imgElement);
+			AppLog(imgElement);
 		}
 				
 		const gridElements_x = Math.floor(imgElement.naturalWidth / gridElement_width_pixels);
@@ -133,12 +133,12 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 			const logAlpha = `Inspecting pixel @ (${x * gridElement_width_pixels}, ${y * gridElement_height_pixels}); alpha = ${alpha}`;
 			if (alpha === 0) {
 				gridElements[i] = null;
-				console.log(`${logAlpha}; %cSkipping (${x}, ${y})`, "color: red;");
+				AppLog(`${logAlpha}; %cSkipping (${x}, ${y})`, "color: red;");
 			}
 			else {
 				gridElements[i] = CreateElement_Grid(x, y);
 				mapElement.appendChild(gridElements[i]);
-				console.log(`${logAlpha}; %cCreating grid element @ (${x}, ${y})`, "color: green;");
+				AppLog(`${logAlpha}; %cCreating grid element @ (${x}, ${y})`, "color: green;");
 			}
 		}
 
@@ -157,11 +157,11 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 
 		//Instead, catch elements whose position is out-of-bounds
 			if (gridIndex >= gridElements.length || gridIndex < 0) {
-				console.log(`%c${loc.address}%c is out-of-bounds - check grid reference.`, "color: yellow;", "color:red");
+				AppLog(`%c${loc.address}%c is out-of-bounds - check grid reference.`, "color: yellow;", "color:red");
 				continue;
 			}
 			else if (gridElements[gridIndex] === null) {
-				console.log(`%c${loc.address} is located on a grid that has been intentionally skipped - grid reference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: red;");
+				AppLog(`%c${loc.address} is located on a grid that has been intentionally skipped - grid reference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: red;");
 				continue;
 			}
 
@@ -179,7 +179,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		//Add a label element that will display when the location is assigned
 			CreateElement_Label(gridElements[gridIndex], loc, markerPos_x, markerPos_y);
 		//Log
-			console.log(`%c#${markerElement.id} ${loc.address} @ gridReference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: yellow;");
+			AppLog(`%c#${markerElement.id} ${loc.address} @ gridReference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: yellow;");
 		}
 	}
 
@@ -188,16 +188,16 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 //	CREATE ELEMENTS
 //
 	function CreateElement_Grid (_gridRef_x, _gridRef_y) {
-		const gridElement = NewElement("div", ["gridElement-ctnr"]);
-		gridElement.appendChild(NewElement("div", ["gridElement-border"]));
+		const gridElement = NewElement("div", "", ["gridElement-ctnr"]);
+		gridElement.appendChild(NewElement("div", "", ["gridElement-border"]));
 		gridElement.style.left = `${_gridRef_x * gridElement_width_pixels}px`;
 		gridElement.style.top = `${_gridRef_y * gridElement_height_pixels}px`;
 		return gridElement;
 	}
 
 	function CreateElement_Marker(_gridElement, _markerPos_x, _markerPos_y) {
-		const marker = NewElement("div", ["marker-hl"]);
-		marker.appendChild(NewElement("div", ["marker-ping"]));
+		const marker = NewElement("div", "", ["marker-hl"]);
+		marker.appendChild(NewElement("div", "", ["marker-ping"]));
 		marker.style.left = `${_markerPos_x}px`;
 		marker.style.top = `${_markerPos_y}px`;
 		_gridElement.appendChild(marker);
@@ -206,12 +206,12 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 
 	function CreateElement_Label(_gridElement, _location, _markerPos_x, _markerPos_y) {
 		const label_offset_px_x = 32, label_offset_px_y = 40;
-		const label = NewElement("div", ["marker-label"]);
+		const label = NewElement("div", "", ["marker-label"]);
 		let x = _markerPos_x;
 		let y = _markerPos_y;
 
 		if (typeof _location.labelPos !== 'string') {
-			console.log("Nope @ "+_location.name+" "+_markerPos_x+" "+_markerPos_y);
+			AppLog("Nope @ "+_location.name+" "+_markerPos_x+" "+_markerPos_y);
 		}
 
 		for (const c of _location.labelPos) {
@@ -234,23 +234,38 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 	function AddSearchTerms (_locations) {
-		const elem_search_list = document.getElementById('search').querySelector('ul');
-		for (const loc of _locations) {
-			const listElement = NewElement("li", []);
-		//If is defined location...
-			if (loc instanceof Location) {
-				listElement.textContent = loc.fullAddress;
-			//Hide locations with type "generic" (a generic alternative will be made available)
-				if (loc.type == "generic") {
-					listElement.style.display = "none";
+		const location_menu = document.getElementById('location-menu');
+		for (const _loc of _locations) {
+/*
+	SKIP GENERICS FOR NOW 
+*/
+if (typeof _loc === 'string') continue;
+
+			const areaID = _loc.area
+				.replace(/ /g, "-")
+				.replace(".", "")
+				.replace("/", "-")
+			;
+		//Create new element for area containing location list
+			if (!location_menu.querySelector(`#${areaID}`)) {
+				location_menu.appendChild(NewElement('div', areaID, ['location-list'], (_elmt)=>{
+					_elmt.appendChild(NewElement('h3', '', [], (_subElmt)=>{
+						_subElmt.textContent = _loc.area;
+					}));
+					_elmt.appendChild(NewElement('ul', '', []));
+				}));
+			}
+		//Append list item to area location list
+		console.log(_loc.displayName);
+			location_menu
+				.querySelector(`#${areaID}`)
+				.querySelector('ul')
+				.appendChild(NewElement('li', "", [], (_elmt)=>{
+					_elmt.textContent = _loc.displayName;
 				}
-			}
-		//Else assumes a string:
-			else {
-				listElement.textContent = loc;
-			}
-    	    elem_search_list.appendChild(listElement);
-		}
+			));
+		};
+
 	}
 
 
@@ -260,11 +275,12 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 //	UTILITY FUNCTIONS
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-	function NewElement(elemType, arr_classes/*, Func_appendStyles*/) {			//<== With Func_appendStyles you can add a function to the constructor like (_newElem)=>{DOSTUFF}). Useful for including extra paramaters.
+	function NewElement(elemType, id, Arr_classes, _Func_appendStyles = (_elmt)=>{return;}) {		//<== With Func_appendStyles you can add a function to the constructor like (_newElem)=>{DOSTUFF}). Useful for including extra paramaters.
 		const newElem = document.createElement(elemType);
-		for (const cl of arr_classes) {
-			newElem.classList.add(cl);
+		if (id !='') newElem.id = id;
+		for (cl in Arr_classes) {
+			newElem.classList.add(Arr_classes[cl]);
 		}
-		/*Func_appendStyles(newElem);*/
+		_Func_appendStyles(newElem);
 		return newElem;
-    }
+	}
