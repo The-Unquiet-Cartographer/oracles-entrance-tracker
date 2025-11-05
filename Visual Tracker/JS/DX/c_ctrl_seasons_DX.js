@@ -59,11 +59,11 @@
 		elem_map_holodrumPlain,
 		locs_holodrumPlain
 	);
-		const locations_natzuRegion = Locations_ConcatGroups_DX(
+	const locations_natzuRegion = Locations_ConcatGroups_DX(
 		elem_map_natzuRegion,
 		locs_natzuRegion
 	);
-		const locations_greatMoblinsKeep = Locations_ConcatGroups_DX(
+	const locations_greatMoblinsKeep = Locations_ConcatGroups_DX(
 		elem_map_greatMoblinsKeep,
 		locs_greatMoblinsKeep
 	);
@@ -78,7 +78,8 @@
 	);
 	const locations_northHoron = Locations_ConcatGroups_DX(
 		elem_map_northHoron,
-		locs_northHoron
+		locs_northHoron,
+		locs_eyeglassLake
 	);
 	const locations_easternSuburbs = Locations_ConcatGroups_DX(
 		elem_map_easternSuburbs,

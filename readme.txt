@@ -1,7 +1,7 @@
-Need to run 
+Setting up a local host server for development: 
+(Required for local development as the browser requires a server in order to delay script execution with promises until all the images are loaded.)
 
-	python -m http.server
-
-from the terminal in VSCode,
-then navigate to http://localhost:8000/Visual%20Tracker/HTML/map_seasons.html
-in your browser.
+* Install python.
+* Install python extension in VSCode.
+* Execute "python -m http.server" in the terminal.
+* Navigate to http://localhost:8000/Visual%20Tracker/HTML/map_seasons.html in your browser.

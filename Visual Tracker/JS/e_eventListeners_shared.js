@@ -1,13 +1,14 @@
 /*
 *	We've managed to write this whole script without referring back to the Location arrays constructed earlier, ensuring modularity.
 */
-	const search_ctnr_outer = document.getElementById('search-ctnr-outer');			//Will be displayed when a marker is selected.
-	const sections = [];															//Will let us track which list items belong to which sections (mainly used for writing labels).
+	const elem_search_ctnr_outer = document.getElementById('search-ctnr-outer');	//Will be displayed when a marker is selected.
+	const elem_btn_clear = elem_search_ctnr_outer.querySelector('#btn-clear');
+	const menu_sections = [];														//Will let us track which list items belong to which menu_sections (mainly used for writing labels).
 	const elems_listItems = [];														//Each list item will be given an event listener so we can label the entrances.
-	for (const l of search_ctnr_outer.querySelectorAll('.location-list')) {
+	for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
 		const oldLength = elems_listItems.length;
 		elems_listItems.push(...l.querySelectorAll('li'));
-		sections.push({
+		menu_sections.push({
 			area: l.querySelector('h3').textContent,
 			locationCount: elems_listItems.length - oldLength
 		});
@@ -15,7 +16,7 @@
 	function LocationMenu_FullLabel (_locationMenuIndex) {
 		let labelText = "";
 		let _i = _locationMenuIndex;
-		for (const s of sections) {
+		for (const s of menu_sections) {
 			if (_i < s.locationCount) {
 				labelText = s.area;
 				break;
@@ -171,11 +172,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 	function ShowMenu() {
-		search_ctnr_outer.style.display = "block";
+		elem_search_ctnr_outer.style.display = "block";
 //		elem_search_input.focus();
 	}
 	function HideMenu() {
-		search_ctnr_outer.style.display = "none";
+		elem_search_ctnr_outer.style.display = "none";
 //		elem_search_input.value = "";
 	}
 
@@ -199,7 +200,7 @@
 //
 //	Click off Marker: Deselect marker and hide search overlay
 //
-	search_ctnr_outer.addEventListener('click', e => {
+	elem_search_ctnr_outer.addEventListener('click', e => {
 		Annotation.Deselect();
 		HideMenu();
 		e.stopPropagation();
@@ -242,6 +243,12 @@
 			HideMenu();
 		});
 	});
+	elem_btn_clear.addEventListener('click', ()=>{
+		Annotation.SELECTED_.Unassign();
+		Annotation.Deselect();
+		HideMenu();
+		EventLog("Cleared.");
+	});
 
 
 
@@ -251,9 +258,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 	function CreateLine(_from, _to) {
-		let pt1 = ReturnGlobalOffsets(_from);
-		let pt2 = ReturnGlobalOffsets(_to);
-		//AppLog(pt1, pt2);
+		const pt1 = [
+			StringToInt(_from.parentElement.style.left) + StringToInt(_from.style.left),
+			StringToInt(_from.parentElement.style.top) + StringToInt(_from.style.top)
+		];
+		console.log(_from.style.left, _from.style.top);
+		const global_from = ReturnGlobalOffsets(_from);
+		const global_to = ReturnGlobalOffsets(_to);
+		const diff = [global_to[0] - global_from[0], global_to[1] - global_from[1]];
+		const pt2 = [
+			pt1[0] + diff[0],
+			pt1[1] + diff[1]
+		];
+		AppLog(`Marker position relative to map element is ${pt1}; global offsets are ${global_from} and ${global_to}; difference is ${diff}; pt1 + diff is ${pt2}`);
 
 	//Draw right-angled triangle between two markers
 		let a = pt2[0]-pt1[0], b = pt2[1]-pt1[1];
@@ -295,12 +312,19 @@
 		return parseInt(_str);
 	}
 
+	function ReturnOffsets(_elem) {
+		return [
+			StringToInt(`${_elem.style.left}`),						//<== For this to work fully requires that the map elements (ALL elements) have inline top and left styles.
+			StringToInt(`${_elem.style.top}`)
+		];
+	}
+
 	function ReturnGlobalOffsets(_elem) {
 		let globalOffsetX = 0;
 		let globalOffsetY = 0;
 		while(_elem != document.querySelector('body')) {
-			let x = StringToInt(`${_elem.style.left}`);					//<== For this to work fully requires that the map elements (ALL elements) have inline top and left styles.
-			let y = StringToInt(`${_elem.style.top}`);
+			let x = StringToInt(_elem.style.left);					//<== For this to work fully requires that the map elements (ALL elements) have inline top and left styles.
+			let y = StringToInt(_elem.style.top);
 			//AppLog(`(${x}, ${y})`);
 			if (!isNaN(x)) globalOffsetX += x;
 			if (!isNaN(y)) globalOffsetY += y;

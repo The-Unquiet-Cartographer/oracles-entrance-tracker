@@ -83,7 +83,12 @@ html, body {
 #location-menu ul {
 	padding-left: 20px;
 }
-li:hover, #btn-clear:hover {
+/*
+#location-menu li {
+
+}
+*/
+#location-menu li:hover, #btn-clear:hover {
 	background: green;
 	cursor: pointer;
 }

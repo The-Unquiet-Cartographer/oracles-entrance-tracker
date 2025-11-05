@@ -1,7 +1,6 @@
 function AddEventListener_ChangeSeasons (mapElement) {
 	mapElement.querySelectorAll('.gridElement-ctnr').forEach(_gridElem => {
 		_gridElem.addEventListener('click', () => {
-			console.log("clicked");
 			ChangeSeasons(mapElement);
 		});
 	});
@@ -28,46 +27,32 @@ function ChangeSeasons (mapElement) {
 	}
 }
 
-AddEventListener_ChangeSeasons(elem_map_ancientRuins);
-
 /*
-elem_map_northernPeak
+function ChangeNorthernPeak
+function ChangeNatzuRegion
+funciton ChangeMoblinsKeep
 
-elem_map_templeRemains
-
-elem_map_goronMountain
-
-elem_map_mtCucco
-
-elem_map_tarmRuins
-
-elem_map_northernPeakFoothills
-
-elem_map_holodrumPlain
-
-elem_map_natzuRegion
-
-elem_map_greatMoblinsKeep
-
-elem_map_sunkenCity
-
-elem_map_spoolSwamp
-
-elem_map_northHoron
-
-elem_map_easternSuburbs
-
-elem_map_woodOfWinter
-
-elem_map_graveyard
-
-elem_map_westernCoast
-
-elem_map_horonVillage
-
-elem_map_makuTree
-
-elem_map_easternCoast
-
-elem_map_samasaDesert
+//Change the AddEventListener_ChangeSeasons function to accept a callback, and rename it.
 */
+
+AddEventListener_ChangeSeasons(elem_map_ancientRuins);
+//AddEventListener_ChangeSeasons(elem_map_northernPeak);
+AddEventListener_ChangeSeasons(elem_map_templeRemains);
+//AddEventListener_ChangeSeasons(elem_map_goronMountain);
+AddEventListener_ChangeSeasons(elem_map_mtCucco);
+AddEventListener_ChangeSeasons(elem_map_tarmRuins);
+//AddEventListener_ChangeSeasons(elem_map_northernPeakFoothills);
+AddEventListener_ChangeSeasons(elem_map_holodrumPlain);
+//AddEventListener_ChangeSeasons(elem_map_natzuRegion);
+//AddEventListener_ChangeSeasons(elem_map_greatMoblinsKeep);
+AddEventListener_ChangeSeasons(elem_map_sunkenCity);
+AddEventListener_ChangeSeasons(elem_map_spoolSwamp);
+AddEventListener_ChangeSeasons(elem_map_northHoron);
+AddEventListener_ChangeSeasons(elem_map_easternSuburbs);
+AddEventListener_ChangeSeasons(elem_map_woodsOfWinter);
+AddEventListener_ChangeSeasons(elem_map_graveyard);
+AddEventListener_ChangeSeasons(elem_map_westernCoast);
+AddEventListener_ChangeSeasons(elem_map_horonVillage);
+//AddEventListener_ChangeSeasons(elem_map_makuTree);
+//AddEventListener_ChangeSeasons(elem_map_easternCoast);
+//AddEventListener_ChangeSeasons(elem_map_samasaDesert);

@@ -31,7 +31,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		for (const g of locationGroups) {
 			for (const l of g) {
 				concatenatedLocations.push(new Location (
-					l.area, l.name, l.type,
+					l.area, l.name, l.type_,
 					l.gridRef_x - mapElement_gridOffset_x,
 					l.gridRef_y - mapElement_gridOffset_y,
 					l.tilePos_x, l.tilePos_y,
@@ -105,7 +105,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 			return;
 		}
 		else {
-			AppLog(imgElement);
+			LogElement(imgElement);
 		}
 				
 		const gridElements_x = Math.floor(imgElement.naturalWidth / gridElement_width_pixels);
@@ -171,9 +171,9 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 			const markerElement = CreateElement_Marker(gridElements[gridIndex], markerPos_x, markerPos_y);
 			markerElement.id = "loc"+idCount;
 			idCount++;
-
-            if (loc.type == "portal") {
-                markerElement.classList.add("portal");
+		//
+            if (loc.isPortal) {
+                markerElement.classList.add("portal");			//<== IDK why any of this TBH.
                 Portals.push([loc.label, markerElement]);
             }
 		//Add a label element that will display when the location is assigned
@@ -236,32 +236,44 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 	function AddSearchTerms (_locations) {
 		const location_menu = document.getElementById('location-menu');
 		for (const _loc of _locations) {
-/*
-	SKIP GENERICS FOR NOW 
-*/
-if (typeof _loc === 'string') continue;
 
-			const areaID = _loc.area
+		//If location is of type Generic, don't add to search terms
+			if (_loc.isGeneric) continue;
+
+		//Generate relevant element ID, textContent
+			let area_h3_textContent;
+			let area_ID;
+			let listItem_textContent;
+			if (typeof _loc === 'string') {
+				const splitString = _loc.split(" - ");
+				area_h3_textContent = splitString[0];
+				listItem_textContent = splitString[1];
+			}
+			else {
+				area_h3_textContent = _loc.area;
+				listItem_textContent = _loc.displayName;
+			}
+			area_ID = area_h3_textContent
 				.replace(/ /g, "-")
 				.replace(".", "")
 				.replace("/", "-")
+				.toLowerCase()
 			;
-		//Create new element for area containing location list
-			if (!location_menu.querySelector(`#${areaID}`)) {
-				location_menu.appendChild(NewElement('div', areaID, ['location-list'], (_elmt)=>{
+		//Create new element for area location list
+			if (!location_menu.querySelector(`#${area_ID}`)) {
+				location_menu.appendChild(NewElement('div', area_ID, ['location-list'], (_elmt)=>{
 					_elmt.appendChild(NewElement('h3', '', [], (_subElmt)=>{
-						_subElmt.textContent = _loc.area;
+						_subElmt.textContent = area_h3_textContent;
 					}));
 					_elmt.appendChild(NewElement('ul', '', []));
 				}));
 			}
 		//Append list item to area location list
-		console.log(_loc.displayName);
 			location_menu
-				.querySelector(`#${areaID}`)
+				.querySelector(`#${area_ID}`)
 				.querySelector('ul')
 				.appendChild(NewElement('li', "", [], (_elmt)=>{
-					_elmt.textContent = _loc.displayName;
+					_elmt.textContent = listItem_textContent;
 				}
 			));
 		};

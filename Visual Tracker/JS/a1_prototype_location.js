@@ -73,9 +73,25 @@ Object.defineProperties(Location.prototype, {
 			}
 		}
 	},
+	isGeneric: {
+		get: function() {
+			if (this.type_ instanceof Location.Type || typeof this.type_ === "symbol") {
+				if (this.type_ == Location.Type.Generic) return true;
+			}
+			return false;
+		}
+	},
+	isPortal: {
+		get: function() {
+			if (this.type_ instanceof Location.Type || typeof this.type_ === "symbol") {
+				if (this.type_ == Location.Type.Portal) return true;
+			}
+			return false;
+		}
+	},
 	address: {
 		get: function() {
-			return this.area+" - "+this.name;
+			return `${this.area} - ${this.name}`;
 		}
 	},
 	type: {
@@ -96,12 +112,12 @@ Object.defineProperties(Location.prototype, {
 				&&	this.type_ != Location.Type.Portal
 				&&	this.type_ != Location.Type.Secret
 				) {
-					return this.address+" - "+this.type_.description;
+					return `${this.address} - ${this.type_.description}`;
 				}
 				return this.address;
 			}
 		//Else assume a string:
-			return this.area+" - "+this.name+" - "+this.type_;
+			return `${this.area} - ${this.name} - ${this.type_}`;
 		}
 	},
 	displayName: {
@@ -113,10 +129,11 @@ Object.defineProperties(Location.prototype, {
 				&&	this.type_ != Location.Type.Portal
 				&&	this.type_ != Location.Type.Secret
 				) {
-					return this.name+" - "+this.type_.description;
+					return `${this.name} - ${this.type_.description}`;
 				}
+				return this.name;
 			}
-			return this.name;
+			return `${this.name} - ${this.type_}`;
 		} 
 	},
 /*
@@ -136,9 +153,4 @@ Object.defineProperties(Location.prototype, {
 		}
 	},
 */
-	isPortal: {
-		get: function() {
-			return this.type == Type.Portal ? true : false;
-		}
-	}
 });

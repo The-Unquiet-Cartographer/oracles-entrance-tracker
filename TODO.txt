@@ -1,17 +1,18 @@
 TODO:
 
-Add generics to search terms.
+index.html
+
 Add search input field.
-Add functionality to Clear button.
+
+search.css - #location-menu - Change bullet point style to arrow.
+
+DX Seasons event listeners - Do.
 
 
-Solve teh mystery of why locations aren't being listed in the search menu properly.
-
-
-Create EX page for Oracle of Ages
-
+Create DX page for Oracle of Ages
 Event Listeners - Oracle of Ages - change Nuul region for animal companion.
-
 Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
 
-Exempt locations from EX seasons (and I suppose EX ages) location lists. Look in c_ctrl_[ages/seasons]_EX.js
+Exempt locations from DX seasons (and I suppose DX ages) location lists. Look in c_ctrl_[ages/seasons]_DX.js
+Identify locations in Holodrum with note //Generic?.
+Reassess location types in Subrosia.

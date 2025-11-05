@@ -7,7 +7,7 @@ $zIndex-gridElement: 5;
 $zIndex-marker-ping: 10;
 $zIndex-marker-hl: 11;
 $zIndex-marker-label: 15;
-$zIndex-line: 0;				//<== Should be 13 but due to stacking context gubbins that doesn't work. Values of 0-4 work.
+$zIndex-line: 4;				//<== Should be 13 but due to stacking context gubbins that doesn't work. Values of 0-4 work.
 $zIndex-search: 20;
 
 	*{
