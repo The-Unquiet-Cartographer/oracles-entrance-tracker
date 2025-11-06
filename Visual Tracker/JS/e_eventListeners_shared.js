@@ -92,6 +92,7 @@
 			if (!labelText.startsWith("Generic - ")) {
 				Annotation.all.forEach(_a => {
 					if (_a.dupeIndex == _locationMenuIndex) _a.Unassign();
+					elems_listItems[_locationMenuIndex].style.color = "grey";
 				});
 			}
 		//Set label
@@ -104,10 +105,13 @@
 
 	//UNASSIGN A LABEL
 		Unassign () {
-			this.label.textContent = "";
-			this.label.classList.remove('label-shown');
-			this.dupeIndex = undefined;
-			this.BreakConnections();
+			if (this.dupeIndex != undefined) {
+				this.label.textContent = "";
+				this.label.classList.remove('label-shown');
+				elems_listItems[this.dupeIndex].style.color = "";
+				this.dupeIndex = undefined;
+				this.BreakConnections();
+			}
 		}
 
 	//MAKE/BREAK CONNECTIONS
@@ -187,9 +191,6 @@
 	document.querySelectorAll('.marker-hl').forEach(_markerElem => {
 		_markerElem.addEventListener('click', e => {
 			Annotation.Deselect();
-		//Since the marker offset is relative, add the grid element position to get the true position
-			let x = StringToInt(_markerElem.style.left) + StringToInt(_markerElem.parentElement.style.left);
-			let y = StringToInt(_markerElem.style.top) + StringToInt(_markerElem.parentElement.style.top);
 			Annotation.Select(_markerElem);
 			ShowMenu();
 			e.stopPropagation();
@@ -238,6 +239,7 @@
 //Iterate list items with index, add event listeners
 	elems_listItems.forEach((_li, i) => {
 		_li.addEventListener('click', ()=>{
+			_li
 			Annotation.Assign(i);
 			Annotation.Deselect();
 			HideMenu();
@@ -262,7 +264,6 @@
 			StringToInt(_from.parentElement.style.left) + StringToInt(_from.style.left),
 			StringToInt(_from.parentElement.style.top) + StringToInt(_from.style.top)
 		];
-		console.log(_from.style.left, _from.style.top);
 		const global_from = ReturnGlobalOffsets(_from);
 		const global_to = ReturnGlobalOffsets(_to);
 		const diff = [global_to[0] - global_from[0], global_to[1] - global_from[1]];
@@ -270,7 +271,7 @@
 			pt1[0] + diff[0],
 			pt1[1] + diff[1]
 		];
-		AppLog(`Marker position relative to map element is ${pt1}; global offsets are ${global_from} and ${global_to}; difference is ${diff}; pt1 + diff is ${pt2}`);
+		//AppLog(pt1, pt2);
 
 	//Draw right-angled triangle between two markers
 		let a = pt2[0]-pt1[0], b = pt2[1]-pt1[1];
@@ -296,7 +297,7 @@
 		line.style.height = `${c}px`;
 		line.style.transform = `rotate(${rotation}deg)`;
 		line.style.transformOrigin = "50% 0";
-		line.style.backgroundColor = `rgb(${DieRoll(0,192)},${DieRoll(192,255)},${DieRoll(160,224)})`;
+		//line.style.backgroundColor = `rgb(${DieRoll(0,192)},${DieRoll(192,255)},${DieRoll(160,224)})`;
 		_from.parentElement.parentElement.appendChild(line);			//<== Should append to the map element; required so that the zIndex is within the same context stacking as the labels and markers.
 		return line;
 	}

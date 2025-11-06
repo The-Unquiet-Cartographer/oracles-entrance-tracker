@@ -1,5 +1,5 @@
-const enableLogging = true;
-const enableEventLogging = true;
+const enableLogging = false;
+const enableEventLogging = false;
 
 function AppLog (...args) {
 	args[0] = `🗺️ ${args[0]}`;

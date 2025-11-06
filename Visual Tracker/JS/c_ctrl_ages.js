@@ -18,6 +18,7 @@
 	);
 	Locations_RemoveExemptions (locations_labrynna_past, exemptions_labrynna_past);
 
+
 //LABRYNNA PRESENT LOCATIONS
 	const locations_labrynna_present = Locations_ConcatGroups(
 		locs_blackTower_present,
@@ -41,17 +42,17 @@
 	);
 	Locations_RemoveExemptions (locations_labrynna_present, exemptions_labrynna_present);
 
+
 //UNDERWATER PAST LOCATIONS 
 	const locations_underwater_past1 = Locations_ConcatGroups(
 		locs_seaOfNoReturn_underwater,
 	);
-	//Locations_RemoveExemptions (locations_zoraSeas_past1, []);
 	const locations_underwater_past2 = Locations_ConcatGroups(
 		locs_seaOfStorms_underwater_past,
 		locs_zoraSeas_underwater_past,
 		locs_zoraVillage_underwater_past,
 	);
-	//Locations_RemoveExemptions (locations_zoraSeas_past2, []);
+
 
 //UNDERWATER PRESENT LOCATIONS 
 	const locations_underwater_present = Locations_ConcatGroups(
@@ -61,7 +62,6 @@
 		locs_zoraVillage_underwater_present,
 	);
 	Locations_RemoveExemptions (locations_underwater_present, exemptions_underwater_present);
-
 
 
 //MAP ELEMENTS
@@ -78,6 +78,7 @@
 	MapElement_AddLocationMarkers(elem_map_underwater_past2, locations_underwater_past2);
 	MapElement_AddLocationMarkers(elem_map_underwater_present, locations_underwater_present);
 
+	
 //SEARCH TERMS
 	AddSearchTerms(locs_generic);
 	AddSearchTerms(locations_labrynna_past);

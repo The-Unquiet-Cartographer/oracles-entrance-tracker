@@ -1,13 +1,57 @@
-Links to:
-* Key Location Tracker - Seasons
-* Key Location Tracker - Ages
-* Visual Tracker - Seasons
-* Visual Tracker - Ages
-* Visual Tracker - Seasons EX
-go here.
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Index</title>
+		<style>
+			body { margin: 0; background: black; position: relative; }
+			#nav-ctnr {
+				width: calc(100vw - 80px);
+				max-width: 500px;
+				margin: auto;
+				margin-top: 40px;
+				box-sizing: border-box;
+			}
+			.clearfix::after { content: ""; display: table; clear: both; }
+			a {
+				float: left;
+				text-align: center;
+				color: white;
+				width: calc(50% - 5px);
+				padding: 10px;
+				box-sizing: border-box;
+				border: 1px solid white;
+				border-radius: 4px;
+			}
+			a:nth-child(odd) {
+				margin-right: 5px;
+				background-color: #B92428;
+			}
+			a:nth-child(even) {
+				margin-left: 5px;
+				background-color: #4E4B98;
+			}
+			a:not(:nth-child(1)):not(:nth-child(2)) {
+				margin-top: 5px;
+			}
+			a:not(:last-child):not(:nth-last-child(2)) {
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
 
-<body>
-	<div id="nav-ctnr">
-		<!-- <link> ? -->
-	</div>
-</body>
+	<body>
+		<div id="nav-ctnr" class="clearfix">
+			<a href="Key Location Tracker/HTML/keyLoc_seasons.html">Oracle of Seasons<br>Key Location Tracker</a>
+			<a href="#" style="color:dimgrey;">Oracle of Ages<br>Key Location Tracker</a>
+
+			<a href="Visual Tracker/HTML/map_seasons_DX.html">Oracle of Seasons<br>Visual Tracker DX</a>
+			<a href="#" style="color:dimgrey;">Oracle of Ages<br>Visual Tracker DX</a>
+
+			<a href="Visual Tracker/HTML/map_seasons.html">Oracle of Seasons<br>Old Visual Tracker</a>
+			<a href="Visual Tracker/HTML/map_ages.html">Oracle of Ages<br>Old Visual Tracker</a>
+		</div>
+	</body>
+	
+</html>

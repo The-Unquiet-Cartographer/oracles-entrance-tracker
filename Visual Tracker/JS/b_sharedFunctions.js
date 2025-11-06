@@ -11,23 +11,27 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 /*
 *	In our databases we are grouping locations by area.
 *	However, we want to group these into a single collection so they can be utilised by the program.
-*	The EX version of this function takes the offset of the map element and adjusts the locations grid reference,
-*	so even if we've portioned up the map, the grid reference will be relative to the size of that map element.
+
+*	The DX version of this function takes the offset of the map element and adjusts the locations grid reference,
+	so even if we've portioned up the map, the grid reference will be relative to the size of that map element.
+
+*	This function is designed to take the global grid reference assigned to the location and transform it to the local position of the map element.
+	The common origin is the top-left corner of the world map, i.e. the cluster of map elements, that the locations are assigned to.
 */
 
 	function Locations_ConcatGroups (...locationGroups) {
 		return locationGroups.flat();
 	}
 
-	function Locations_ConcatGroups_DX (mapElement, ...locationGroups) {
+	function Locations_ConcatGroups_DX (mapElement, commonOrigin, ...locationGroups) {
 		if (mapElement == null) {
 			AppLog("MapElement is null, so the querySelector has probably been mis-spelled...");
 			return [];
 		}
 		else AppLog("Concatenating location groups for map element:", mapElement);
 		const concatenatedLocations = [];
-		const mapElement_gridOffset_x = Math.floor(parseInt(mapElement.style.left) / gridElement_width_pixels);
-		const mapElement_gridOffset_y = Math.floor(parseInt(mapElement.style.top) / gridElement_height_pixels);
+		const mapElement_gridOffset_x = Math.floor((parseInt(mapElement.style.left)-commonOrigin.x) / gridElement_width_pixels);
+		const mapElement_gridOffset_y = Math.floor((parseInt(mapElement.style.top)-commonOrigin.y) / gridElement_height_pixels);
 		for (const g of locationGroups) {
 			for (const l of g) {
 				concatenatedLocations.push(new Location (
@@ -44,6 +48,8 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 
 /*
 *	Not all locations will be included (such as those that are always-vanilla in the shuffle).
+*	Exemptions should be written as strings and match the address of the location, i.e. "area - name".
+	If the exemption is a connector, you will have to pass a copy for each entrance.
 */
 	function Locations_RemoveExemptions (_locations, ...exemptions) {
 	//Internal function
@@ -64,7 +70,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 				}
 				continue;
 			}
-		//Else if exemption is singular, just sort it out
+		//Else if exemption is singular, just sort it out.
 			RemoveFromLocations(entry);
 		}
 	}
@@ -253,10 +259,9 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 				area_h3_textContent = _loc.area;
 				listItem_textContent = _loc.displayName;
 			}
-			area_ID = area_h3_textContent
-				.replace(/ /g, "-")
-				.replace(".", "")
-				.replace("/", "-")
+			area_ID = area_h3_textContent		
+				.replace(/[\s\/]+/g, "-")				//Spaces & forward slashes => hyphens	
+				.replace(/[^a-zA-Z0-9\-\_\:]/g, "")		//Everything else => nothing
 				.toLowerCase()
 			;
 		//Create new element for area location list

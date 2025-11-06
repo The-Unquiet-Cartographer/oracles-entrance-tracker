@@ -4,6 +4,7 @@
 		elem_map_subrosia = document.getElementById('map-subrosia-ctnr')
 	;
 
+	
 //HOLODRUM LOCATIONS
 	const locations_holodrum = Locations_ConcatGroups(
 		locs_ancientRuins,
@@ -28,6 +29,7 @@
 	);
 	Locations_RemoveExemptions(locations_holodrum, exemptions_holodrum);
 
+
 //SUBROSIA LOCATIONS
 	const locations_subrosia = Locations_ConcatGroups(
 		locs_easternSubrosia,
@@ -38,9 +40,11 @@
 	);
 	Locations_RemoveExemptions(locations_subrosia, exemptions_subrosia);
 
+
 //LOCATION MARKERS
 	MapElement_AddLocationMarkers(elem_map_holodrum, locations_holodrum);
 	MapElement_AddLocationMarkers(elem_map_subrosia, locations_subrosia);
+
 
 //SEARCH TERMS
 	AddSearchTerms(locs_generic);

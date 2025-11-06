@@ -1,18 +1,9 @@
 TODO:
 
-index.html
-
-Add search input field.
-
-search.css - #location-menu - Change bullet point style to arrow.
-
-DX Seasons event listeners - Do.
-
+Add search input field?
 
 Create DX page for Oracle of Ages
 Event Listeners - Oracle of Ages - change Nuul region for animal companion.
 Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
 
-Exempt locations from DX seasons (and I suppose DX ages) location lists. Look in c_ctrl_[ages/seasons]_DX.js
-Identify locations in Holodrum with note //Generic?.
-Reassess location types in Subrosia.
+~index.html (WIP)

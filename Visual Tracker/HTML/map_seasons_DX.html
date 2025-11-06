@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Seasons Visual Tracker</title>
-        <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Seasons Visual Tracker</title>
+		<link rel="stylesheet" href="../CSS & SASS/map-markers.css">
 		<link rel="stylesheet" href="../CSS & SASS/search.css">
-        <style>
-            body                { margin: 0; background: black; position: relative;}
-        </style>
-    </head>
+		<style>
+			body { margin: 0; background: black; position: relative; }
+			#search-ctnr-inner, .marker-label { background: #B92428; }
+		</style>
+	</head>
 
 	<body>
 		<div id=search-ctnr-outer>
@@ -65,7 +66,7 @@
 		</div>
 
 		<div id=map-natzuRegion-ctnr class=map-ctnr style="top:512px; left:960px">
-			<img src="../Images/Seasons/Areas/natzuPraire.png">
+			<img src="../Images/Seasons/Areas/natzuRegion_praire.png">
 			<div class=map-searchOverlay></div>
 		</div>
 
@@ -75,7 +76,7 @@
 		</div>
 
 		<div id=map-moblinsKeepRoof-ctnr class=map-ctnr style="top:512px; left:1760px">
-			<img src="../Images/dummyGrid.png">
+			<img src="../Images/Seasons/moblinsKeep_roof.png">
 			<div class=map-searchOverlay></div>
 		</div>
 
@@ -138,17 +139,22 @@
 			<div class=map-searchOverlay></div>
 		</div>
 
-    </body>
+
+		<div id=map-subrosia-ctnr class=map-ctnr style="top:512px; left:2560px">
+			<img src="../Images/Seasons/Sources/subrosia.png">
+		</div>
+
+	</body>
 
 	<script src="../JS/scriptLoadManager.js"></script>
-    <script src="../JS/a1_prototype_location.js"></script>
-    <script src="../JS/a2_data_locations_seasons.js"></script>
+	<script src="../JS/a1_prototype_location.js"></script>
+	<script src="../JS/a2_data_locations_seasons.js"></script>
 	<script src="../JS/appLogging.js"></script>
-    <script src="../JS/b_sharedFunctions.js"></script>
+	<script src="../JS/b_sharedFunctions.js"></script>
 <!--
-    <script src="../JS/DX/c_ctrl_seasons_DX.js"></script>
-    <script src="../JS/e_eventListeners_shared.js"></script>
-	<script src="../JS/DX/e_eventListeners_seasonsDX.js"></script>
+	<script src="../JS/DX/c_ctrl_seasons_DX.js"></script>
+	<script src="../JS/e_eventListeners_shared.js"></script>
+	<script src="../JS/DX/e2_eventListeners_seasonsDX.js"></script>
 -->
 
 <!--Delay running scripts as they require image elements to be fully loaded-->
@@ -164,7 +170,7 @@
 		*/
 			"../JS/DX/c_ctrl_seasons_DX.js",
 			"../JS/e_eventListeners_shared.js",
-			"../JS/DX/e_eventListeners_seasonsDX.js"
+			"../JS/DX/e2_eventListeners_seasonsDX.js"
 		];
 		WaitForImages(() => {
 			LoadScriptsInOrder(scriptSrcs);

@@ -44,7 +44,7 @@ html, body {
 	z-index: 20;
 }
 #search-ctnr-inner {
-	background: brown;
+	background: dimgrey;
 	color: white;
 	border-radius: 20px;
 	width: calc(100%);
@@ -67,8 +67,9 @@ html, body {
 }
 #btn-clear, .location-list {
 	margin-top: 0;
-	width: 200px;
+	width: 220px;
 	margin-bottom: 10px;
+	margin-right: 30px;
 }
 #btn-clear {
 	padding: 10px 0;
@@ -81,13 +82,22 @@ html, body {
 	margin-bottom: 10px;
 }
 #location-menu ul {
-	padding-left: 20px;
+	margin-top: 10px;
+	padding-left: 5px;
+	list-style: none;
 }
-/*
+#location-menu li:before {
+	content: "➢";			/*➣ or ➢*/
+	margin-right: 10px;
+}
 #location-menu li {
-
+    font-family: Verdana, Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+	padding-top: 9px;
+	padding-bottom: 9px;
 }
-*/
 #location-menu li:hover, #btn-clear:hover {
 	background: green;
 	cursor: pointer;

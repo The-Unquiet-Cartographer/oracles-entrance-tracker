@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Seasons Visual Tracker</title>
-        <link rel="stylesheet" href="../CSS & SASS/map-markers.css">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Seasons Visual Tracker</title>
+		<link rel="stylesheet" href="../CSS & SASS/map-markers.css">
 		<link rel="stylesheet" href="../CSS & SASS/search.css">
-        <style>
-			body	{ margin: 0; background: black; position: relative;}
-        </style>
-    </head>
+		<style>
+			body { margin: 0; background: black; position: relative; }
+			#search-ctnr-inner, .marker-label { background: #B92428; }
+		</style>
+	</head>
 
-    <body>
+	<body>
 <!--
-        <div id=search>
+		<div id=search>
 			<input title="Search" placeholder="Search">
-            <ul></ul>
-        </div>
+			<ul></ul>
+		</div>
 -->
 
 		<div id=search-ctnr-outer>
@@ -29,22 +30,22 @@
 			</div>
 		</div>
 
-        <div id=map-holodrum-ctnr class=map-ctnr style="top:0px; left:0px">
-            <img src="../Images/Seasons/Sources/holodrum_default.png">
-        </div>
+		<div id=map-holodrum-ctnr class=map-ctnr style="top:0px; left:0px">
+			<img src="../Images/Seasons/Sources/holodrum_default.png">
+		</div>
 		<div id=map-subrosia-ctnr class=map-ctnr style="top:512px; left:2560px">
-            <img src="../Images/Seasons/Sources/subrosia.png">
-        </div>
-    </body>
+			<img src="../Images/Seasons/Sources/subrosia.png">
+		</div>
+	</body>
 
 	<script src="../JS/scriptLoadManager.js"></script>
-    <script src="../JS/a1_prototype_location.js"></script>
-    <script src="../JS/a2_data_locations_seasons.js"></script>
-    <script src="../JS/appLogging.js"></script>
-    <script src="../JS/b_sharedFunctions.js"></script>
+	<script src="../JS/a1_prototype_location.js"></script>
+	<script src="../JS/a2_data_locations_seasons.js"></script>
+	<script src="../JS/appLogging.js"></script>
+	<script src="../JS/b_sharedFunctions.js"></script>
 <!--
 	<script src="../JS/c_ctrl_seasons.js"></script>
-    <script src="../JS/e_eventListeners_shared.js"></script>
+	<script src="../JS/e_eventListeners_shared.js"></script>
 -->
 
 <!--Delay running scripts as they require image elements to be fully loaded-->

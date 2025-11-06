@@ -22,6 +22,7 @@ class Location {
 		static Single = Symbol("Single");
 		static Generic = Symbol("Generic");				// Locations marked generic will be removed from the search options, but will still be selectable on the map. A selection of generic labels will be made available instead.
 		static Portal = Symbol("Portal");
+		static Trade = Symbol("Trade");					// Single entrances relevant to the trading sequence.
 		static Secret = Symbol("Secret");				// Single entrances that appear to have no use...
 		static Con_Entrance = Symbol("Entrance");
 		static Con_Exit = Symbol("Exit");
@@ -110,6 +111,7 @@ Object.defineProperties(Location.prototype, {
 					this.type_ != Location.Type.Single
 				&&	this.type_ != Location.Type.Generic
 				&&	this.type_ != Location.Type.Portal
+				&&	this.type_ != Location.Type.Trade
 				&&	this.type_ != Location.Type.Secret
 				) {
 					return `${this.address} - ${this.type_.description}`;
@@ -127,6 +129,7 @@ Object.defineProperties(Location.prototype, {
 					this.type_ != Location.Type.Single
 				&&	this.type_ != Location.Type.Generic
 				&&	this.type_ != Location.Type.Portal
+				&&	this.type_ != Location.Type.Trade
 				&&	this.type_ != Location.Type.Secret
 				) {
 					return `${this.name} - ${this.type_.description}`;
@@ -146,6 +149,7 @@ Object.defineProperties(Location.prototype, {
 					case Type.Single:		return false;
 					case Type.Generic:		return false;
 					case Type.Portal:		return false;
+					case Type.Trade:		return false;
 					case Type.Secret:		return false;
 				}
 			}

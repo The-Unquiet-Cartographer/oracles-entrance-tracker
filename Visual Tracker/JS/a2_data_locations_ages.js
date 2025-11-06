@@ -248,7 +248,7 @@ const locs_nuunHighlands_ricky = [
 ];
 
 const locs_rollingRidge_present = [
-	new Location("Rolling Ridge (Present)", "Dried-up Fairy Fountain",			Location.Type.Generic, 13,1, 7,2, "B"),
+	new Location("Rolling Ridge (Present)", "Empty Cave",						Location.Type.Generic, 13,1, 7,2, "B"),		//Secret (Learn) - Bombchus
 	new Location("Rolling Ridge (Present)", "Dug-out Cave",						Location.Type.Generic, 11,0, 7,2, "B"),
 	new Location("Rolling Ridge (Present)", "Dungeon 5: Crown Dungeon",			Location.Type.Single, 10,0, 7,1, "B"),
 	new Location("Rolling Ridge (Present)", "Central Ascent (Present)",			Location.Type.Con_Upper, 12,0, 4,5, "B"),
@@ -279,7 +279,7 @@ const locs_rollingRidgeBase_present = [
 	new Location("Rolling Ridge Base (Present)", "Goron Dance Hall (Present)",			Location.Type.Con_Lower, 13,3, 7,2, "B"),	//i.e. East Ascent. Access Target Carts (vine).
 	new Location("Rolling Ridge Base (Present)", "Old Man (Take)",						Location.Type.Generic, 13,4, 8,3, "B"),
 	new Location("Rolling Ridge Base (Present)", "Small Fairy Cave",					Location.Type.Generic, 13,3, 3,1, "B"),
-	new Location("Rolling Ridge Base (Present)", "Toss Ring Cave",							Location.Type.Generic, 12,3, 2,3, "B"),		//Underwater cave, in the grotto next to the Mermaid's Cave entrance.
+	new Location("Rolling Ridge Base (Present)", "Toss Ring Cave",						Location.Type.Generic, 12,3, 2,3, "B"),		//Underwater cave, in the grotto next to the Mermaid's Cave entrance.
 	new Location("Rolling Ridge Base (Present)", "West Ascent (Present)",				Location.Type.Con_Lower, 8,2, 6,2, "B"),
 	new Location("Rolling Ridge Base (Present)", "Portal (Mermaid's Cave)",				Location.Type.Portal, 12,3, 1,6, "B"),
 ];
@@ -374,14 +374,15 @@ const exemptions_labrynna_present = [
 	"Fairies' Woods - Dungeon 2: Wing Dungeon",
 	"Forest of Time - Portal (Maku Tree)",
 	"Forest of Time - Portal (Nayru's House)",
-	"Symmetry City - Portal (East)",
-	"Symmetry City - Portal (West)",
+	"Lynna City - Portal (Members Shop)",
 	"Rolling Ridge (Present) - Great Moblin's Fortress",
 	"Rolling Ridge (Present) - Great Moblin's Fortress",
 	"Rolling Ridge (Present) - Portal (Peak)",
 	"Rolling Ridge (Present) - Portal (Target Carts)",
 	"Rolling Ridge (Present) - Portal (West)",
 	"Rolling Ridge Base (Present) - Portal (Mermaid's Cave)",
+	"Symmetry City - Portal (East)",
+	"Symmetry City - Portal (West)",
 	"Talus Peaks (Present) - Portal (Top of the Dam)",
 	"Talus Peaks (Present) - Portal (Base of the Dam)",
 	"Talus Peaks (Present) - Portal (Symmetry City)",
@@ -402,8 +403,6 @@ const exemptions_underwater_present = [
 */
 const locs_generic = [
     "Generic - Chest Cave",
-    "Generic - Connector",
-    "Generic - Underwater Connector",
     "Generic - Flooded Cave",
     "Generic - Great Fairy",
     "Generic - House",

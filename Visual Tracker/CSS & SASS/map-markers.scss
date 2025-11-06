@@ -17,17 +17,12 @@ $zIndex-search: 20;
 	.map-ctnr {
 		position: absolute;
 		> img {
-			filter: brightness(75%);
+			//filter: brightness(100%);			//Too bright/high-contrast...
+			filter: brightness(75%);			//...much better.
 		}
 		//DON'T add a z-index! It's very tenuous right now with all the overlapping map elements...
 	}
 
-//Optional: Mute overly-bright colours on the map element.
-	.map-shroud {
-		position: absolute;
-		top: 0;
-		background-color: rgba(0,0,0,0.25);
-	}
 
 
 //////////////////////////
@@ -140,7 +135,7 @@ $zIndex-search: 20;
         height: auto;
         min-height: 24px;
         transform: translate(-50%, -50%);
-        background-color: brown;
+        background-color: grey;
         color: white;
         display: none;
 		z-index: $zIndex-marker-label;
