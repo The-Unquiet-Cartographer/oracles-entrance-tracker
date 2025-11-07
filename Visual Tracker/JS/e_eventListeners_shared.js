@@ -1,41 +1,33 @@
-/*
-*	We've managed to write this whole script without referring back to the Location arrays constructed earlier, ensuring modularity.
-*/
-	const elem_search_ctnr_outer = document.getElementById('search-ctnr-outer');	//Will be displayed when a marker is selected.
-	const elem_btn_clear = elem_search_ctnr_outer.querySelector('#btn-clear');
-	const menu_sections = [];														//Will let us track which list items belong to which menu_sections (mainly used for writing labels).
-	const elems_listItems = [];														//Each list item will be given an event listener so we can label the entrances.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  SEARCH MENU ELEMENTS
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+	const elem_search_ctnr_outer = document.getElementById('search-ctnr-outer');		//Will be displayed when a marker is selected.
+	const elem_search_ctnr_inner = document.getElementById('search-ctnr-outer');		//Will be displayed when a marker is selected.
+	const elem_btn_clear = elem_search_ctnr_inner.querySelector('#btn-clear');			//Will allow the user to clear the annotation assigned to the selected marker.
+	const elem_search_input = elem_search_ctnr_inner.querySelector('#search-input');	//Will allow the user to input search terms and narrow down the list of locations.
+
+//LIST ITEMS
+	const elems_listItems = [];															//Each list element will be given an event listener so we can label the entrances.
+	const searchTerms = [];
+//Record each list element and create a corresponding search term.
+//Search terms will be case-insensitive and include the full {Area - Name - Connector type} for each location.
 	for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
-		const oldLength = elems_listItems.length;
-		elems_listItems.push(...l.querySelectorAll('li'));
-		menu_sections.push({
-			area: l.querySelector('h3').textContent,
-			locationCount: elems_listItems.length - oldLength
-		});
-	}
-	function LocationMenu_FullLabel (_locationMenuIndex) {
-		let labelText = "";
-		let _i = _locationMenuIndex;
-		for (const s of menu_sections) {
-			if (_i < s.locationCount) {
-				labelText = s.area;
-				break;
-			}
-			_i -= s.locationCount;
+		for (const li of l.querySelectorAll('li')) {
+			elems_listItems.push(li);
+		//Create search term
+			const areaName = l.querySelector('h3').textContent;
+			searchTerms.push((`${areaName} - ${li.textContent}`).toLowerCase());
 		}
-		return labelText+" - "+elems_listItems[_locationMenuIndex].textContent;
 	}
-
-
-
-	//const elem_search_input = elem_search_ctnr.querySelector('input');						//Will be displayed when a marker is selected and have its own event listener so the user can input a search.
-	//const elem_search_list = elem_search_ctnr.querySelector('ul');							//Will be displayed when a marker is selected and modified by the search input. 
-																							//Actually nearly all the references to this call .childNodes so I can probably replace it with elems_listItems.
-	//const searchTerms = Array.from(elems_listItems, _li => _li.textContent.toLowerCase());	//A case-insensitive list of applicable terms to be matched by the search input.
-
-
-	const elems_connectors = [];	//Tracks all connector elements - actually tracks the source marker, destination marker, and line element, as an array.
-									//Feasibly I could make this sstatic inside the Annotation class if it's not needed elsewhere.
+	function RetrieveLabelText (_locationMenuIndex) {
+		return (
+			Capitalise(searchTerms[_locationMenuIndex].split(" - ")[0])
+			+" - "
+			+elems_listItems[_locationMenuIndex].textContent
+		);
+	}
 
 
 
@@ -45,7 +37,6 @@
 //	DISPLAY / HIDE ELEMENTS
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	class Annotation {
 		constructor (
 			markerElement,
@@ -53,14 +44,17 @@
 			this.marker = markerElement;
 			this.label = markerElement.nextSibling;
 			this.dupeIndex = undefined;						//The index of the search term used to generate the label.textContent. Ensures markers are assigned unique labels.
-			this.connections = [];							//Contains the Annotation.all index of any Annotations this one is connected to.
+			this.connectedAnnotationIndices = [];			//Contains the Annotation.all index of any Annotations this one is connected to.
 		}
-		static all = [];																			//All marker/label elements on the map.
-		static Init_All () {																		//Call this after the map has been populated.
+
+	//Static class components
+		static all = [];																	//All marker/label elements on the map.
+		static Init_All () {																//Call this after the map has been populated.
 			const elems_markers = Array.from(document.querySelectorAll('.marker-hl'));
 			Annotation.all = elems_markers.map(m => new Annotation(m));
 		}
-		static SELECTED_;																			//The currently selected Annotation.
+		static SELECTED_;																	//The currently selected Annotation.
+		static connections = [];															//Will contain an array of objects formatted as {source, destination, lineElement}
 
 	//Select/Deselect the current Annotation.
 		static Select (_markerElem) {
@@ -87,7 +81,7 @@
 	//ASSIGN SELECTED WITH A LABEL, A DUPEINDEX, AND CONNECTIONS
 		static Assign (_locationMenuIndex) {
 			Annotation.SELECTED_.BreakConnections();
-			const labelText = LocationMenu_FullLabel(_locationMenuIndex);
+			const labelText = RetrieveLabelText(_locationMenuIndex);
 		//Remove pre-existing instances of the label (unless generic)
 			if (!labelText.startsWith("Generic - ")) {
 				Annotation.all.forEach(_a => {
@@ -116,10 +110,10 @@
 
 	//MAKE/BREAK CONNECTIONS
 		RetrieveFullLocationName () {
-			return LocationMenu_FullLabel(this.dupeIndex);
+			return RetrieveLabelText(this.dupeIndex);
 		}
 		RetrieveSplitLocationName () {
-			return LocationMenu_FullLabel(this.dupeIndex).split(" - ");
+			return RetrieveLabelText(this.dupeIndex).split(" - ");
 		}
 		MakeConnections () {
 		//Get location name and connector type from search list entry
@@ -132,35 +126,39 @@
 					if (_a.dupeIndex == undefined) return;					//<== The dupeIndex is the index of the location menu list element that is assigned to the marker. If the marker has no label, it has no dupeIndex.
 					const otherName = _a.RetrieveSplitLocationName();
 					if (splitName[1] == otherName[1] && splitName[2] != otherName[2]) {
-						this.connections.push(_aIndex);
-						_a.connections.push(thisIndex);
+						this.connectedAnnotationIndices.push(_aIndex);
+						_a.connectedAnnotationIndices.push(thisIndex);
 					//Create connector element
-						elems_connectors.push([this.marker, _a.marker, CreateLine(this.marker, _a.marker)]);
+						Annotation.connections.push({
+							source: this.marker,
+							destination: _a.marker,
+							lineElement: CreateLine(this.marker, _a.marker)
+						});
 					}
 				});
 			}
 		}
 		BreakConnections () {
-			if (this.connections.length == 0) return;
+			if (this.connectedAnnotationIndices.length == 0) return;
 			const thisIndex = Annotation.all.indexOf(this);
-		//Find the other Annotation using the index stored in this.connections
-			this.connections.forEach(_c => {
-				const other = Annotation.all[_c];
-				const otherCon = other.connections;
+		//Find the other Annotation using the index stored in this.connectedAnnotationIndices
+			this.connectedAnnotationIndices.forEach(_ci => {
+				const other = Annotation.all[_ci];
+				const otherCon = other.connectedAnnotationIndices;
 				otherCon.splice(otherCon.indexOf(thisIndex), 1);
 			//Destroy connector element
-				for (let i = elems_connectors.length-1; i > -1; i--) {
+				for (let j = Annotation.connections.length-1; j > -1; j--) {
 					if (
-						(elems_connectors[i][0] == this.marker && elems_connectors[i][1] == other.marker)
-						|| (elems_connectors[i][0] == other.marker && elems_connectors[i][1] == this.marker)
+						(Annotation.connections[j].source == this.marker && Annotation.connections[j].destination == other.marker)
+						|| (Annotation.connections[j].source == other.marker && Annotation.connections[j].destination == this.marker)
 					) {
-						elems_connectors[i][2].remove();
-						elems_connectors.splice(i, 1);
+						Annotation.connections[j].lineElement.remove();
+						Annotation.connections.splice(j, 1);
 					}
 				}
 			});
-		//Wipe this.connections
-			this.connections.length = 0;
+		//Wipe this.connectedAnnotationIndices
+			this.connectedAnnotationIndices.length = 0;
 		}
 	}
 //
@@ -177,11 +175,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 	function ShowMenu() {
 		elem_search_ctnr_outer.style.display = "block";
-//		elem_search_input.focus();
+		elem_search_input.focus();
 	}
 	function HideMenu() {
 		elem_search_ctnr_outer.style.display = "none";
-//		elem_search_input.value = "";
+		elem_search_input.value = "";
 	}
 
 
@@ -202,19 +200,29 @@
 //	Click off Marker: Deselect marker and hide search overlay
 //
 	elem_search_ctnr_outer.addEventListener('click', e => {
+		if (e.target != e.currentTarget) return;				//<== This is necessary because for whatever fucking reason clicking on the inner element fires this event and there's no explanation for it that makes sense.
 		Annotation.Deselect();
 		HideMenu();
 		e.stopPropagation();
 	});
-
+	
 
 //
 //	Keypress in Input field : Narrow down search
 //
-/*
-	elem_search_input.addEventListener('keydown', () => {
-		let thisSearch = elem_search_input.value.toLowerCase().split(" ");
+	elem_search_input.addEventListener('input', () => {
+	//Restore everything is search is empty
+		if (elem_search_input.value.length === 0) {
+			for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
+				l.style.display = "block";
+				for (const li of l.querySelectorAll('li')) {
+					li.style.display = "block";
+				}
+			}
+			return;
+		}
 	//Scan for matches
+		let thisSearch = elem_search_input.value.toLowerCase().split(" ");
 		for (let i = 0; i < searchTerms.length; i++) {
 			let terms_found = 0;
 			for (let j = 0; j < thisSearch.length; j++) {
@@ -223,14 +231,25 @@
 				}
 			//Cull non-matches from display
 				if (terms_found == thisSearch.length) {
-					elem_search_list.childNodes[i].style.display = "block";
+					elems_listItems[i].style.display = "block";
 				} else {
-					elem_search_list.childNodes[i].style.display = "none";
+					elems_listItems[i].style.display = "none";
 				}
 			}
 		}
+	//Hide section headers (actually just hides entire section because might as well)
+		for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
+			let hideHeader = true;
+			for (const li of l.querySelectorAll('li')) {
+				if (li.style.display == "block") {
+					hideHeader = false;
+					break;
+				}
+			}
+			if (hideHeader) l.style.display = "none";
+			else l.style.display = "block";
+		}
 	});
-*/
 
 
 //
@@ -238,18 +257,19 @@
 //
 //Iterate list items with index, add event listeners
 	elems_listItems.forEach((_li, i) => {
-		_li.addEventListener('click', ()=>{
-			_li
+		_li.addEventListener('click', e => {
 			Annotation.Assign(i);
 			Annotation.Deselect();
 			HideMenu();
+			e.stopPropagation();
 		});
 	});
-	elem_btn_clear.addEventListener('click', ()=>{
+	elem_btn_clear.addEventListener('click', e => {
 		Annotation.SELECTED_.Unassign();
 		Annotation.Deselect();
 		HideMenu();
 		EventLog("Cleared.");
+		e.stopPropagation();
 	});
 
 
@@ -332,4 +352,17 @@
 			_elem = _elem.parentNode;
 		}
 		return [globalOffsetX, globalOffsetY];
+	}
+
+	function Capitalise(str) {
+		return str.split(' ').map(word => {
+			const match = word.match(/[a-zA-Z]/);
+			if (!match) return word;
+			const index = match.index;
+			return (
+				word.slice(0, index) +
+				word.charAt(index).toUpperCase() +
+				word.slice(index + 1)
+			);
+		}).join(' ');
 	}

@@ -65,17 +65,17 @@ html, body {
 	flex-wrap: wrap;
 	height: 120%;
 }
-#btn-clear, .location-list {
+#btn-clear, #search-input {
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid white 1px;
+	border-radius: 4px;
+}
+#btn-clear, #search-input, .location-list {
 	margin-top: 0;
 	width: 220px;
 	margin-bottom: 10px;
 	margin-right: 30px;
-}
-#btn-clear {
-	padding: 10px 0;
-	box-sizing: border-box;
-	border: solid white 1px;
-	border-radius: 4px;
 }
 #location-menu h3 {
 	margin-top: 0;

@@ -1,7 +1,5 @@
 TODO:
 
-Add search input field?
-
 Create DX page for Oracle of Ages
 Event Listeners - Oracle of Ages - change Nuul region for animal companion.
 Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
