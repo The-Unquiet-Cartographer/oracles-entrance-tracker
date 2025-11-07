@@ -17,6 +17,7 @@
 		locs_horonVillage,
 		locs_mtCucco,
 		locs_natzuRegion,
+		locs_natzuRegion_ricky,
 		locs_northernPeak,
 		locs_northHoron,
 		locs_samasaDesert,

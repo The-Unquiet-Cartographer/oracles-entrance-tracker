@@ -93,10 +93,22 @@ const locs_mtCucco = [
 ];
 
 const locs_natzuRegion = [
-    //Ricky Locs only 
     new Location("Natzu Region", "Small Platform Cave",				Location.Type.Generic, 9,4, 7,1, "B"),		//Generic - Chest Cave
+];
+
+const locs_natzuRegion_ricky = [
     new Location("Natzu Region", "Great Fairy",						Location.Type.Generic, 7,5, 2,3, "B"),		//Generic - Great Fairy
     new Location("Natzu Region", "Seed-Loving Scrub",				Location.Type.Single, 9,7, 8,4, "B"),		//Seed Satchel upgrade, Secret (Tell) - Seed Satchel Upgrade
+];
+
+const locs_natzuRegion_dimitri = [
+	new Location("Natzu Region", "Great Fairy",						Location.Type.Generic, 9,6, 5,6, "B"),		//Generic - Great Fairy
+    new Location("Natzu Region", "Seed-Loving Scrub",				Location.Type.Single, 10,5, 4,4, "B"),		//Seed Satchel upgrade, Secret (Tell) - Seed Satchel Upgrade
+];
+
+const locs_natzuRegion_moosh = [
+    new Location("Natzu Region", "Great Fairy",						Location.Type.Generic, 7,5, 5,1, "B"),		//Generic - Great Fairy
+    new Location("Natzu Region", "Seed-Loving Scrub",				Location.Type.Single, 9,5, 5,5, "B"),		//Seed Satchel upgrade, Secret (Tell) - Seed Satchel Upgrade	
 ];
 
 const locs_northernPeak = [

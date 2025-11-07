@@ -1,8 +1,3 @@
-let Portals = [];			//<== Will store all portal markers by their location name. This will help to automate drawing connections between portals later.
-let Connectors = [];		//<== Will contain generated line elements denoting connectors.
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	GROUP LOCATIONS
@@ -25,19 +20,17 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 
 	function Locations_ConcatGroups_DX (mapElement, commonOrigin, ...locationGroups) {
 		if (mapElement == null) {
-			AppLog("MapElement is null, so the querySelector has probably been mis-spelled...");
+			AppLog("MapElement is null, so either the querySelector has been mis-spelled or the map element is missing.");
 			return [];
 		}
 		else AppLog("Concatenating location groups for map element:", mapElement);
 		const concatenatedLocations = [];
-		const mapElement_gridOffset_x = Math.floor((parseInt(mapElement.style.left)-commonOrigin.x) / gridElement_width_pixels);
-		const mapElement_gridOffset_y = Math.floor((parseInt(mapElement.style.top)-commonOrigin.y) / gridElement_height_pixels);
 		for (const g of locationGroups) {
 			for (const l of g) {
+				const actualGridRef = GetModdedGridReference(l, mapElement, commonOrigin);
 				concatenatedLocations.push(new Location (
 					l.area, l.name, l.type_,
-					l.gridRef_x - mapElement_gridOffset_x,
-					l.gridRef_y - mapElement_gridOffset_y,
+					actualGridRef.x, actualGridRef.y,
 					l.tilePos_x, l.tilePos_y,
 					l.labelPos
 				));
@@ -94,6 +87,10 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		tile_size_pixels = 16,
 		markerOffset_pixels = 8
 	;
+	const
+		label_offsetIncrement_pixels_x = 32,
+		label_offsetIncrement_pixels_y = 40
+	;
 
 
 //
@@ -121,16 +118,15 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 	//(OPTIONAL) ADD GRID ELEMENTS
 	/*
 	*	While not all grid references have entrances in them, giving each a grid element will serve as a visual aid while scrolling over the map.
-	*	The EX version of this function checks for whether the part of the image is transparent, as the map will be made up of various regions which will necessarily contain transparent parts so as to overlap.
+	*	The DX version of this function checks for whether the part of the image is transparent, as the map will be made up of various regions which will necessarily contain transparent parts so as to overlap.
 	*/
 
-	//Prepare Canvas
+	//Prepare Canvas (required to check map elements for alpha transparency)
 		const canvas = document.createElement('canvas');
 		canvas.width = imgElement.naturalWidth;
 		canvas.height = imgElement.naturalHeight;
 		const context = canvas.getContext('2d', { willReadFrequently: true });
 		context.drawImage(imgElement, 0, 0);
-
 	//Create a gridElement for each filled-in grid reference of the map element
 		for (let i = 0; i < gridElements.length; i++) {
 			const x = Math.floor(i % gridElements_x);
@@ -151,17 +147,7 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 	//ITERATE LOCATIONS
 		for (const loc of _locations) {
 			const gridIndex = loc.gridRef_y * gridElements_x + loc.gridRef_x;
-
-		//Add a grid element if none exists already
-		/*
-		*	Not required as we are adding grid elements for ALL grids regardless.
-		*/
-		//	if (gridElements[gridIndex] == undefined) {
-		//		gridElements[gridIndex] = CreateElement_Grid(loc.gridRef_x, loc.gridRef_y);
-		//		mapElement.appendChild(gridElements[gridIndex]);
-		//	}
-
-		//Instead, catch elements whose position is out-of-bounds
+		//Catch locations whose positions are out-of-bounds
 			if (gridIndex >= gridElements.length || gridIndex < 0) {
 				AppLog(`%c${loc.address}%c is out-of-bounds - check grid reference.`, "color: yellow;", "color:red");
 				continue;
@@ -170,20 +156,12 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 				AppLog(`%c${loc.address} is located on a grid that has been intentionally skipped - grid reference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: red;");
 				continue;
 			}
-
 		//Add a marker element corresponding to the location
-			const markerPos_x = (loc.tilePos_x * tile_size_pixels) + markerOffset_pixels;
-			const markerPos_y = (loc.tilePos_y * tile_size_pixels) + markerOffset_pixels;
-			const markerElement = CreateElement_Marker(gridElements[gridIndex], markerPos_x, markerPos_y);
+			const markerElement = CreateElement_Marker(gridElements[gridIndex], loc);
 			markerElement.id = "loc"+idCount;
 			idCount++;
-		//
-            if (loc.isPortal) {
-                markerElement.classList.add("portal");			//<== IDK why any of this TBH.
-                Portals.push([loc.label, markerElement]);
-            }
 		//Add a label element that will display when the location is assigned
-			CreateElement_Label(gridElements[gridIndex], loc, markerPos_x, markerPos_y);
+			CreateElement_Label(gridElements[gridIndex], loc);
 		//Log
 			AppLog(`%c#${markerElement.id} ${loc.address} @ gridReference (${loc.gridRef_x}, ${loc.gridRef_y})`, "color: yellow;");
 		}
@@ -201,33 +179,17 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		return gridElement;
 	}
 
-	function CreateElement_Marker(_gridElement, _markerPos_x, _markerPos_y) {
+	function CreateElement_Marker(_gridElement, _location) {
 		const marker = NewElement("div", "", ["marker-hl"]);
 		marker.appendChild(NewElement("div", "", ["marker-ping"]));
-		marker.style.left = `${_markerPos_x}px`;
-		marker.style.top = `${_markerPos_y}px`;
+		SetMarkerPosition(_location, marker);
 		_gridElement.appendChild(marker);
 		return marker;
 	}
 
-	function CreateElement_Label(_gridElement, _location, _markerPos_x, _markerPos_y) {
-		const label_offset_px_x = 32, label_offset_px_y = 40;
+	function CreateElement_Label(_gridElement, _location) {
 		const label = NewElement("div", "", ["marker-label"]);
-		let x = _markerPos_x;
-		let y = _markerPos_y;
-
-		if (typeof _location.labelPos !== 'string') {
-			AppLog("Nope @ "+_location.name+" "+_markerPos_x+" "+_markerPos_y);
-		}
-
-		for (const c of _location.labelPos) {
-			if (c == "T") {y -= label_offset_px_y; continue}
-			if (c == "B") {y += label_offset_px_y; continue}
-			if (c == "L") {x -= label_offset_px_x; continue}
-			if (c == "R") {x += label_offset_px_x; continue}
-		}
-		label.style.top = `${y}px`;
-		label.style.left = `${x}px`;
+		SetLabelPosition(_location, label);
 		_gridElement.appendChild(label);
 		return label;
 	}
@@ -300,4 +262,39 @@ let Connectors = [];		//<== Will contain generated line elements denoting connec
 		}
 		_Func_appendStyles(newElem);
 		return newElem;
+	}
+
+	function GenerateMarkerPosition (_location) {
+		return {
+			x: _location.tilePos_x * tile_size_pixels + markerOffset_pixels,
+			y: _location.tilePos_y * tile_size_pixels + markerOffset_pixels
+		};
+	}
+
+	function SetMarkerPosition (_location, _markerElement) {
+		const markerPosition = GenerateMarkerPosition(_location);
+		_markerElement.style.left = `${markerPosition.x}px`;
+		_markerElement.style.top = `${markerPosition.y}px`;
+	}
+
+	function SetLabelPosition (_location, _labelElement) {
+		let labelPosition = GenerateMarkerPosition(_location);
+		for (const c of _location.labelPos) {
+			if (c == "T") {labelPosition.y -= label_offsetIncrement_pixels_y; continue}
+			if (c == "B") {labelPosition.y += label_offsetIncrement_pixels_y; continue}
+			if (c == "L") {labelPosition.x -= label_offsetIncrement_pixels_x; continue}
+			if (c == "R") {labelPosition.x += label_offsetIncrement_pixels_x; continue}
+		}
+		_labelElement.style.left = `${labelPosition.x}px`;
+		_labelElement.style.top = `${labelPosition.y}px`;
+	}
+
+//Take the global grid reference assigned to the location and transform it to the local position of the map element.
+//The common origin is the top-left corner of the world map, i.e. the cluster of map elements, that the locations are assigned to.
+//This function is also used MUUUUUCH later on in the DX event listeners, to change the marker locations when changing the animal companion regions.
+	function GetModdedGridReference (_location, _mapElement, commonOrigin) {
+		return {
+			x: _location.gridRef_x - Math.floor((parseInt(_mapElement.style.left)-commonOrigin.x) / gridElement_width_pixels),
+			y: _location.gridRef_y - Math.floor((parseInt(_mapElement.style.top)-commonOrigin.y) / gridElement_height_pixels)
+		};
 	}

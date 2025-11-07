@@ -72,7 +72,8 @@
 	const locations_natzuRegion = Locations_ConcatGroups_DX(
 		elem_map_natzuRegion,
 		commonOrigin_holodrum,
-		locs_natzuRegion
+		locs_natzuRegion,
+		locs_natzuRegion_ricky
 	);
 	const locations_greatMoblinsKeep = Locations_ConcatGroups_DX(
 		elem_map_greatMoblinsKeep,

@@ -200,7 +200,7 @@
 //	Click off Marker: Deselect marker and hide search overlay
 //
 	elem_search_ctnr_outer.addEventListener('click', e => {
-		if (e.target != e.currentTarget) return;				//<== This is necessary because for whatever fucking reason clicking on the inner element fires this event and there's no explanation for it that makes sense.
+		if (e.target != e.currentTarget) return;				//<== This is necessary because for whatever dratted reason clicking on the inner element fires this event and there's no explanation for it that makes sense.
 		Annotation.Deselect();
 		HideMenu();
 		e.stopPropagation();
