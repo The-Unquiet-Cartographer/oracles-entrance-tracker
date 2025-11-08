@@ -14,10 +14,22 @@
         .wFloat-anchor:hover {
             cursor:pointer;
         }
+	/*
+		NEW
+	*/
+		.floatingWindow {
+			overflow: scroll;
+		}
+		.wFloat-border {
+			background: transparent;
+		}
+		.wfloat-anchor {
+			position: sticky;		/*Trying to get the anchor to stick in place when I scroll the box but no luck.*/
+		}
     </style>
 </head>
 <body>
-    <image id=subrosia class=hidden src="IMG/sources/seasons/subrosia.png"></image>
+    <image id=subrosia class=hidden src="Images/subrosia.png"></image>
 
     <div class="floatingWindow">
         <div id="map-subrosia" class="map">

@@ -142,11 +142,7 @@
 
 
 //SUBROSIA LOCATIONS
-	const commonOrigin_subrosia = {x:parseInt(elem_map_subrosia.style.left), y:parseInt(elem_map_subrosia.style.top)};
-
-	const locations_subrosia = Locations_ConcatGroups_DX(
-		elem_map_subrosia,
-		commonOrigin_subrosia,
+	const locations_subrosia = Locations_ConcatGroups(
 		locs_easternSubrosia,
 		locs_subrosianVillage,
 		locs_subrosianVolcanoes,

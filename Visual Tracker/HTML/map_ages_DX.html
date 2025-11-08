@@ -29,12 +29,16 @@
 
 		<div id=map-labrynna-past-ctnr class=map-ctnr style="top:0px; left:0px">
 			<img src="../Images/Ages/Sources/labrynna_past.png">
-			<div class=map-searchOverlay></div>
 		</div>
 
 		<div id=map-labrynna-present-ctnr class=map-ctnr style="top:0px; left:2240px">
-			<img src="../Images/Ages/Sources/labrynna_present.png">
-			<div class=map-searchOverlay></div>
+			<img src="../Images/Ages/Areas/labrynna_present.png">
+		</div>
+		<div id=map-nuunHighlands-ctnr class=map-ctnr style="top:0px; left:3040px">
+			<img src="../Images/Ages/Areas/nuunHighlands_dimitri.png">
+		</div>
+		<div id=map-greatMoblinsKeep-ctnr class=map-ctnr style="top:0px; left:3680px">
+			<img src="../Images/Ages/Areas/greatMoblinsKeep_default.png">
 		</div>
 
 		<div id=map-zoraseas-past-ctnr class=map-ctnr style="top:1792px; left:0px">
@@ -43,9 +47,8 @@
 		
 		<div id=map-zoraseas-present-ctnr class=map-ctnr style="top:1920px; left:2240px">
 			<img src="../Images/Ages/Sources/zoraseas_present.png">
-			<div class=map-searchOverlay></div>
 		</div>
-		
+
 	</body>
 
 	<script src="../JS/scriptLoadManager.js"></script>
@@ -54,8 +57,9 @@
 	<script src="../JS/appLogging.js"></script>
 	<script src="../JS/b_sharedFunctions.js"></script>
 <!--
-	<script src="../JS/c_ctrl_ages.js"></script>
+	<script src="../JS/DX/c_ctrl_ages_DX.js"></script>
 	<script src="../JS/e_eventListeners_shared.js"></script>
+	<script src="../JS/DX/e2_eventListeners_agesDX.js"></script>
 -->
 
 <!--Delay running scripts as they require image elements to be fully loaded-->
@@ -67,8 +71,9 @@
 			"../JS/appLogging.js",
 			"../JS/b_sharedFunctions.js",
 		*/
-			"../JS/c_ctrl_ages.js",
-			"../JS/e_eventListeners_shared.js"
+			"../JS/DX/c_ctrl_ages_DX.js",
+			"../JS/e_eventListeners_shared.js",
+			"../JS/DX/e2_eventListeners_agesDX.js"
 		];
 		WaitForImages(() => {
 			LoadScriptsInOrder(scriptSrcs);

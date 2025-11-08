@@ -1,7 +1,11 @@
 TODO:
 
-Create DX page for Oracle of Ages
-Event Listeners - Oracle of Ages - change Nuul region for animal companion.
-Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
-
 ~index.html (WIP)
+~condense Ages locations (i.e. work out which ones are generic, etc)
+
+Do something with experimental content.
+
+While playtesting Ages:
+*	Create a key location tracker for Oracle of Ages - would probably have to do several randomizer runs to narrow down which locations are to be considered "key".
+*	Check default state for Moblin's Keep and choose a set of entrances to keep on the old tracker.
+*	Check mistake in bottom-right tile of Nuun Highlands moosh and dimitri. See if it's present in game. Fix tile in images. perhaps.

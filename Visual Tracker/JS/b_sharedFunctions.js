@@ -97,7 +97,7 @@
 //	ADD MARKERS AND GRID ELEMENTS TO MAP ELEMENT
 //
 	let idCount = 0;
-	function MapElement_AddLocationMarkers (mapElement, _locations) {
+	function MapElement_AddLocationMarkers(mapElement, _locations) {
 		if (mapElement == null) {
 			AppLog("MapElement is null, so the querySelector has probably been mis-spelled...");
 			return [];
@@ -291,10 +291,10 @@
 
 //Take the global grid reference assigned to the location and transform it to the local position of the map element.
 //The common origin is the top-left corner of the world map, i.e. the cluster of map elements, that the locations are assigned to.
-//This function is also used MUUUUUCH later on in the DX event listeners, to change the marker locations when changing the animal companion regions.
 	function GetModdedGridReference (_location, _mapElement, commonOrigin) {
 		return {
 			x: _location.gridRef_x - Math.floor((parseInt(_mapElement.style.left)-commonOrigin.x) / gridElement_width_pixels),
 			y: _location.gridRef_y - Math.floor((parseInt(_mapElement.style.top)-commonOrigin.y) / gridElement_height_pixels)
 		};
 	}
+	

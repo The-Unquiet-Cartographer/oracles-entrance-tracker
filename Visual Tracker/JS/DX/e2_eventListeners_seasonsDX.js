@@ -1,16 +1,3 @@
-function AddRegionChangeEventListener (mapElement, _Callback) {
-	if (_Callback.length > 0) {
-		mapElement.querySelectorAll('.gridElement-ctnr').forEach(_gridElem => {
-			_gridElem.addEventListener('click', ()=>{_Callback(mapElement)});
-		});
-	}
-	else {
-		mapElement.querySelectorAll('.gridElement-ctnr').forEach(_gridElem => {
-			_gridElem.addEventListener('click', ()=>{_Callback()});
-		});
-	}
-}
-
 function ChangeSeasons (_mapElement) {
 	const imgData = GetImgSrcData(_mapElement);
 	switch (imgData.state) {
@@ -23,60 +10,22 @@ function ChangeSeasons (_mapElement) {
 }
 
 function ChangeNatzuRegion () {
-	function FindGridElement (loc) {
-		return (
-			[...elem_map_natzuRegion.querySelectorAll('.gridElement-ctnr')].find(grid => {
-				const actualGridRef = GetModdedGridReference(loc, elem_map_natzuRegion, {x:0, y:0});
-				return (
-					grid.style.left == `${actualGridRef.x*gridElement_width_pixels}px`
-					&& grid.style.top == `${actualGridRef.y*gridElement_height_pixels}px`
-				);
-			})
-		);
-	}
-	function FindMarkerElement (loc, _gridElement) {
-		return (
-			[..._gridElement.querySelectorAll('.marker-hl')].find(marker => {
-				return (
-					loc.tilePos_x == Math.floor((parseInt(marker.style.left)-markerOffset_pixels) / tile_size_pixels)
-					&& loc.tilePos_y == Math.floor((parseInt(marker.style.top)-markerOffset_pixels) / tile_size_pixels)
-				);
-			})
-		);
-	}
-	function MoveMarkerElement (_thisLocationSet, locationName, _nextLocationSet) {
-		const locInThisSet = _thisLocationSet.find(loc => loc.name == locationName);
-		const markerElem = FindMarkerElement(locInThisSet, FindGridElement(locInThisSet));
-		const labelElem = markerElem.nextSibling;
-		const locInNextSet = _nextLocationSet.find(loc => loc.name == locationName);
-		const nextGridElement = FindGridElement(locInNextSet);
-		nextGridElement.appendChild(markerElem);
-		nextGridElement.appendChild(labelElem);
-		SetMarkerPosition(locInNextSet, markerElem);
-		SetLabelPosition(locInNextSet, labelElem);
-		Annotation.connections.forEach(_a => {
-			if (_a.source == markerElem || _a.destination == markerElem) {
-				_a.lineElement.remove();
-				_a.lineElement = CreateLine(_a.source, _a.destination);
-			}
-		});
-	}
 	const imgData = GetImgSrcData(elem_map_natzuRegion);
 	switch (imgData.state) {
 		case "praire":
 			imgData.img.src = imgData.img.src.slice(0, imgData.src_stateStart)+"_river.png";
-			MoveMarkerElement(locs_natzuRegion_ricky, "Great Fairy", locs_natzuRegion_dimitri);
-			MoveMarkerElement(locs_natzuRegion_ricky, "Seed-Loving Scrub", locs_natzuRegion_dimitri);
+			MoveMarkerElement(locs_natzuRegion_ricky, "Great Fairy", locs_natzuRegion_dimitri, elem_map_natzuRegion, commonOrigin_holodrum);
+			MoveMarkerElement(locs_natzuRegion_ricky, "Seed-Loving Scrub", locs_natzuRegion_dimitri, elem_map_natzuRegion, commonOrigin_holodrum);
 			break;
 		case "river":
 			imgData.img.src = imgData.img.src.slice(0, imgData.src_stateStart)+"_wasteland.png";
-			MoveMarkerElement(locs_natzuRegion_dimitri, "Great Fairy", locs_natzuRegion_moosh);
-			MoveMarkerElement(locs_natzuRegion_dimitri, "Seed-Loving Scrub", locs_natzuRegion_moosh);
+			MoveMarkerElement(locs_natzuRegion_dimitri, "Great Fairy", locs_natzuRegion_moosh, elem_map_natzuRegion, commonOrigin_holodrum);
+			MoveMarkerElement(locs_natzuRegion_dimitri, "Seed-Loving Scrub", locs_natzuRegion_moosh, elem_map_natzuRegion, commonOrigin_holodrum);
 			break;
 		case "wasteland":
 			imgData.img.src = imgData.img.src.slice(0, imgData.src_stateStart)+"_praire.png";
-			MoveMarkerElement(locs_natzuRegion_moosh, "Great Fairy", locs_natzuRegion_ricky);
-			MoveMarkerElement(locs_natzuRegion_moosh, "Seed-Loving Scrub", locs_natzuRegion_ricky);
+			MoveMarkerElement(locs_natzuRegion_moosh, "Great Fairy", locs_natzuRegion_ricky, elem_map_natzuRegion, commonOrigin_holodrum);
+			MoveMarkerElement(locs_natzuRegion_moosh, "Seed-Loving Scrub", locs_natzuRegion_ricky, elem_map_natzuRegion, commonOrigin_holodrum);
 			break;
 	}
 }
@@ -123,18 +72,6 @@ function ChangeNorthernPeak () {
 		case "default": imgData.img.src = imgData.img.src.slice(0, imgData.src_stateStart)+"_ending.png"; break;
 		case "ending": imgData.img.src = imgData.img.src.slice(0, imgData.src_stateStart)+"_default.png"; break;
 	}
-}
-
-function GetImgSrcData (_mapElement) {
-	const imgElement = _mapElement.querySelector('img');
-	const src_stateStart = imgElement.src.lastIndexOf('_');
-	const src_stateEnd = imgElement.src.lastIndexOf('.');
-	return {
-		img: imgElement,
-		src_stateStart: src_stateStart,
-		src_stateEnd: src_stateEnd,
-		state: imgElement.src.slice(src_stateStart+1, src_stateEnd)
-	};
 }
 
 

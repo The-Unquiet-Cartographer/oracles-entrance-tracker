@@ -1,5 +1,21 @@
 //CREATE A WORLD MAP, POPULATE IT WITH TILES (in-game screens), SET THE STATE OF EACH REGION (e.g. seasons, isDestroyed, etc.)
     class Map {
+
+    //Style functions
+    /*
+    *   Using width/height, NOT style.width/style.height. This is because we're applying it to <canvas> elements, which work a bit differently.
+    */
+        static #WidthHeightLeftTop(width, height, left, top) {
+            return((_elmt)=>{_elmt.width = width; _elmt.height = height; _elmt.style.left = `${left}px`; _elmt.style.top = `${top}px`;});
+        }
+        static #WidthHeight(width, height) {
+            return((_elmt)=>{_elmt.width = width; _elmt.height = height;});
+        }
+        static #LeftTop(left, top) {
+            return((_elmt)=>{_elmt.style.left = `${left}px`; _elmt.style.top = `${top}px`;});
+        }
+
+
     //Constructor
         constructor (elmt, screens_x, screens_y) {
             this.DOMElement = elmt;
@@ -24,20 +40,6 @@
                 const newMarker = this.markerCtnr.appendChild(NewElement("span", ["marker"], Map.#LeftTop(entr.pos_x+8, entr.pos_y+8)));
                 newMarker.appendChild(NewElement("span", ["marker-ping"]));
             });
-        }
-
-    //Style functions
-    /*
-    *   Using width/height, NOT style.width/style.height. This is because we're applying it to <canvas> elements, which work a bit differently.
-    */
-        static #WidthHeightLeftTop(width, height, left, top) {
-            return((_elmt)=>{_elmt.width = width; _elmt.height = height; _elmt.style.left = `${left}px`; _elmt.style.top = `${top}px`;});
-        }
-        static #WidthHeight(width, height) {
-            return((_elmt)=>{_elmt.width = width; _elmt.height = height;});
-        }
-        static #LeftTop(left, top) {
-            return((_elmt)=>{_elmt.style.left = `${left}px`; _elmt.style.top = `${top}px`;});
         }
 
 

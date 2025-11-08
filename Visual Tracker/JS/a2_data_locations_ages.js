@@ -113,14 +113,14 @@ const locs_seaOfNoReturn = [
 ];
 
 const locs_seaOfNoReturn_underwater = [
-	new Location ("Sea of no Return", "Tokay Cave",		Location.Type.Con_Exit, 4,0, 5,4, "B")
+	new Location ("Sea of no Return", "Tokay Cave",		Location.Type.Con_Exit, 12,0, 5,4, "B")
 ];
 
 //const locs_seaOfStorms_past = [
 //];
 
 const locs_seaOfStorms_underwater_past = [
-	new Location("Sea of Storms (Past)", "Underwater Chest Cave",	Location.Type.Generic, 7,3, 6,4, "B")
+	new Location("Sea of Storms (Past)", "Underwater Chest Cave",	Location.Type.Generic, 7,4, 6,4, "B")
 ];
 
 const locs_southShore_past = [
@@ -156,17 +156,17 @@ const locs_zoraSeas_past = [
 ];
 
 const locs_zoraSeas_underwater_past = [
-	new Location("Zora Seas (Past)", "Switch Hook Cave",		Location.Type.Generic, 5,3, 5,5, "B"),
+	new Location("Zora Seas (Past)", "Switch Hook Cave",		Location.Type.Generic, 5,4, 5,5, "B"),
 ];
 
 //const locs_zoraVillage_past = [
 //];
 
 const locs_zoraVillage_underwater_past = [
-	new Location("Zora Village (Past)", "King Zora's Palace (Past)",		Location.Type.Single, 1,1, 4.5,2, "B"),
-	new Location("Zora Village (Past)", "Zora's House",						Location.Type.Generic, 1,3, 6,4, "B"),
-	new Location("Zora Village (Past)", "Zora's Long House (Past)",			Location.Type.Con_Left, 0,4, 2,2, "B"),
-	new Location("Zora Village (Past)", "Zora's Long House (Past)",			Location.Type.Con_Right, 0,4, 5,2, "B"),
+	new Location("Zora Village (Past)", "King Zora's Palace (Past)",		Location.Type.Single, 1,2, 4.5,2, "B"),
+	new Location("Zora Village (Past)", "Zora's House",						Location.Type.Generic, 1,4, 6,4, "B"),
+	new Location("Zora Village (Past)", "Zora's Long House (Past)",			Location.Type.Con_Left, 0,5, 2,2, "B"),
+	new Location("Zora Village (Past)", "Zora's Long House (Past)",			Location.Type.Con_Right, 0,5, 5,2, "B"),
 ];
 
 
@@ -213,6 +213,16 @@ const locs_forestOfTime = [
 	new Location("Forest of Time", "Portal (Nayru's House)",	Location.Type.Portal, 10,3, 1,2, "B"),
 ];
 
+const locs_greatMoblinsKeep = [
+	new Location("Rolling Ridge (Present)", "Great Moblin's Keep",	Location.Type.Con_Left, 9,0, 4,4, "B"),
+	new Location("Rolling Ridge (Present)", "Great Moblin's Keep",	Location.Type.Con_Right, 9,0, 6,4, "B")
+];
+
+const locs_greatMoblinsKeep_destroyed = [
+	new Location("Rolling Ridge (Present)", "Fortress Basement",			Location.Type.Con_Entrance, 9,0, 3,4, "B"),
+	new Location("Rolling Ridge (Present)", "West/Crown Dungeon Access",	Location.Type.Con_Left, 9,0, 7,3, "B"),
+];
+
 const locs_lynnaCity = [
 	new Location("Lynna City", "Bipin & Blossom's House",	Location.Type.Con_Left, 7,4, 5,2, "B"),
 	new Location("Lynna City", "Bipin & Blossom's House",	Location.Type.Con_Right, 7,4, 7,2, "B"),
@@ -254,11 +264,8 @@ const locs_rollingRidge_present = [
 	new Location("Rolling Ridge (Present)", "Central Ascent (Present)",			Location.Type.Con_Upper, 12,0, 4,5, "B"),
 	new Location("Rolling Ridge (Present)", "East/Crown Dungeon Access",		Location.Type.Con_Left, 11,0, 3,4, "B"),
 	new Location("Rolling Ridge (Present)", "East/Crown Dungeon Access",		Location.Type.Con_Right, 11,1, 8,0, "B"),
-	new Location("Rolling Ridge (Present)", "Fortress Basement",				Location.Type.Con_Entrance, 9,0, 3,4, "B"),
 	new Location("Rolling Ridge (Present)", "Fortress Basement",				Location.Type.Con_Exit, 10,0, 2,1, "B"),
 	new Location("Rolling Ridge (Present)", "Great Fairy",						Location.Type.Generic, 11,1, 6,3, "B"),
-	new Location("Rolling Ridge (Present)", "Great Moblin's Fortress",			Location.Type.Con_Left, 9,0, 4,4, "B"),
-	new Location("Rolling Ridge (Present)", "Great Moblin's Fortress",			Location.Type.Con_Right, 9,0, 6,4, "B"),
 	new Location("Rolling Ridge (Present)", "Goron Dance Hall (Present)",		Location.Type.Con_Middle, 12,1, 3,4, "B"),	//i.e. East Ascent. Access Target Carts (vine).
 	new Location("Rolling Ridge (Present)", "Goron Dance Hall (Present)",		"Upper-Right", 13,0, 5,4, "B"),
 	new Location("Rolling Ridge (Present)", "Goron Dance Hall (Present)",		"Upper-Left", 13,0, 2,4, "B"),
@@ -266,7 +273,6 @@ const locs_rollingRidge_present = [
 	new Location("Rolling Ridge (Present)", "Target Carts Grandchild's Cave",	Location.Type.Generic, 12,1, 7,3, "B"),
 	new Location("Rolling Ridge (Present)", "West Ascent (Present)",			Location.Type.Con_Middle, 8,1, 4,0, "B"),
 	new Location("Rolling Ridge (Present)", "West Ascent (Present)",			Location.Type.Con_Upper, 8,1, 1,2, "B"),
-	new Location("Rolling Ridge (Present)", "West/Crown Dungeon Access",		Location.Type.Con_Left, 9,0, 7,3, "B"),
 	new Location("Rolling Ridge (Present)", "West/Crown Dungeon Access",		Location.Type.Con_Right, 11,0, 1,4, "B"),
 	new Location("Rolling Ridge (Present)", "Portal (Peak)",					Location.Type.Portal, 11,0, 7,4, "B"),
 	new Location("Rolling Ridge (Present)", "Portal (Target Carts)",			Location.Type.Portal, 13,1, 4,2, "B"),		//Access Goron Shooting Gallery.

@@ -366,3 +366,135 @@
 			);
 		}).join(' ');
 	}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//	DX Utility Functions
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Add an event listener to the map element
+	function AddRegionChangeEventListener (mapElement, _Callback) {
+		if (_Callback.length > 0) {
+			mapElement.querySelectorAll('.gridElement-ctnr').forEach(_gridElem => {
+				_gridElem.addEventListener('click', ()=>{_Callback(mapElement)});
+			});
+		}
+		else {
+			mapElement.querySelectorAll('.gridElement-ctnr').forEach(_gridElem => {
+				_gridElem.addEventListener('click', ()=>{_Callback()});
+			});
+		}
+	}
+//Get the current state of the region we are changing
+	function GetImgSrcData (_mapElement) {
+		const imgElement = _mapElement.querySelector('img');
+		const src_stateStart = imgElement.src.lastIndexOf('_');
+		const src_stateEnd = imgElement.src.lastIndexOf('.');
+		return {
+			img: imgElement,
+			src_stateStart: src_stateStart,
+			src_stateEnd: src_stateEnd,
+			state: imgElement.src.slice(src_stateStart+1, src_stateEnd)
+		};
+	}
+
+/*
+*	These functions are primarily used when changing the state of the animal regions.
+*/
+	function FindGridElement (loc, isPreModded, _mapElement, _commonOrigin) {
+		const actualGridRef = isPreModded ? {x: loc.gridRef_x, y: loc.gridRef_y} : GetModdedGridReference(loc, _mapElement, _commonOrigin);
+		return (
+			[..._mapElement.querySelectorAll('.gridElement-ctnr')].find(grid => {
+				return (
+					grid.style.left == `${actualGridRef.x*gridElement_width_pixels}px`
+					&& grid.style.top == `${actualGridRef.y*gridElement_height_pixels}px`
+				);
+			})
+		);
+	}
+	function FindMarkerElement (loc, _gridElement) {
+		return (
+			[..._gridElement.querySelectorAll('.marker-hl')].find(marker => {
+				return (
+					Math.trunc(loc.tilePos_x) == Math.floor((parseInt(marker.style.left)-markerOffset_pixels) / tile_size_pixels)		//<== Use Math.trunc here because Dimitri's map has a double-width entrance, with the tilePos_x for the marker at 1.5.
+					&& loc.tilePos_y == Math.floor((parseInt(marker.style.top)-markerOffset_pixels) / tile_size_pixels)
+				);
+			})
+		);
+	}
+/*
+*	Use unmodded location sets for this function.
+*/
+	function MoveMarkerElement (_thisLocationSet, locationName, _nextLocationSet, _mapElement, _commonOrigin, locsArePreModded = false) {
+		const locInThisSet = _thisLocationSet.find(loc => loc.name == locationName);
+		const markerElem = FindMarkerElement(locInThisSet, FindGridElement(locInThisSet, locsArePreModded, _mapElement, _commonOrigin));
+		const labelElem = markerElem.nextSibling;
+		const locInNextSet = _nextLocationSet.find(loc => loc.name == locationName);
+		const nextGridElement = FindGridElement(locInNextSet, locsArePreModded, _mapElement, _commonOrigin);
+		nextGridElement.appendChild(markerElem);
+		nextGridElement.appendChild(labelElem);
+		SetMarkerPosition(locInNextSet, markerElem);
+		SetLabelPosition(locInNextSet, labelElem);
+		Annotation.connections.forEach(_a => {
+			if (_a.source == markerElem || _a.destination == markerElem) {
+				_a.lineElement.remove();
+				_a.lineElement = CreateLine(_a.source, _a.destination);
+			}
+		});
+	}
+
+/*
+*	These functions are primarily used to replace the Moblin's Keep markers in Ages when the state is changed.
+*/
+	function MapElement_ReplaceMarkers(_mapElement, _commonOrigin, newLocationSet, locsArePreModded = false) {
+	//Remove old markers
+		const markers = _mapElement.querySelectorAll('.marker-hl');
+		const firstID = parseInt(markers[0].id.replace(/\D/g, ""));
+		const removedCount = markers.length;
+		RemoveLocationMarkers(markers);
+	//Reassign marker IDs and make space to insert new markers
+		const toAddCount = newLocationSet.length;
+		const difference = toAddCount-removedCount;
+		//console.log(`Removed ${removedCount}, added ${toAddCount}, difference is ${difference}`)
+		const allMarkers = [...document.querySelectorAll('.marker-hl')].sort((a,b)=>{
+			const aInt = parseInt(a.id.slice(3)), bInt = parseInt(b.id.slice(3));
+			return aInt-bInt;
+		});
+		if (difference < 0) {
+			for (let i = firstID; i < allMarkers.length; i++) {
+				allMarkers[i].id = `loc${i+removedCount+difference}`;
+			}
+		}
+		else if (difference > 0) {
+			for (let i = allMarkers.length-1; i > firstID-1; i--) {
+				allMarkers[i].id = `loc${i+removedCount+difference}`;
+			}
+		}
+	//Reset idCount, insert new markers, re-reset idCount
+		idCount = firstID;
+		for (const loc of newLocationSet) {
+			const gridElement = FindGridElement(loc, locsArePreModded, _mapElement, _commonOrigin);
+			const markerElement = CreateElement_Marker(gridElement, loc);
+			markerElement.id = "loc"+idCount;
+			idCount++;
+			CreateElement_Label(gridElement, loc);
+			Annotation.all.push(new Annotation(markerElement));
+		}
+		idCount = parseInt(allMarkers[allMarkers.length-1].id.replace(/\D/g, ""))+1;
+	}
+
+	function RemoveLocationMarkers(_markers) {
+		_markers.forEach(m => {
+			for (let i = Annotation.all.length-1; i > -1; i--) {
+				if (Annotation.all[i].marker == m) {
+					Annotation.all[i].Unassign();
+					Annotation.all.splice(i,1);
+					break;
+				}
+			}			
+			m.nextSibling.remove();					//Remove label
+			m.remove();								//Remove marker
+		});
+	}
