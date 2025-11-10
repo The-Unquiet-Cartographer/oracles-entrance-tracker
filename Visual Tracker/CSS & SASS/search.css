@@ -1,32 +1,3 @@
-/*
-////////////////////////////
-//  SEARCH LIST & INPUT   //
-////////////////////////////
-
-#search {
-    display: none;
-    position: absolute;
-	white-space: nowrap;
-    z-index: $zIndex-search;
-    background-color: grey;
-    color: white;
-    ul {
-        list-style: none;
-    }
-}
-
-li {
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-.li-grey {
-    color: black;
-}
-*/
-
-
 html, body {
 	height: 100%;
 }

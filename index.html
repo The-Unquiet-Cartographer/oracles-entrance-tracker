@@ -5,8 +5,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Index</title>
 		<style>
-			body { margin: 0; background: black; position: relative; }
-			#nav-ctnr {
+			* {
+				color: white;
+			}
+			body {
+				margin: 0;
+				background: black;
+				position: relative;
+			}
+			#nav-ctnr, #about {
 				width: calc(100vw - 80px);
 				max-width: 500px;
 				margin: auto;
@@ -14,7 +21,7 @@
 				box-sizing: border-box;
 			}
 			.clearfix::after { content: ""; display: table; clear: both; }
-			a {
+			#nav-ctnr a {
 				float: left;
 				text-align: center;
 				color: white;
@@ -24,19 +31,28 @@
 				border: 1px solid white;
 				border-radius: 4px;
 			}
-			a:nth-child(odd) {
+			#nav-ctnr a:nth-child(odd) {
 				margin-right: 5px;
 				background-color: #B92428;
 			}
-			a:nth-child(even) {
+			#nav-ctnr a:nth-child(even) {
 				margin-left: 5px;
 				background-color: #4E4B98;
 			}
-			a:not(:nth-child(1)):not(:nth-child(2)) {
+			#nav-ctnr a:not(:nth-child(1)):not(:nth-child(2)) {
 				margin-top: 5px;
 			}
-			a:not(:last-child):not(:nth-last-child(2)) {
+			#nav-ctnr a:not(:last-child):not(:nth-last-child(2)) {
 				margin-bottom: 5px;
+			}
+			#about {
+				color: white;
+				font-family: Verdana, Arial, "Helvetica Neue", Helvetica, sans-serif;
+				text-align: center;
+			}
+			#about p {
+				margin-top: 20px;
+				margin-bottom: 20px;
 			}
 		</style>
 	</head>
@@ -51,6 +67,15 @@
 
 			<a href="Visual Tracker/HTML/map_seasons.html">Oracle of Seasons<br>Old Visual Tracker</a>
 			<a href="Visual Tracker/HTML/map_ages.html">Oracle of Ages<br>Old Visual Tracker</a>
+		</div>
+
+		<div id="about">
+			<p>The Key Location Tracker provides a condensed way of tracking important locations and access to specific parts of the map. Using the "warp to start" feature, the player should be able to quickly navigate to any area or location that they have tracked.</p>
+			<p>The Visual Tracker takes a more intuitive approach, allowing the user to literally label the entrances as they appear on the in-game overworld. It will even draw connections for locations that have multiple points of entry - but it is more cumbersome to use when trying to play the game quickly or efficiently.</p>
+			<p>The DX version of the Visual Tracker is more feature-rich, allowing the user to change the state of certain regions such as the animal companion regions, or change the seasons in Oracle of Seasons, which can also be randomized.</p>
+			<p>Jangler's Oracles Randomizer and links to various forks can be found at <a href="https://github.com/jangler/oracles-randomizer">https://github.com/jangler/oracles-randomizer</a></p>
+			<p>vinheim3's forked Entrance Randomizer can be downloaded at <a href="https://github.com/vinheim3/oracles-randomizer/releases">https://github.com/vinheim3/oracles-randomizer/releases</a></p>
+			<p>I am in no way affiliated with any of the developers of this software.</p>
 		</div>
 	</body>
 	

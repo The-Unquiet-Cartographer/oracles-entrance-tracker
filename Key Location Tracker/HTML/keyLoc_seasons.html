@@ -31,9 +31,9 @@
 		}
 
 	/*ENTRANCE LIST (POPUP)*/
-		#Entrances-ctnr-outer {
+		#search-ctnr-outer {
 			display: none;
-			position: absolute;
+			position: fixed;
 			top: 0;
 			left: 0;
 			height: 100vh;
@@ -42,9 +42,11 @@
 			max-height: 100%;
 			padding: 40px;
 			box-sizing: border-box;
+			z-index: 20;
 		}
-		#Entrances-ctnr-inner {
+		#search-ctnr-inner {
 			background: #B92428;
+			color: white;
 			border-radius: 20px;
 			width: calc(100%);
 			height: calc(100%);
@@ -52,50 +54,77 @@
 			padding: 30px 0;
 			box-sizing: border-box;
 		}
-		#Entrances-ctnr-scrollArea {
+		#search-ctnr-scrollArea {
 			height: 100%;
 			margin: 30px;
 			margin-top: 0;
 			overflow: scroll;
 		}
-		#Entrances-Holodrum {
+		#entrance-menu {
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
 			height: 120%;
-		/*    height: 100%;
-			margin: 30px;
-			margin-top: 0;
-			overflow: scroll;
-		*/
 		}
-		#btn-clear, .entrance-list {
-			margin-top: 0;
-			width: 200px;
-			margin-bottom: 10px;
-		}
-		#btn-clear {
-			padding: 10px 0;
+		#btn-clear, #search-input {
+			padding: 10px;
 			box-sizing: border-box;
 			border: solid white 1px;
 			border-radius: 4px;
 		}
-		#Entrances-Holodrum h3 {
+		#btn-clear, #search-input, .entrance-list {
+			margin-top: 0;
+			width: 220px;
+			margin-bottom: 10px;
+			margin-right: 30px;
+		}
+		#entrance-menu h3 {
 			margin-top: 0;
 			margin-bottom: 10px;
 		}
-		#Entrances-Holodrum ul {
-			padding-left: 20px;
+		#entrance-menu ul {
+			margin-top: 10px;
+			padding-left: 5px;
+			list-style: none;
 		}
-		li:hover, #btn-clear:hover {
+		#entrance-menu li:before {
+			content: "➢";			/*➣ or ➢*/
+			margin-right: 10px;
+		}
+		#entrance-menu li {
+			font-family: Verdana, Arial, "Helvetica Neue", Helvetica, sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.2;
+			padding-top: 9px;
+			padding-bottom: 9px;
+		}
+		#entrance-menu li:hover, #btn-clear:hover {
 			background: green;
 			cursor: pointer;
+		}
+		#search-input {
+			color: black;
 		}
 
 	</style>
 </head>
 
 <body>
+
+	<div id=search-ctnr-outer>
+		<div id=search-ctnr-inner>
+			<div id=search-ctnr-scrollArea>
+				<div id=entrance-menu>
+					<div id=add-ctrls>
+						<p id=btn-clear>Clear</p>
+						<input id=search-input title="Search" placeholder="Search">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<section id=Key-Locations>
 		<div class=sect>
 			<h2>Complex Connectors</h2>
@@ -248,17 +277,6 @@
 		</div>
 -->
 	</section>
-
-
-	<div id=Entrances-ctnr-outer>
-		<div id=Entrances-ctnr-inner>
-			<div id=Entrances-ctnr-scrollArea>
-				<div id=Entrances-Holodrum>
-					<p id=btn-clear>Clear</p>
-				</div>
-			</div>
-		</div>
-	</div>
 	
 </body>
 
@@ -272,24 +290,26 @@
 	This should be enough information for the player to navigate anywhere from the starting location.
 -->
 <script>
+	const locs_ancientRuins = [
+		["Tarm Ruins", "Dungeon 6 (Ancient Ruins)"],
+		["Tarm Ruins", "Tarm Ruins Burn Bush"],
+		["Tarm Ruins", "Seed tree basement"],		//Wooden basement containing a chest (Gasha Seed)
+	];
+
 	const locs_easternSuburbs = [
 		["Eastern Suburbs", "Blast Bloom Cave"],
-		["Eastern Suburbs", "Eastern Suburbs Portal"],
 		["Eastern Suburbs", "Windmill Cave Lower"],
 		["Eastern Suburbs", "Windmill Cave Middle"],
-		["Eastern Suburbs", "Windmill Cave Upper"]
+		["Eastern Suburbs", "Windmill Cave Upper"],
+		["Eastern Suburbs", "Woods of Winter Burn Bush"],
 	];
 
 	const locs_eyeglassLake = [
-		["Eyeglass Lake/North Horon", "North Horon Burn Bush"],
-		["Eyeglass Lake/North Horon", "Dungeon 1 (Gnarled Root)"],
-		["Eyeglass Lake/North Horon", "Dungeon 5 (Unicorn's Cave)"],
-		["Eyeglass Lake/North Horon", "Eyeglass Lake Portal"],
-		["Eyeglass Lake/North Horon", "Impa's Refuge"],
-		["Eyeglass Lake/North Horon", "Lakebed Bomb Cave"],
-		["Eyeglass Lake/North Horon", "Lakebed Boulder Cave"],
-		["Eyeglass Lake/North Horon", "Malon's House"],
-		["Eyeglass Lake/North Horon", "Red Ring Guardian"]
+		["Eyeglass Lake", "Dungeon 5 (Unicorn's Cave)"],
+		["Eyeglass Lake", "Lakebed Bomb Cave"],
+		["Eyeglass Lake", "Lakebed Boulder Cave"],
+		["Eastern Suburbs", "Eastern Suburbs Portal"],
+		["Eyeglass Lake", "Eyeglass Lake Portal"],
 	];
 
 	const locs_goronMountain = [
@@ -313,7 +333,7 @@
 	const locs_graveyard = [
 		["Graveyard", "Dungeon 7 (Ancient Crypt)"],
 		["Graveyard", "Graveyard Secret"],
-		["Graveyard", "Graveyard Passage U"]
+		["Graveyard", "Graveyard Passage U"],
 	];
 
 	const locs_holodrumPlain = [
@@ -323,7 +343,7 @@
 		["Holodrum Plain", "Flooded Cave (West)"],
 		["Holodrum Plain", "Goponga Flower Cave"],
 		["Holodrum Plain", "Mrs Ruul's House"],
-		["Holodrum Plain", "Round Jewel Guardian"]
+		["Holodrum Plain", "Round Jewel Guardian"],
 	];
 
 	const locs_horonVillage = [
@@ -333,7 +353,7 @@
 		["Horon Village", "Clock Shop"], 
 		["Horon Village", "Clock Shop Stairs"],
 		["Horon Village", "Know-It-All Birds' Hut (L)"],
-		["Horon Village", "Mako Tree"],
+		["Horon Village", "Maku Tree"],
 		["Horon Village", "Mayor Ruul's House"],
 		["Horon Village", "Mr. Left's House L"],
 		["Horon Village", "Mr. Left's House R"],
@@ -350,24 +370,32 @@
 		["Mt. Cucco", "Mushroom Cave"],
 		["Mt. Cucco", "Mt. Cucco Portal"],
 		["Mt. Cucco", "Pyramid Jewel Cave"],
-		["Mt. Cucco", "Cucco Ascent W Lower"],      //Narrow passage going left
-		["Mt. Cucco", "Cucco Ascent W Upper"],    //Reverse C?
-		["Mt. Cucco", "Cucco Ascent E Lower"],    //Big pit, tiny platforms
-		["Mt. Cucco", "Cucco Ascent E Upper"],    //Big pit, tiny platforms
-		["Mt. Cucco", "Passage to Sunken City"]
+		["Mt. Cucco", "Cucco Ascent W Lower"],		//Narrow passage going left
+		["Mt. Cucco", "Cucco Ascent W Upper"],		//Reverse C?
+		["Mt. Cucco", "Cucco Ascent E Lower"],		//Big pit, tiny platforms
+		["Mt. Cucco", "Cucco Ascent E Upper"],		//Big pit, tiny platforms
+		["Mt. Cucco", "Passage to Sunken City"],
 	];
 
-	const locs_natzu = [
+	const locs_natzuRegion = [
 		//Ricky Locs only 
 		["Natzu Region", "Stairs on the River"],
 		["Natzu Region", "Natzu Great Fairy"],
 		["Natzu Region", "Seed-Loving Scrub's Cave"],
 		["Natzu Region", "Moblin's Fortress L"],
-		["Natzu Region", "Moblin's Fortress R"]
-	]
+		["Natzu Region", "Moblin's Fortress R"],
+	];
 
 	const locs_northernPeak = [
-		["Northern Peak", "Onox's Castle"]
+		["Northern Peak", "Onox's Castle"],
+	];
+
+	const locs_northHoron = [
+		["North Horon", "Dungeon 1 (Gnarled Root)"],
+		["North Horon", "Impa's Refuge"],
+		["North Horon", "Malon's House"],
+		["North Horon", "North Horon Burn Bush"],
+		["North Horon", "Red Ring Guardian"],
 	];
 
 	const locs_samasaDesert = [
@@ -375,25 +403,25 @@
 		["Samasa Desert", "Great Fairy"],
 		["Samasa Desert", "Pirate Ship (Beached)"],
 		["Samasa Desert", "Desert Passage Entrance"],
-		["Samasa Desert", "Desert Passage Exit"]
+		["Samasa Desert", "Desert Passage Exit"],
 	];
 
 	const locs_spoolSwamp = [
 		["Spool Swamp", "Dungeon 3 (Poison Moth's Lair)"],
 		["Spool Swamp", "Floodgate Keeper's House"],
-		["Spool Swamp", "Floodgate Passage Entrance"],      //Long zig-zagging cave full of Bushcrabs.
+		["Spool Swamp", "Floodgate Passage Entrance"],		//Long zig-zagging cave full of Bushcrabs.
 		["Spool Swamp", "Floodgate Passage Exit"],
 		["Spool Swamp", "Spool Swamp Portal"],
-		["Spool Swamp", "Spool Swamp Bomb Cave"]    //Square Jewel in vanilla
+		["Spool Swamp", "Spool Swamp Bomb Cave"],	//Square Jewel in vanilla
 	];
 
 	const locs_sunkenCity = [
 		["Sunken City", "Vine Cave"],
 		["Sunken City", "Ingo's House"],
-		["Sunken City", "Sunken House NE"],             //Woman's house
-		["Sunken City", "Sunken House SE"],             //Moblin's hideout
-		["Sunken City", "Sunken House SW"],             //Man's house
-		["Sunken City", "Sunken House W"],              //Master Diver's house
+		["Sunken City", "Sunken House NE"],			//Woman's house
+		["Sunken City", "Sunken House SE"],			//Moblin's hideout
+		["Sunken City", "Sunken House SW"],			//Man's house
+		["Sunken City", "Sunken House W"],			//Master Diver's house
 		["Sunken City", "Potion Shop"],
 		["Sunken City", "Passage to Mt. Cucco"],
 		["Sunken City", "Passage to Woods of Winter"],
@@ -403,33 +431,30 @@
 	];
 
 	const locs_tarmRuins = [
-		["Tarm Ruins", "Dungeon 6 (Ancient Ruins)"],
 		["Tarm Ruins", "Tarm Ruins Bomb Wall"],
 		["Tarm Ruins", "Helpful Scrub's Cave"],
 		["Tarm Ruins", "Music-Loving Scrub's Cave"],
-		["Tarm Ruins", "Tarm Ruins Burn Bush"],
-		["Tarm Ruins", "Seed tree basement"]           //Wooden basement containing a chest (Gasha Seed)
 	];
 
 	const locs_templeRemains = [
 		["Temple Remains", "Temple Remains Bomb Wall"],
-		["Temple Remains", "Temple Ascent Lower"],          //S-shaped Magnetic glove traversal
-		["Temple Remains", "Temple Ascent Upper"],          //Long, narrow bridge blocked by tortoise-shell rocks
-		["Temple Remains", "Bastion L"],                    //Crumbling floors and tonnes of Keese
-		["Temple Remains", "Bastion R"],                    //Narrow <v diagonal ledge <v guarded by Bushcrab and Moldorm
+		["Temple Remains", "Temple Ascent Lower"],			//S-shaped Magnetic glove traversal
+		["Temple Remains", "Temple Ascent Upper"],			//Long, narrow bridge blocked by tortoise-shell rocks
+		["Temple Remains", "Bastion L"],					//Crumbling floors and tonnes of Keese
+		["Temple Remains", "Bastion R"],					//Narrow <v diagonal ledge <v guarded by Bushcrab and Moldorm
 		["Temple Remains", "Portal (Temple Remains Lower)"],
-		["Temple Remains", "Portal (Temple Remains Upper)"]
+		["Temple Remains", "Portal (Temple Remains Upper)"],
 	];
 
-	const locs_westernShore = [
-		["Western Shore", "Graveyard Passage Lower"],
-		["Western Shore", "Coast Fairy's Cave"],
-		["Western Shore", "Hero's Cave Dropdown"],
-		["Western Shore", "Hero's Cave Entrance"],
-		["Western Shore", "Shore House Main"],
-		["Western Shore", "Shore House Shed"],
-		["Western Shore", "Pirate Ship (Docked)"],
-		["Western Shore", "Old Man"]
+	const locs_westernCoast = [
+		["Western Coast", "Graveyard Passage Lower"],
+		["Western Coast", "Coast Fairy's Cave"],
+		["Western Coast", "Hero's Cave Dropdown"],
+		["Western Coast", "Hero's Cave Entrance"],
+		["Western Coast", "Coast House Main"],
+		["Western Coast", "Coast House Shed"],
+		["Western Coast", "Pirate Ship (Docked)"],
+		["Western Coast", "Old Man"],
 	];
 
 	const locs_woodsOfWinter = [
@@ -438,7 +463,6 @@
 		["Woods of Winter", "D2 Stairs R"],
 		["Woods of Winter", "Holly's House Chimney"],
 		["Woods of Winter", "Holly's House Entrance"],
-		["Woods of Winter", "WoW Burn Bush"],
 		["Woods of Winter", "WoW Bomb Cave"],
 		["Woods of Winter", "WoW Open Cave"],
 		["Woods of Winter", "WoW Mushroom-blocked Cave"],
@@ -495,19 +519,18 @@
 		["South-East Subrosia", "Great Furnace"],
 		["South-East Subrosia", "Great Furnace Portal"],
 		["South-East Subrosia", "Sign-Loving Subrosian's House"],
-
 	];
 
 	//Exemptions (locations that always-vanilla in the shuffle)
 
 	const exemptions_holodrum = [
-		["Horon Village", "Mako Tree"],
+		["Horon Village", "Maku Tree"],
 		["Northern Peak", "Onox's Castle"],
 		["Samasa Desert", "Desert Cave"],
 		["Samasa Desert", "Pirate Ship (Beached)"],
 		["Sunken City", "Master Diver's Test"],
 		["Sunken City", "Master Diver's Cave"],
-		["Western Shore", "Pirate Ship (Docked)"],
+		["Western Coast", "Pirate Ship (Docked)"],
 	];
 
 	const exemptions_subrosia = [
@@ -526,54 +549,28 @@
 //  Concatenate locations   //
 //////////////////////////////
 
-//Get the full list of locations in Oracle of Seasons
-/*
 const Locations_OracleOfSeasons = [].concat(
-	locs_easternSuburbs,
-	locs_eyeglassLake,
-	locs_goronMountain,
-	locs_graveyard,
-	locs_holodrumPlain,
-	locs_horonVillage,
-	locs_mtCucco,
-	locs_natzu,
+	locs_ancientRuins,
 	locs_northernPeak,
-	locs_samasaDesert,
-	locs_spoolSwamp,
-	locs_sunkenCity,
-	locs_tarmRuins,
 	locs_templeRemains,
-	locs_westernShore,
-	locs_woodsOfWinter,
-
-	locs_easternSubrosia,
-	locs_subrosianVillage,
-	locs_subrosianVolcanoes,
-	locs_subrosianWilds,
-	locs_templeOfSeasons,
-);
-*/
-const Locations_OracleOfSeasons = [].concat(
-	locs_graveyard,
-	locs_westernShore,
-
-	locs_tarmRuins,
-	locs_spoolSwamp,
-	locs_natzu,
-	locs_templeRemains,
-	locs_eyeglassLake,
-	locs_holodrumPlain,
-	locs_horonVillage,
-
 	locs_goronMountain,
 	locs_mtCucco,
-	locs_northernPeak,
 
+	locs_tarmRuins,
+	locs_holodrumPlain,
+	locs_natzuRegion, 
+	locs_sunkenCity,
+
+	locs_spoolSwamp,
+	locs_northHoron,
+	locs_eyeglassLake,
 	locs_easternSuburbs,
 	locs_woodsOfWinter,
-	locs_samasaDesert,
 
-	locs_sunkenCity,
+	locs_graveyard,
+	locs_westernCoast,
+	locs_horonVillage,
+	locs_samasaDesert,
 
 	locs_sw_subrosia,
 	locs_nw_subrosia,
@@ -609,8 +606,8 @@ RemoveExemptions(exemptions_subrosia);
 <!--Do stuff-->
 <script>
 	const KeyLocations = document.getElementById('Key-Locations');
-	const Entrances_ctnr_outer = document.getElementById('Entrances-ctnr-outer');
-	const Entrances_Holodrum = document.getElementById('Entrances-Holodrum');
+	const elem_search_ctnr_outer = document.getElementById('search-ctnr-outer');
+	const elem_entrance_menu = document.getElementById('entrance-menu');
 	let elmt_toEdit;
 
 
@@ -624,10 +621,10 @@ RemoveExemptions(exemptions_subrosia);
 		return newElem;
 	}
 	function ShowMenu() {
-		Entrances_ctnr_outer.style.display = "block";
+		elem_search_ctnr_outer.style.display = "block";
 	}
 	function HideMenu() {
-		Entrances_ctnr_outer.style.display = "none";
+		elem_search_ctnr_outer.style.display = "none";
 	}
 
 
@@ -638,8 +635,8 @@ RemoveExemptions(exemptions_subrosia);
 			.replace("/", "-")
 		;
 	//Create new element for area containing entrance list
-		if (!Entrances_Holodrum.querySelector(`#${areaID}`)) {
-			Entrances_Holodrum.appendChild(NewElem('div', areaID, ['entrance-list'], (_elmt)=>{
+		if (!elem_entrance_menu.querySelector(`#${areaID}`)) {
+			elem_entrance_menu.appendChild(NewElem('div', areaID, ['entrance-list'], (_elmt)=>{
 				_elmt.appendChild(NewElem('h3', '', [], (_subElmt)=>{
 					_subElmt.textContent = _loc[0];
 				}));
@@ -649,7 +646,7 @@ RemoveExemptions(exemptions_subrosia);
 			}));
 		}
 	//Append list item to area entrance list
-		Entrances_Holodrum
+		elem_entrance_menu
 			.querySelector(`#${areaID}`)
 			.querySelector('ul')
 			.appendChild(NewElem('li', "", [], (_elmt)=>{
@@ -665,25 +662,83 @@ RemoveExemptions(exemptions_subrosia);
 
 	KeyLocations.querySelectorAll('tr').forEach(_tr => {
 		_tr.addEventListener('click', ()=>{
-			elmt_toEdit = _tr.childNodes[3];        //<== It has to be 3 because 2 gets the space in between the <td>s; I guess index[0] is also a node. Whatevs.
+			elmt_toEdit = _tr.childNodes[3];
 			ShowMenu();
 		});
 	});
 
-
-	Entrances_Holodrum.querySelector('#btn-clear').addEventListener('click', ()=>{
-		elmt_toEdit.textContent = "";
+//
+//	Click off Menu: Hide search overlay
+//
+	elem_search_ctnr_outer.addEventListener('click', e => {
+		if (e.target != e.currentTarget) return;				//<== This is necessary because for whatever dratted reason clicking on the inner element fires this event.
 		HideMenu();
+		e.stopPropagation();
 	});
-	Entrances_Holodrum.querySelectorAll('li').forEach(_ent => {
+
+//
+//	Click on List Item : Assign entrance to key location
+//
+	elem_entrance_menu.querySelectorAll('li').forEach(_ent => {
 		_ent.addEventListener('click', ()=>{
 			elmt_toEdit.textContent = _ent.textContent;
 			HideMenu();
 		});
 	});
 
-	Entrances_ctnr_outer.addEventListener('click', ()=>{
+//
+//	Clear button : Assign entrance to key location
+//
+	elem_entrance_menu.querySelector('#btn-clear').addEventListener('click', ()=>{
+		elmt_toEdit.textContent = "";
 		HideMenu();
+	});
+
+//
+//	Keypress in Input field : Narrow down search
+//
+	const elem_search_input = document.getElementById('search-input');
+	const elems_listItems = [...elem_search_ctnr_outer.querySelectorAll('.entrance-list')].map(l => [...l.querySelectorAll('li')]).flat();
+	const searchTerms = Locations_OracleOfSeasons.map(loc => `${loc[0]} - ${loc[1]}`.toLowerCase());
+	elem_search_input.addEventListener('input', () => {
+	//Restore everything is search is empty
+		if (elem_search_input.value.length === 0) {
+			for (const l of elem_search_ctnr_outer.querySelectorAll('.entrance-list')) {
+				l.style.display = "block";
+				for (const li of l.querySelectorAll('li')) {
+					li.style.display = "block";
+				}
+			}
+			return;
+		}
+	//Scan for matches
+		let thisSearch = elem_search_input.value.toLowerCase().split(" ");
+		for (let i = 0; i < searchTerms.length; i++) {
+			let terms_found = 0;
+			for (let j = 0; j < thisSearch.length; j++) {
+				if (searchTerms[i].includes(thisSearch[j])) {
+					terms_found++;
+				}
+			//Cull non-matches from display
+				if (terms_found == thisSearch.length) {
+					elems_listItems[i].style.display = "block";
+				} else {
+					elems_listItems[i].style.display = "none";
+				}
+			}
+		}
+	//Hide section headers (actually just hides entire section because might as well)
+		for (const l of elem_search_ctnr_outer.querySelectorAll('.entrance-list')) {
+			let hideHeader = true;
+			for (const li of l.querySelectorAll('li')) {
+				if (li.style.display == "block") {
+					hideHeader = false;
+					break;
+				}
+			}
+			if (hideHeader) l.style.display = "none";
+			else l.style.display = "block";
+		}
 	});
 
 </script>
