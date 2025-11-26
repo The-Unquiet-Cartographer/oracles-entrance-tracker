@@ -30,6 +30,11 @@
 			background-color: green;
 			cursor: pointer;
 		}
+		@media (max-width: 660px) {
+			#Key-Locations {
+				max-height: none;
+			}
+		}
 
 	/*ENTRANCE LIST (POPUP)*/
 		#search-ctnr-outer {
@@ -108,10 +113,36 @@
 			color: black;
 		}
 
+	/*ADDITIONAL CONTROLS*/
+	/*
+		#ctrls {
+			background: rgba(32, 32, 32);
+			width: 100%;
+			padding: 2px;
+		}
+		.ctrl {
+			background: rgba(96, 96, 96);
+			padding: 5px;
+			border: solid white 1px;
+			border-radius: 4px;
+			font-family: sans-serif;
+			width: fit-content;
+		}
+		.ctrl:hover {
+			background: green;
+			cursor: pointer;
+		}
+	*/
 	</style>
 </head>
 
 <body>
+
+<!--
+	<div id="ctrls">
+		<div id="ctrl-???????" class="ctrl">↔/↕</div>
+	</div>
+-->
 
 	<div id=search-ctnr-outer>
 		<div id=search-ctnr-inner>
@@ -284,7 +315,7 @@
 					<li>Temple Remains</li>
 					<li>Woods of Winter</li>
 				<h3>Bracelet</h3>
-					<li>Blast Bloom Cave (Eastern Suburbs - Spring)</li>
+					<li>Eastern Suburbs Blast Bloom Cave (Spring)</li>
 					<li>Horon Village Chest  (Fall)</li>
 				<h3>Fall</h3>
 					<li>D2 Area Cave (Bracelet)</li>
@@ -677,9 +708,10 @@ RemoveExemptions(exemptions_subrosia);
 	});
 
 
-//////////////////////
-//  EVENT LISTENERS //
-//////////////////////
+
+//////////////////////////////
+//	EVENT LISTENERS (MENUS)	//
+//////////////////////////////
 
 	KeyLocations.querySelectorAll('tr').forEach(_tr => {
 		_tr.addEventListener('click', ()=>{
