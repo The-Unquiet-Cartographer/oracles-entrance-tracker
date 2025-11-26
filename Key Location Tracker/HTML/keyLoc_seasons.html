@@ -27,8 +27,7 @@
 			font-family: Verdana, Arial, "Helvetica Neue", Helvetica, sans-serif;
 		}
 		tr:hover {
-		/*	background: rgb(0, 191, 255);	*/	/*<== This is a good contrasting color...*/
-			background: green;					/*<== This is better.*/
+			background-color: green;
 			cursor: pointer;
 		}
 
@@ -322,16 +321,16 @@
 <script>
 	const locs_ancientRuins = [
 		["Tarm Ruins", "Dungeon 6 (Ancient Ruins)"],
-		["Tarm Ruins", "Tarm Ruins Burn Bush"],
-		["Tarm Ruins", "Seed Tree Basement"],		//Wooden basement containing a chest (Gasha Seed)
+		["Tarm Ruins", "Ancient Ruins Burn Bush"],
+		["Tarm Ruins", "Ancient Ruins Gale Tree Basement"],		//Wooden basement containing a chest (Gasha Seed)
 	];
 
 	const locs_easternSuburbs = [
 		["Eastern Suburbs", "Blast Bloom Cave"],
-		["Eastern Suburbs", "Windmill Cave Lower"],
-		["Eastern Suburbs", "Windmill Cave Middle"],
-		["Eastern Suburbs", "Windmill Cave Upper"],
-		["Eastern Suburbs", "Woods of Winter Burn Bush"],
+		["Eastern Suburbs", "Windmill Cave (L)"],
+		["Eastern Suburbs", "Windmill Cave (M)"],
+		["Eastern Suburbs", "Windmill Cave (U)"],
+		["Eastern Suburbs", "Burn Bush near Holly's House"],
 	];
 
 	const locs_eyeglassLake = [
@@ -343,19 +342,14 @@
 	];
 
 	const locs_goronMountain = [
-		["Goron Mountain", "Goron City L"],						//At the foot of the mountain
-		["Goron Mountain", "Goron City M"],						//Opposite the burn bush
-		["Goron Mountain", "Goron City U"],						//Beneath Biggoron
-		//["Goron Mountain", "Goron Mt. First Ascent L"],		//:Bomb Wall
-		//["Goron Mountain", "Goron Mt. First Ascent U"],		//:Split Path (stairs)
-		//["Goron Mountain", "Goron Mt. Second Ascent L"],		//:Split Path (right)
-		//["Goron Mountain", "Goron Mt. Second Ascent U"],		//:Summit Stairs
-		//["Goron Mountain", "Goron Mt. Small Pot Cave"],		//:Split Path (left)
+		["Goron Mountain", "Goron City (L)"],					//At the foot of the mountain
+		["Goron Mountain", "Goron City (M)"],					//Opposite the burn bush
+		["Goron Mountain", "Goron City (U)"],					//Beneath Biggoron
 		["Goron Mountain", "Goron Mt. Bomb Wall"],				// => First Ascent A.K.A. Lava Cave Lower
 		["Goron Mountain", "Goron Mt. Burn Bush"],
 		["Goron Mountain", "Goron Mt. Summit Stairs"],			// => Second Ascent Upper
-		["Goron Mountain", "Goron Mt. Trail L"],				// => Small Pot Cave A.K.A. Double Cave (Left)
-		["Goron Mountain", "Goron Mt. Trail R"],				// => Second Ascent (Lower) A.K.A. Double Cave (Right)
+		["Goron Mountain", "Goron Mt. Trail (L)"],				// => Small Pot Cave A.K.A. Double Cave (Left)
+		["Goron Mountain", "Goron Mt. Trail (R)"],				// => Second Ascent (Lower) A.K.A. Double Cave (Right)
 		["Goron Mountain", "Goron Mt. Trail Stairs"],			// => First Ascent Upper
 		["Goron Mountain", "Lone Goron's Cave"],
 	];
@@ -363,57 +357,57 @@
 	const locs_graveyard = [
 		["Graveyard", "Dungeon 7 (Ancient Crypt)"],
 		["Graveyard", "Graveyard Secret"],
-		["Graveyard", "Graveyard Passage U"],
+		["Graveyard", "Graveyard Passage (U)"],
 	];
 
 	const locs_holodrumPlain = [
 		["Holodrum Plain", "Blaino's Gym"],
-		["Holodrum Plain", "Burn Bush (North)"],
-		["Holodrum Plain", "Burn Bush (West)"],
-		["Holodrum Plain", "Flooded Cave (West)"],
-		["Holodrum Plain", "Goponga Flower Cave"],
+		["Holodrum Plain", "Plains Burn Bush (NE)"],
+		["Holodrum Plain", "Plains Burn Bush (SW)"],
+		["Holodrum Plain", "Plains Flooded Cave"],
+		["Holodrum Plain", "Plains Mushroom Cave"],
 		["Holodrum Plain", "Mrs Ruul's House"],
 		["Holodrum Plain", "Round Jewel Guardian"],
 	];
 
 	const locs_horonVillage = [
 		["Horon Village", "Advance Shop (R)"],
-		["Horon Village", "BipBop L"],
-		["Horon Village", "BipBop R"],
+		["Horon Village", "Bipin & Blossom's House (L)"],
+		["Horon Village", "Bipin & Blossom's House (R)"],
 		["Horon Village", "Clock Shop"], 
-		["Horon Village", "Clock Shop Stairs"],
+		["Horon Village", "Clock Shop Basement"],
 		["Horon Village", "Know-It-All Birds' Hut (L)"],
 		["Horon Village", "Maku Tree"],
 		["Horon Village", "Mayor Ruul's House"],
-		["Horon Village", "Mr. Left's House L"],
-		["Horon Village", "Mr. Left's House R"],
-		["Horon Village", "Horon Burn Bush"],
-		["Horon Village", "Horon Stairs"],
+		["Horon Village", "Mr. Left's House (L)"],
+		["Horon Village", "Mr. Left's House (R)"],
+		["Horon Village", "Horon Portal Basement"],
+		["Horon Village", "Horon Village Burn Bush"],
 		["Horon Village", "Horon Village Shop"],
 		["Horon Village", "Vasu Jewelers"],
 	];
 
 	const locs_mtCucco = [
 		["Mt. Cucco", "Dungeon 4 (Dancing Dragon Dungeon)"],
+		["Mt. Cucco", "Cucco East Bluff Ascent (L)"],		//Big pit, tiny platforms
+		["Mt. Cucco", "Cucco East Bluff Ascent (U)"],		//Big pit, tiny platforms
 		["Mt. Cucco", "Cucco East Bluff Lower Cave"],
-		["Mt. Cucco", "Mt. Cucco Cave next to Portal"],
-		["Mt. Cucco", "Mushroom Cave"],
+		["Mt. Cucco", "Cucco West Ascent (L)"],				//Narrow Passage going left
+		["Mt. Cucco", "Cucco West Ascent (U)"],				//Reverse C?
+		["Mt. Cucco", "Mt. Cucco high cave near Portal"],
+		["Mt. Cucco", "Mt. Cucco Mushroom Cave"],
 		["Mt. Cucco", "Mt. Cucco Portal"],
-		["Mt. Cucco", "Pyramid Jewel Cave"],
-		["Mt. Cucco", "Cucco Ascent W Lower"],		//Narrow Passage going left
-		["Mt. Cucco", "Cucco Ascent W Upper"],		//Reverse C?
-		["Mt. Cucco", "Cucco Ascent E Lower"],		//Big pit, tiny platforms
-		["Mt. Cucco", "Cucco Ascent E Upper"],		//Big pit, tiny platforms
+		["Mt. Cucco", "Pyramid Jewel Dive Spot"],
 		["Mt. Cucco", "Passage to Sunken City"],
 	];
 
 	const locs_natzuRegion = [
 		//Ricky Locs only 
 		["Natzu Region", "Stairs on the River"],
-		["Natzu Region", "Natzu Great Fairy"],
+		["Natzu Region", "Natzu Region Great Fairy"],
 		["Natzu Region", "Seed-Loving Scrub's Cave"],
-		["Natzu Region", "Moblin's Fortress L"],
-		["Natzu Region", "Moblin's Fortress R"],
+		["Natzu Region", "Great Moblin's Keep (L)"],
+		["Natzu Region", "Great Moblin's Keep (R)"],
 	];
 
 	const locs_northernPeak = [
@@ -422,9 +416,9 @@
 
 	const locs_northHoron = [
 		["North Horon", "Dungeon 1 (Gnarled Root)"],
+		["North Horon", "Gnarled Root Burn Bush"],
 		["North Horon", "Impa's Refuge"],
 		["North Horon", "Malon's House"],
-		["North Horon", "North Horon Burn Bush"],
 		["North Horon", "Red Ring Guardian"],
 	];
 
@@ -448,16 +442,15 @@
 	const locs_sunkenCity = [
 		["Sunken City", "Vine Cave"],
 		["Sunken City", "Ingo's House"],
-		["Sunken City", "Sunken House NE"],			//Woman's house
-		["Sunken City", "Sunken House SE"],			//Moblin's hideout
-		["Sunken City", "Sunken House SW"],			//Man's house
-		["Sunken City", "Sunken House W"],			//Master Diver's house
+		["Sunken City", "Sunken House (NE)"],			//Woman's house
+		["Sunken City", "Sunken House (SE)"],			//Moblin's hideout
+		["Sunken City", "Sunken House (SW)"],			//Man's house
+		["Sunken City", "Sunken House (W)"],			//Master Diver's house
 		["Sunken City", "Potion Shop"],
 		["Sunken City", "Passage to Mt. Cucco"],
 		["Sunken City", "Passage to Woods of Winter"],
 		["Sunken City", "Master Diver's Test"],
 		["Sunken City", "Master Diver's Cave"],
-
 	];
 
 	const locs_tarmRuins = [
@@ -468,29 +461,29 @@
 
 	const locs_templeRemains = [
 		["Temple Remains", "Temple Remains Bomb Wall"],
-		["Temple Remains", "Temple Ascent Lower"],			//S-shaped Magnetic glove traversal
-		["Temple Remains", "Temple Ascent Upper"],			//Long, narrow bridge blocked by tortoise-shell rocks
-		["Temple Remains", "Bastion L"],					//Crumbling floors and tonnes of Keese
-		["Temple Remains", "Bastion R"],					//Narrow <v diagonal ledge <v guarded by Bushcrab and Moldorm
-		["Temple Remains", "Portal (Temple Remains Lower)"],
-		["Temple Remains", "Portal (Temple Remains Upper)"],
+		["Temple Remains", "Temple Ascent (L)"],			//S-shaped Magnetic glove traversal
+		["Temple Remains", "Temple Ascent (U)"],			//Long, narrow bridge blocked by tortoise-shell rocks
+		["Temple Remains", "Temple Bastion (L)"],			//Crumbling floors and tonnes of Keese
+		["Temple Remains", "Temple Bastion (R)"],			//Narrow <v diagonal ledge <v guarded by Bushcrab and Moldorm
+		["Temple Remains", "Temple Remains Portal (L)"],
+		["Temple Remains", "Temple Remains Portal (U)"],
 	];
 
 	const locs_westernCoast = [
-		["Western Coast", "Graveyard Passage Lower"],
+		["Western Coast", "Graveyard Passage (L)"],
 		["Western Coast", "Coast Fairy's Cave"],
 		["Western Coast", "Hero's Cave Dropdown"],
 		["Western Coast", "Hero's Cave Entrance"],
 		["Western Coast", "Coast House Main"],
 		["Western Coast", "Coast House Shed"],
 		["Western Coast", "Pirate Ship (Docked)"],
-		["Western Coast", "Old Man"],
+		["Western Coast", "Western Coast Burn Bush"],
 	];
 
 	const locs_woodsOfWinter = [
-		["Woods of Winter", "Dungeon 2 (Snake's Remains) Front"],
-		["Woods of Winter", "D2 Stairs L"],
-		["Woods of Winter", "D2 Stairs R"],
+		["Woods of Winter", "Dungeon 2 (Snake's Remains) Entrance"],
+		["Woods of Winter", "Dungeon 2 Upper Entrance"],
+		["Woods of Winter", "Dungeon 2 Annex"],
 		["Woods of Winter", "Holly's House Chimney"],
 		["Woods of Winter", "Holly's House Entrance"],
 		["Woods of Winter", "WoW Bomb Cave"],
@@ -503,52 +496,52 @@
 
 	//Subrosia Locations
 
-	const locs_nw_subrosia = [
-		["North-West Subrosia", "Dungeon 8 (Sword & Shield Maze)"],
-		["North-West Subrosia", "Dungeon 8 Portal"],
-		["North-West Subrosia", "Explosive Volcano"],
-		["North-West Subrosia", "Subrosia - Key-locked Cave"],
-		["North-West Subrosia", "Subrosia - Western-most Cave"],
-		["North-West Subrosia", "Subrosia - Western House"],
+	const locs_se_subrosia = [
+		["Subrosian Furnaces (SE)", "Subrosian Bluff Ascent (U)"],
+		["Subrosian Furnaces (SE)", "Subrosian Bluff Ascent (L)"],
+		["Subrosian Furnaces (SE)", "Great Furnace"],
+		["Subrosian Furnaces (SE)", "Great Furnace Portal"],
+		["Subrosian Furnaces (SE)", "Sign-Loving Subrosian's House"],
+	];
+	const locs_s_subrosia = [
+		["Subrosian Seaside (S)", "Key-locked Passage (L)"],
+		["Subrosian Seaside (S)", "Key-locked Passage (R)"],
+		["Subrosian Seaside (S)", "Subrosian Market"],
+		["Subrosian Seaside (S)", "Subrosian Market Portal"],
 	];
 	const locs_n_subrosia = [
-		["North Subrosia", "Dancing Game"],
-		["North Subrosia", "Dancing Game Portal"],
-		["North Subrosia", "House North of Smithy"],
-		["North Subrosia", "Subrosian Smithy"],
-		["North Subrosia", "Subrosian Secret"],
+		["Subrosian Village (N)", "Dancing Game"],
+		["Subrosian Village (N)", "Dancing Game Portal"],
+		["Subrosian Village (N)", "House North of Smithy"],
+		["Subrosian Village (N)", "Subrosian Smithy"],
+		["Subrosian Village (N)", "Subrosian Secret"],
+	];
+	const locs_nw_subrosia = [
+		["Subrosian Volcanoes (NW)", "Dungeon 8 (Sword & Shield Maze)"],
+		["Subrosian Volcanoes (NW)", "Dungeon 8 Portal"],
+		["Subrosian Volcanoes (NW)", "Explosive Volcano"],
+		["Subrosian Volcanoes (NW)", "Subrosia Locked Cave"],
+		["Subrosian Volcanoes (NW)", "Subrosia West Cave"],
+		["Subrosian Volcanoes (NW)", "Subrosian Volcanoes House (NW)"],
+	];
+	const locs_sw_subrosia = [
+		["Subrosian Wilds (SW)", "House of Pirates (U)"],
+		["Subrosian Wilds (SW)", "House of Pirates (L)"],
+		["Subrosian Wilds (SW)", "House of Pirates Portal"],
+		["Subrosian Wilds (SW)", "Subrosian Wilds House (SW)"],
+		["Subrosian Wilds (SW)", "Pirate ship (Beached)"],
+		["Subrosian Wilds (SW)", "Strange Brothers Portal"],
+		["Subrosian Wilds (SW)", "Strange Brothers' House (L)"],
+		["Subrosian Wilds (SW)", "Strange Brothers' House (R)"],
+		["Subrosian Wilds (SW)", "Tower of Spring Passage (L)"],
 	];
 	const locs_ne_subrosia = [
 		["Temple of Seasons", "Main Temple"],
 		["Temple of Seasons", "Tower of Fall"],
 		["Temple of Seasons", "Tower of Spring"],
-		["Temple of Seasons", "Tower of Spring Passage R"],
+		["Temple of Seasons", "Tower of Spring Passage (R)"],
 		["Temple of Seasons", "Tower of Summer"],
 		["Temple of Seasons", "Tower of Winter"],
-	];
-	const locs_sw_subrosia = [
-		["South-West Subrosia", "House of Pirates U"],
-		["South-West Subrosia", "House of Pirates L"],
-		["South-West Subrosia", "House of Pirates Portal"],
-		["South-West Subrosia", "Subrosia - South-West House"],
-		["South-West Subrosia", "Pirate ship (Beached)"],
-		["South-West Subrosia", "Strange Brothers Portal"],
-		["South-West Subrosia", "Strange Brothers' House L"],
-		["South-West Subrosia", "Strange Brothers' House R"],
-		["South-West Subrosia", "Tower of Spring Passage L"],
-	];
-	const locs_s_subrosia = [
-		["South Subrosia", "Key-locked Passage L"],
-		["South Subrosia", "Key-locked Passage R"],
-		["South Subrosia", "Subrosian Market"],
-		["South Subrosia", "Subrosian Market Portal"],
-	];
-	const locs_se_subrosia = [
-		["South-East Subrosia", "Subrosia - Bluff Ascent U"],
-		["South-East Subrosia", "Subrosia - Bluff Ascent L"],
-		["South-East Subrosia", "Great Furnace"],
-		["South-East Subrosia", "Great Furnace Portal"],
-		["South-East Subrosia", "Sign-Loving Subrosian's House"],
 	];
 
 	//Exemptions (locations that always-vanilla in the shuffle)
@@ -564,12 +557,12 @@
 	];
 
 	const exemptions_subrosia = [
-		["North Subrosia", "Dancing Game"],
-		["South Subrosia", "Key-locked Passage L"],
-		["South Subrosia", "Key-locked Passage R"],
-		["South-West Subrosia", "Pirate Ship (Beached)"],
-		["South-West Subrosia", "Strange Brothers' House L"],
-		["South-West Subrosia", "Strange Brothers' House R"],
+		["Subrosian Village (N)", "Dancing Game"],
+		["Subrosian Seaside (S)", "Key-locked Passage (L)"],
+		["Subrosian Seaside (S)", "Key-locked Passage (R)"],
+		["Subrosian Wilds (SW)", "Pirate Ship (Beached)"],
+		["Subrosian Wilds (SW)", "Strange Brothers' House (L)"],
+		["Subrosian Wilds (SW)", "Strange Brothers' House (R)"],
 	];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -581,33 +574,30 @@
 
 const Locations_OracleOfSeasons = [].concat(
 	locs_ancientRuins,
-	locs_northernPeak,
-	locs_templeRemains,
-	locs_goronMountain,
-	locs_mtCucco,
-
-	locs_tarmRuins,
-	locs_holodrumPlain,
-	locs_natzuRegion, 
-	locs_sunkenCity,
-
-	locs_spoolSwamp,
-	locs_northHoron,
-	locs_eyeglassLake,
 	locs_easternSuburbs,
+	locs_eyeglassLake,
+	locs_goronMountain,
+	locs_graveyard,
+	locs_holodrumPlain,
+	locs_horonVillage,
+	locs_mtCucco,
+	locs_natzuRegion, 
+	locs_northernPeak,
+	locs_northHoron,
+	locs_samasaDesert,
+	locs_spoolSwamp,
+	locs_sunkenCity,
+	locs_tarmRuins,
+	locs_templeRemains,
+	locs_westernCoast,
 	locs_woodsOfWinter,
 
-	locs_graveyard,
-	locs_westernCoast,
-	locs_horonVillage,
-	locs_samasaDesert,
-
-	locs_sw_subrosia,
-	locs_nw_subrosia,
-	locs_n_subrosia,
-	locs_s_subrosia,
-	locs_ne_subrosia,
 	locs_se_subrosia,
+	locs_s_subrosia,
+	locs_n_subrosia,
+	locs_nw_subrosia,
+	locs_sw_subrosia,
+	locs_ne_subrosia,
 );
 
 
@@ -657,14 +647,15 @@ RemoveExemptions(exemptions_subrosia);
 	}
 	function HideMenu() {
 		elem_search_ctnr_outer.style.display = "none";
+		elem_search_input.value = "";
 	}
 
 
 	Locations_OracleOfSeasons.forEach(_loc => {
+	//Get the query selector from the area ID
 		let areaID = _loc[0]
-			.replace(/ /g, "-")
-			.replace(".", "")
-			.replace("/", "-")
+			.replace(/\p{P}/gu, "")		//<== Replace all punctuation with ""
+			.replace(/ /g, "-")			//<== Replace spaces with "-"
 		;
 	//Create new element for area containing entrance list
 		if (!elem_entrance_menu.querySelector(`#${areaID}`)) {
@@ -672,9 +663,7 @@ RemoveExemptions(exemptions_subrosia);
 				_elmt.appendChild(NewElem('h3', '', [], (_subElmt)=>{
 					_subElmt.textContent = _loc[0];
 				}));
-				_elmt.appendChild(NewElem('ul', '', [], ()=>{
-
-				}));
+				_elmt.appendChild(NewElem('ul', '', [], ()=>{return;}));
 			}));
 		}
 	//Append list item to area entrance list
@@ -714,6 +703,7 @@ RemoveExemptions(exemptions_subrosia);
 	elem_entrance_menu.querySelectorAll('li').forEach(_ent => {
 		_ent.addEventListener('click', ()=>{
 			elmt_toEdit.textContent = _ent.textContent;
+			//elmt_toEdit.parentElement.style.background = "#B92428";
 			HideMenu();
 		});
 	});
@@ -723,6 +713,7 @@ RemoveExemptions(exemptions_subrosia);
 //
 	elem_entrance_menu.querySelector('#btn-clear').addEventListener('click', ()=>{
 		elmt_toEdit.textContent = "";
+		//elmt_toEdit.parentElement.style.background = "";
 		HideMenu();
 	});
 
