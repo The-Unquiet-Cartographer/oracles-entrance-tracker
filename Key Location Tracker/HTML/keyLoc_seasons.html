@@ -358,17 +358,17 @@
 
 	const locs_easternSuburbs = [
 		["Eastern Suburbs", "Blast Bloom Cave"],
+		["Eastern Suburbs", "Burn Bush near Holly's House"],
 		["Eastern Suburbs", "Windmill Cave (L)"],
 		["Eastern Suburbs", "Windmill Cave (M)"],
 		["Eastern Suburbs", "Windmill Cave (U)"],
-		["Eastern Suburbs", "Burn Bush near Holly's House"],
 	];
 
 	const locs_eyeglassLake = [
 		["Eyeglass Lake", "Dungeon 5 (Unicorn's Cave)"],
+		["Eyeglass Lake", "Eastern Suburbs Portal"],
 		["Eyeglass Lake", "Lakebed Bomb Cave"],
 		["Eyeglass Lake", "Lakebed Boulder Cave"],
-		["Eastern Suburbs", "Eastern Suburbs Portal"],
 		["Eyeglass Lake", "Eyeglass Lake Portal"],
 	];
 
@@ -682,31 +682,49 @@ RemoveExemptions(exemptions_subrosia);
 	}
 
 
-	Locations_OracleOfSeasons.forEach(_loc => {
-	//Get the query selector from the area ID
-		let areaID = _loc[0]
-			.replace(/\p{P}/gu, "")		//<== Replace all punctuation with ""
-			.replace(/ /g, "-")			//<== Replace spaces with "-"
-		;
-	//Create new element for area containing entrance list
-		if (!elem_entrance_menu.querySelector(`#${areaID}`)) {
-			elem_entrance_menu.appendChild(NewElem('div', areaID, ['entrance-list'], (_elmt)=>{
-				_elmt.appendChild(NewElem('h3', '', [], (_subElmt)=>{
-					_subElmt.textContent = _loc[0];
-				}));
-				_elmt.appendChild(NewElem('ul', '', [], ()=>{return;}));
-			}));
-		}
-	//Append list item to area entrance list
-		elem_entrance_menu
-			.querySelector(`#${areaID}`)
-			.querySelector('ul')
-			.appendChild(NewElem('li', "", [], (_elmt)=>{
-				_elmt.textContent = _loc[1];
+	const searchTerms = [];
+	{
+		let entranceLists = [];
+		Locations_OracleOfSeasons.forEach(_loc => {
+		//Get the query selector from the area ID
+			let areaID = _loc[0]
+				.replace(/\p{P}/gu, "")		//<== Replace all punctuation with ""
+				.replace(/ /g, "-")			//<== Replace spaces with "-"
+			;
+		//Create new element for area containing entrance list
+			if (!elem_entrance_menu.querySelector(`#${areaID}`)) {
+				const newElem = NewElem('div', areaID, ['entrance-list'], (_elmt)=>{
+					_elmt.appendChild(NewElem('h3', '', [], (_subElmt)=>{
+						_subElmt.textContent = _loc[0];
+					}));
+					_elmt.appendChild(NewElem('ul', '', [], ()=>{return;}));
+				});
+				entranceLists.push(newElem);
+				elem_entrance_menu.appendChild(newElem);
 			}
-		));
-	});
-
+		//Get relevant entrance list
+			const getEntranceList = elem_entrance_menu.querySelector(`#${areaID}`);
+		//Add search term at the correct index relative to it's position in the entrance menu
+		//	This is done in case a location is added to a different (earlier) entrance list.
+		//	Do this first due to the way we use the number of existing list items to calculate the destination index.
+			for (let i = entranceLists.length-1; i > -1; i--) {
+				if (entranceLists[i] == getEntranceList) {
+					let masterIndex = 0;
+					for (let j = 0; j < i+1; j++) {
+						masterIndex += entranceLists[j].querySelectorAll('li').length;
+					}
+					const newSearchTerm = `${_loc[0]} - ${_loc[1]}`.toLowerCase()
+					searchTerms.splice(masterIndex, 0, newSearchTerm);
+					break;
+				}
+			};
+		//Append list item to area entrance list
+		//	Do this second due to the way we use the number of existing list items to calculate the search term index.
+			getEntranceList.querySelector('ul').appendChild(NewElem('li', "", [], (_elmt)=>{
+				_elmt.textContent = _loc[1];
+			}));
+		});
+	}
 
 
 //////////////////////////////
@@ -735,7 +753,7 @@ RemoveExemptions(exemptions_subrosia);
 	elem_entrance_menu.querySelectorAll('li').forEach(_ent => {
 		_ent.addEventListener('click', ()=>{
 			elmt_toEdit.textContent = _ent.textContent;
-			//elmt_toEdit.parentElement.style.background = "#B92428";
+			elmt_toEdit.parentElement.style.background = "#B92428";
 			HideMenu();
 		});
 	});
@@ -745,7 +763,7 @@ RemoveExemptions(exemptions_subrosia);
 //
 	elem_entrance_menu.querySelector('#btn-clear').addEventListener('click', ()=>{
 		elmt_toEdit.textContent = "";
-		//elmt_toEdit.parentElement.style.background = "";
+		elmt_toEdit.parentElement.style.background = "";
 		HideMenu();
 	});
 
@@ -753,7 +771,6 @@ RemoveExemptions(exemptions_subrosia);
 //	Keypress in Input field : Narrow down search
 //
 	const elems_listItems = [...elem_search_ctnr_outer.querySelectorAll('.entrance-list')].map(l => [...l.querySelectorAll('li')]).flat();
-	const searchTerms = Locations_OracleOfSeasons.map(loc => `${loc[0]} - ${loc[1]}`.toLowerCase());
 	elem_search_input.addEventListener('input', () => {
 	//Restore everything is search is empty
 		if (elem_search_input.value.length === 0) {
