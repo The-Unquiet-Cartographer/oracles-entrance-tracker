@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Seasons Location Tracker</title>
 
 	<style>
 		body {
@@ -20,13 +20,15 @@
 			max-height: 100vh;
 		}
 		tr:nth-of-type(2n+1) {
-			background: grey;
+			background: rgba(32, 32, 32);
 		}
 		td {
-			width: 200px;
+			width: 220px;
+			font-family: Verdana, Arial, "Helvetica Neue", Helvetica, sans-serif;
 		}
 		tr:hover {
-			background: rgb(0, 191, 255);
+		/*	background: rgb(0, 191, 255);	*/	/*<== This is a good contrasting color...*/
+			background: green;					/*<== This is better.*/
 			cursor: pointer;
 		}
 
@@ -139,7 +141,7 @@
 		</div>
 
 		<div class=sect>
-			<h2>Key Locations</h2>
+			<h2>Dungeons</h2>
 			<table>
 				<tr>    <td>Dungeon 0</td>   <td></td>   </tr>
 				<tr>    <td>Dungeon 1</td>   <td></td>   </tr>
@@ -150,12 +152,19 @@
 				<tr>    <td>Dungeon 6</td>   <td></td>   </tr>
 				<tr>    <td>Dungeon 7</td>   <td></td>   </tr>
 				<tr>    <td>Dungeon 8</td>   <td></td>   </tr>
-	
+			</table>
+		</div>
+
+		<div class=sect>
+			<h2>Key Locations</h2>
+			<table>
 				<tr>    <td>Advance Shop</td>   <td></td>   </tr>
+				<tr>    <td>Floodgate Keeper's House</td>   <td></td>   </tr>
 				<tr>    <td>Great Furnace</td>   <td></td>   </tr>
-				<tr>    <td>Great Moblin</td>   <td></td>   </tr>
+				<tr>    <td>Great Moblin's Keep</td>   <td></td>   </tr>
 				<tr>    <td>Horon Village Shop</td>   <td></td>   </tr>
 				<tr>    <td>House of Pirates</td>   <td></td>   </tr>
+				<tr>    <td>Potion Shop</td>   <td></td>   </tr>
 				<tr>    <td>Red Ring Guardian</td>   <td></td>   </tr>
 				<tr>    <td>Seed-loving Scrub</td>   <td></td>   </tr>
 				<tr>    <td>Subrosian Market</td>   <td></td>   </tr>
@@ -164,37 +173,45 @@
 		</div>
 
 		<div class=sect>
-			<h2>Area Access</h2>
+			<h2>Area Access - Holodrum</h2>
 			<table>
 				<tr>    <td>Dragon Keyhole</td>   <td></td>   </tr>
 				<tr>    <td>Dungeon 2 area</td>   <td></td>   </tr>
 				<tr>    <td>Eastern Suburbs</td>   <td></td>   </tr>
 				<tr>    <td>Floodgate Keyhole</td>   <td></td>   </tr>
-				<tr>    <td>Goron Mt.</td>   <td></td>   </tr>
+				<tr>    <td>Goron Mountain</td>   <td></td>   </tr>
+				<tr>    <td>Goron Mountain Trail</td>   <td></td>   </tr>
 				<tr>    <td>Graveyard</td>   <td></td>   </tr>
+				<tr>	<td>Mr. Left's Garden</td>	<td></td>   </tr>
 				<tr>    <td>Mt. Cucco</td>   <td></td>   </tr>
 				<tr>    <td>Sunken City</td>   <td></td>   </tr>
 				<tr>    <td>Tarm Ruins</td>   <td></td>   </tr>
 				<tr>    <td>Temple Remains</td>   <td></td>   </tr>
 				<tr>    <td>Western Coast</td>   <td></td>   </tr>
 				<tr>    <td>Woods of Winter</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia NW</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia N</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia NE</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia SW</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia S</td>   <td></td>   </tr>
-				<tr>    <td>Subrosia SE</td>   <td></td>   </tr>
+			</table>
+		</div>
+
+		<div class=sect>
+			<h2>Area Access - Subrosia</h2>
+			<table>
+				<tr>    <td>Subrosian Furnaces (SE)</td>   <td></td>   </tr>
+				<tr>    <td>Subrosian Seaside (S)</td>   <td></td>   </tr>
+				<tr>    <td>Subrosian Village (N)</td>   <td></td>   </tr>
+				<tr>    <td>Subrosian Volcanoes (NW)</td>   <td></td>   </tr>
+				<tr>    <td>Subrosian Wilds (SW)</td>   <td></td>   </tr>
+				<tr>    <td>Temple of Seasons (NE)</td>   <td></td>   </tr>
 			</table>
 		</div>
 
 		<div class=sect>
 			<h2>Bomb Checks</h2>
 			<table>
-				<tr>    <td>Dungeon 2b</td>   <td></td>   </tr>
-				<tr>    <td>Explosive volcano</td>   <td></td>   </tr>
+				<tr>    <td>Dungeon 2 Annex</td>   <td></td>   </tr>
+				<tr>    <td>Explosive Volcano</td>   <td></td>   </tr>
 				<tr>    <td>Mayor Ruul's House</td>   <td></td>   </tr>
 				<tr>    <td>Mr. Left's House</td>   <td></td>   </tr>
-				<tr>    <td>West Coast House</td>   <td></td>   </tr>
+				<tr>    <td>Western Coast House</td>   <td></td>   </tr>
 			</table>
 		</div>
 
@@ -208,14 +225,13 @@
 		<div class=sect>
 			<h2>Feather/Cape Checks</h2>
 			<table>
-				<tr>    <td>Cucco east ascent</td>   <td></td>   </tr>
-				<tr>    <td>Cucco west ascent</td>   <td></td>   </tr>
 				<tr>    <td>Graveyard Passage</td>   <td></td>   </tr>
-				<tr>    <td>Horon Village Portal</td>    <td></td>   </tr>
-				<tr>    <td>Temple Remains lava cave</td>   <td></td>   </tr>
+				<tr>    <td>Mt. Cucco East Ascent</td>   <td></td>   </tr>
+				<tr>    <td>Mt. Cucco West Ascent</td>   <td></td>   </tr>
+				<tr>    <td>Temple Remains Lava Cave</td>   <td></td>   </tr>
 				<tr>    <td>Tower of Fall</td>   <td></td>   </tr>
 				<tr>    <td>Tower of Spring</td>   <td></td>   </tr>
-				<tr>    <td>Tower of Spring passage</td>   <td></td>   </tr>
+				<tr>    <td>Tower of Spring Passage</td>   <td></td>   </tr>
 				<tr>    <td>Tower of Winter</td>   <td></td>   </tr>
 			</table>
 		</div>
@@ -223,59 +239,73 @@
 		<div class=sect>
 			<h2>Flipper Checks</h2>
 			<table>
-				<tr>    <td>Flooded cave 1</td>   <td></td>   </tr>
-				<tr>    <td>Flooded cave 2</td>   <td></td>   </tr>
-				<tr>    <td>Flooded cave 3</td>   <td></td>   </tr>
-				<tr>    <td>Flooded cave 4</td>   <td></td>   </tr>
-				<tr>    <td>Flooded passage 1</td>   <td></td>   </tr>
-				<tr>    <td>Flooded passage 2</td>   <td></td>   </tr>
-				<tr>    <td>Floodgate passage</td>   <td></td>   </tr>
-				<tr>    <td>Sunken/WoW passage</td>   <td></td>   </tr>
+				<tr>    <td>Cave beneath Sunken City</td>   <td></td>   </tr>
+				<tr>    <td>Flooded Chest Cave</td>   <td></td>   </tr>
+				<tr>    <td>Flooded Chest Cave</td>   <td></td>   </tr>
+				<tr>    <td>Floodgate Passage</td>   <td></td>   </tr>
+				<tr>    <td>Goponga Flower Cave</td>   <td></td>   </tr>
+				<tr>    <td>Pyramid Jewel Dive Spot</td>   <td></td>   </tr>
+				<tr>    <td>? Underwater Passage</td>   <td></td>   </tr>
+				<tr>    <td>? Underwater Passage</td>   <td></td>   </tr>
+				<tr>    <td>? Underwater Passage</td>   <td></td>   </tr>
+				<tr>    <td>? Underwater Passage</td>   <td></td>   </tr>
 			</table>
 		</div>
 
 		<div class=sect>
 			<h2>Magnetic Glove Checks</h2>
 			<table>
-				<tr>    <td>Magnetic Glove cave 1</td>   <td></td>   </tr>
-				<tr>    <td>Magnetic Glove cave 2</td>   <td></td>   </tr>
-				<tr>    <td>Temple Remains ascent</td>   <td></td>   </tr>
+				<tr>    <td>Magnetic Glove Cave</td>   <td></td>   </tr>
+				<tr>    <td>Magnetic Glove Cave</td>   <td></td>   </tr>
+				<tr>    <td>Temple Remains Ascent</td>   <td></td>   </tr>
 			</table>
 		</div>
 
 		<div class=sect>
-			<h2>Misc</h2>
+			<h2>Magical Boomerang Checks</h2>
 			<table>
-				<tr>    <td>Floodgate Keeper's House</td>   <td></td>   </tr>
+				<tr>    <td>Horon Village Portal</td>    <td></td>   </tr>
 			</table>
 		</div>
+
 <!--
 		<div class=sect>
+			<h2>Misc</h2>
+			<table>
+			</table>
+		</div>
+-->
+
+		<div class=sect>
 			<h2>Overworld Checks (Reminder)</h2>
-			<ul>
+			<ul style="padding-left: 20px;">
 				<h3>Bombs</h3>
 					<li>Goron Mountain</li>
-					<li>Lakebed</li>
+					<li>Lakebed Bomb Cave</li>
 					<li>Temple Remains</li>
 					<li>Woods of Winter</li>
 				<h3>Bracelet</h3>
 					<li>Blast Bloom Cave (Eastern Suburbs - Spring)</li>
-					<li>Horon Chest</li>
+					<li>Horon Village Chest  (Fall)</li>
 				<h3>Fall</h3>
 					<li>D2 Area Cave (Bracelet)</li>
-					<li>Eyeglass Chest</li>
-					<li>Goponga Flower cave (Bracelet & Flippers)</li>
-					<li>Horon Chest</li>
+					<li>Eyeglass Lake Chest</li>
+					<li>Holodrum Plain Cave (Bracelet & Flippers)</li>
+					<li>Horon Village Chest  (Bracelet)</li>
 				<h3>Magnetic Glove</h3>
 					<li>Subrosian Wilds Chest</li>
-					<li>South-East Subrosia Cave</li>
+					<li>Subrosian Furnaces Cave</li>
 				<h3>Spring</h3>
-					<li>Blast Bloom Cave (Eastern Suburbs - Bracelet)</li>
+					<li>Eastern Suburbs Blast Bloom Cave (Bracelet)</li>
+					<li>Mt. Cucco East Ascent (Bracelet)</li>
 				<h3>Summer</h3>
 				<h3>Winter</h3>
+					<li>Holly's House</li>
+					<li>Lakebed Bomb Cave</li>
+					<li>Unreachable cave near Dungeon 4</li>
 			</ul>
 		</div>
--->
+
 	</section>
 	
 </body>
@@ -293,7 +323,7 @@
 	const locs_ancientRuins = [
 		["Tarm Ruins", "Dungeon 6 (Ancient Ruins)"],
 		["Tarm Ruins", "Tarm Ruins Burn Bush"],
-		["Tarm Ruins", "Seed tree basement"],		//Wooden basement containing a chest (Gasha Seed)
+		["Tarm Ruins", "Seed Tree Basement"],		//Wooden basement containing a chest (Gasha Seed)
 	];
 
 	const locs_easternSuburbs = [
@@ -323,10 +353,10 @@
 		//["Goron Mountain", "Goron Mt. Small Pot Cave"],		//:Split Path (left)
 		["Goron Mountain", "Goron Mt. Bomb Wall"],				// => First Ascent A.K.A. Lava Cave Lower
 		["Goron Mountain", "Goron Mt. Burn Bush"],
-		["Goron Mountain", "Goron Mt. Split Path L"],			// => Small Pot Cave A.K.A. Double Cave (Left)
-		["Goron Mountain", "Goron Mt. Split Path R"],			// => Second Ascent (Lower) A.K.A. Double Cave (Right)
-		["Goron Mountain", "Goron Mt. Split Path Stairs"],		// => First Ascent Upper
 		["Goron Mountain", "Goron Mt. Summit Stairs"],			// => Second Ascent Upper
+		["Goron Mountain", "Goron Mt. Trail L"],				// => Small Pot Cave A.K.A. Double Cave (Left)
+		["Goron Mountain", "Goron Mt. Trail R"],				// => Second Ascent (Lower) A.K.A. Double Cave (Right)
+		["Goron Mountain", "Goron Mt. Trail Stairs"],			// => First Ascent Upper
 		["Goron Mountain", "Lone Goron's Cave"],
 	];
 
@@ -370,7 +400,7 @@
 		["Mt. Cucco", "Mushroom Cave"],
 		["Mt. Cucco", "Mt. Cucco Portal"],
 		["Mt. Cucco", "Pyramid Jewel Cave"],
-		["Mt. Cucco", "Cucco Ascent W Lower"],		//Narrow passage going left
+		["Mt. Cucco", "Cucco Ascent W Lower"],		//Narrow Passage going left
 		["Mt. Cucco", "Cucco Ascent W Upper"],		//Reverse C?
 		["Mt. Cucco", "Cucco Ascent E Lower"],		//Big pit, tiny platforms
 		["Mt. Cucco", "Cucco Ascent E Upper"],		//Big pit, tiny platforms
@@ -409,7 +439,7 @@
 	const locs_spoolSwamp = [
 		["Spool Swamp", "Dungeon 3 (Poison Moth's Lair)"],
 		["Spool Swamp", "Floodgate Keeper's House"],
-		["Spool Swamp", "Floodgate Passage Entrance"],		//Long zig-zagging cave full of Bushcrabs.
+		["Spool Swamp", "Floodgate Passage Entrance"],		//Long zig-zagging Cave full of Bushcrabs.
 		["Spool Swamp", "Floodgate Passage Exit"],
 		["Spool Swamp", "Spool Swamp Portal"],
 		["Spool Swamp", "Spool Swamp Bomb Cave"],	//Square Jewel in vanilla
@@ -607,6 +637,7 @@ RemoveExemptions(exemptions_subrosia);
 <script>
 	const KeyLocations = document.getElementById('Key-Locations');
 	const elem_search_ctnr_outer = document.getElementById('search-ctnr-outer');
+	const elem_search_input = document.getElementById('search-input');
 	const elem_entrance_menu = document.getElementById('entrance-menu');
 	let elmt_toEdit;
 
@@ -622,6 +653,7 @@ RemoveExemptions(exemptions_subrosia);
 	}
 	function ShowMenu() {
 		elem_search_ctnr_outer.style.display = "block";
+		elem_search_input.focus();
 	}
 	function HideMenu() {
 		elem_search_ctnr_outer.style.display = "none";
@@ -697,7 +729,6 @@ RemoveExemptions(exemptions_subrosia);
 //
 //	Keypress in Input field : Narrow down search
 //
-	const elem_search_input = document.getElementById('search-input');
 	const elems_listItems = [...elem_search_ctnr_outer.querySelectorAll('.entrance-list')].map(l => [...l.querySelectorAll('li')]).flat();
 	const searchTerms = Locations_OracleOfSeasons.map(loc => `${loc[0]} - ${loc[1]}`.toLowerCase());
 	elem_search_input.addEventListener('input', () => {
