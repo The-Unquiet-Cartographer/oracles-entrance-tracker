@@ -178,8 +178,17 @@
 		elem_search_input.focus();
 	}
 	function HideMenu() {
+		RestoreMenu();
 		elem_search_ctnr_outer.style.display = "none";
 		elem_search_input.value = "";
+	}
+	function RestoreMenu() {
+		for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
+			l.style.display = "block";
+			for (const li of l.querySelectorAll('li')) {
+				li.style.display = "block";
+			}
+		}
 	}
 
 
@@ -213,12 +222,7 @@
 	elem_search_input.addEventListener('input', () => {
 	//Restore everything is search is empty
 		if (elem_search_input.value.length === 0) {
-			for (const l of elem_search_ctnr_outer.querySelectorAll('.location-list')) {
-				l.style.display = "block";
-				for (const li of l.querySelectorAll('li')) {
-					li.style.display = "block";
-				}
-			}
+			RestoreMenu();
 			return;
 		}
 	//Scan for matches
@@ -272,6 +276,14 @@
 		e.stopPropagation();
 	});
 
+
+//
+//	On refresh : Display confirmation dialogue to prevent accidental refresh
+//
+	window.addEventListener("beforeunload", function (event) {
+		event.preventDefault();
+		event.returnValue = "";		//<== Some browsers require this exact assignment
+	});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
