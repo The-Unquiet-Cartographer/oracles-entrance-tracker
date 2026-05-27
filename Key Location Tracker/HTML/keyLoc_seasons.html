@@ -189,6 +189,7 @@
 			<h2>Key Locations</h2>
 			<table>
 				<tr>    <td>Advance Shop</td>				<td></td>	</tr>
+				<tr>    <td>Blaino's Gym</td>				<td></td>	</tr>
 				<tr>    <td>Floodgate Keeper's House</td>	<td></td>	</tr>
 				<tr>    <td>Great Furnace</td>				<td></td>	</tr>
 				<tr>    <td>Great Moblin's Keep</td>		<td></td>	</tr>
@@ -205,28 +206,33 @@
 		<div class=sect>
 			<h2>Area Access - Holodrum</h2>
 			<table>
-				<tr>	<td>Ancient Ruins (D6)</td>		<td></td>	</tr>
-				<tr>	<td>Dragon Keyhole</td>			<td></td>	</tr>
-				<tr>	<td>Eastern Suburbs</td>		<td></td>	</tr>
-				<tr>	<td>Floodgate Keyhole</td>		<td></td>	</tr>
-				<tr>	<td>Goron Mountain</td>			<td></td>	</tr>
-				<tr>	<td>Goron Mountain Trail</td>	<td></td>	</tr>
-				<tr>	<td>Graveyard</td>				<td></td>	</tr>
-				<tr>	<td>Great Moblin's Keep</td>	<td></td>	</tr>
-				<tr>	<td>Mr. Left's Garden</td>		<td></td>	</tr>
-				<tr>	<td>Mt. Cucco</td>				<td></td>	</tr>
-				<tr>	<td>Mt. Cucco East Bluff</td>	<td></td>	</tr>
-				<tr>	<td>Mt. Cucco Falls (D4)</td>	<td></td>	</tr>
-				<tr>	<td>Natzu Region</td>			<td></td>	</tr>
-				<tr>	<td>Samasa Desert</td>			<td></td>	</tr>
-				<tr>	<td>Spool Swamp</td>			<td></td>	</tr>
-				<tr>	<td>Snake's Remains (D2)</td>	<td></td>	</tr>
-				<tr>	<td>Sunken City</td>			<td></td>	</tr>
-				<tr>	<td>Tarm Ruins</td>				<td></td>	</tr>
-				<tr>	<td>Temple Remains</td>			<td></td>	</tr>
-				<tr>	<td>Western Coast</td>			<td></td>	</tr>
-				<tr>	<td>Western Coast Garden</td>	<td></td>	</tr>
-				<tr>	<td>Woods of Winter</td>		<td></td>	</tr>
+				<tr>	<td>Ancient Ruins (D6)</td>			<td></td>	</tr>
+				<tr>	<td>Dragon Keyhole</td>				<td></td>	</tr>
+				<tr>	<td>Eastern Suburbs</td>			<td></td>	</tr>
+				<tr>	<td>Eyeglass Lake</td>				<td></td>	</tr>
+				<tr>	<td>Floodgate Keeper's House</td>	<td></td>	</tr>
+				<tr>	<td>Floodgate Keyhole</td>			<td></td>	</tr>
+				<tr>	<td>Goron Mountain</td>				<td></td>	</tr>
+				<tr>	<td>Goron Mountain Base</td>		<td></td>	</tr>
+				<tr>	<td>Goron Mountain Trail</td>		<td></td>	</tr>
+				<tr>	<td>Graveyard</td>					<td></td>	</tr>
+				<tr>	<td>Great Moblin's Keep</td>		<td></td>	</tr>
+				<tr>	<td>Holodrum Plain</td>				<td></td>	</tr>
+				<tr>	<td>Mr. Left's Garden</td>			<td></td>	</tr>
+				<tr>	<td>Mt. Cucco</td>					<td></td>	</tr>
+				<tr>	<td>Mt. Cucco East Bluff</td>		<td></td>	</tr>
+				<tr>	<td>Mt. Cucco Falls (D4)</td>		<td></td>	</tr>
+				<tr>	<td>Natzu Region</td>				<td></td>	</tr>
+				<tr>	<td>North Horon</td>				<td></td>	</tr>
+				<tr>	<td>Samasa Desert</td>				<td></td>	</tr>
+				<tr>	<td>Spool Swamp</td>				<td></td>	</tr>
+				<tr>	<td>Snake's Remains (D2)</td>		<td></td>	</tr>
+				<tr>	<td>Sunken City</td>				<td></td>	</tr>
+				<tr>	<td>Tarm Ruins</td>					<td></td>	</tr>
+				<tr>	<td>Temple Remains</td>				<td></td>	</tr>
+				<tr>	<td>Western Coast</td>				<td></td>	</tr>
+				<tr>	<td>Western Coast Garden</td>		<td></td>	</tr>
+				<tr>	<td>Woods of Winter</td>			<td></td>	</tr>
 			</table>
 		</div>
 
@@ -692,8 +698,8 @@
 		Locations_OracleOfSeasons.forEach(_loc => {
 		//Get the query selector from the area ID
 			const areaID = _loc[0]
-				.replace(/\p{P}/gu, "")		//<== Replace all punctuation with ""
-				.replace(/ /g, "-")			//<== Replace spaces with "-"
+				.replace(/\p{P}/gu, '')		//<== Replace all punctuation with ""
+				.replace(/ /g, '-')			//<== Replace spaces with "-"
 			;
 		//Create new element for area containing entrance list
 			if (!elem_entrance_menu.querySelector(`#${areaID}`)) {
@@ -717,7 +723,7 @@
 					for (let j = 0; j < i+1; j++) {
 						masterIndex += entranceLists[j].querySelectorAll('li').length;
 					}
-					const newSearchTerm = `${_loc[0]} - ${_loc[1]}`.toLowerCase()
+					const newSearchTerm = `${_loc[0]} - ${_loc[1]}`.replace(/\p{P}/gu, '').toLowerCase();
 					searchTerms.splice(masterIndex, 0, newSearchTerm);
 					break;
 				}
@@ -784,7 +790,7 @@
 			return;
 		}
 	//Scan for matches
-		let thisSearch = elem_search_input.value.toLowerCase().split(" ");
+		let thisSearch = elem_search_input.value.replace(/\p{P}/gu, '').toLowerCase().split(" ");
 		for (let i = 0; i < searchTerms.length; i++) {
 			let terms_found = 0;
 			for (let j = 0; j < thisSearch.length; j++) {
